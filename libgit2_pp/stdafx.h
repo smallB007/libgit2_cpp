@@ -13,5 +13,14 @@
 
 
 // TODO: reference additional headers your program requires here
+#include <set>
+#include <string>
+#include <memory>
+#include <utility>
+#include <array>
+
+
+#include <git2.h>
+
 #include "LIBGIT_PP_MACROS.hpp"
 #include "Common_typedefs.hpp"

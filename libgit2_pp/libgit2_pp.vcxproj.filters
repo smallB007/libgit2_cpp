@@ -39,6 +39,15 @@
     <ClInclude Include="Common_typedefs.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Git_Branch.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Copied_From_libgit2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Commit.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -51,6 +60,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Git_Repo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Branch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Commit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

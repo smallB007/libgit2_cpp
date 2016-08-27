@@ -151,6 +151,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common_typedefs.hpp" />
+    <ClInclude Include="Copied_From_libgit2.hpp" />
+    <ClInclude Include="Git_Branch.hpp" />
+    <ClInclude Include="Git_Commit.hpp" />
     <ClInclude Include="Git_Repo.hpp" />
     <ClInclude Include="Git_Root.hpp" />
     <ClInclude Include="LIBGIT_PP_MACROS.hpp" />
@@ -159,6 +162,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Git_Branch.cpp" />
+    <ClCompile Include="Git_Commit.cpp" />
     <ClCompile Include="Git_Repo.cpp" />
     <ClCompile Include="Git_Root.cpp" />
     <ClCompile Include="libgit2_pp.cpp" />

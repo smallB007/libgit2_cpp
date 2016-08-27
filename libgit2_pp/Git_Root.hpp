@@ -1,13 +1,13 @@
 #pragma once
 #include "stdafx.h"
-#include <git2.h>
-//#include <map>
-#include <unordered_map>
-#include <string>
-#include <memory>
 
 #include "Singleton.hpp"
 #include "Git_Repo.hpp"
+//find a way to name a repo
+/***
+VERY, VERY IMPORTANT
+Unless the docs specifically say otherwise, any non-const pointer that’s filled in by libgit2 needs to be freed by the caller.
+*/
 class Git_Root : private Singleton<Git_Root>
 {
 	//friend class Singleton<Git_Root>;
@@ -15,7 +15,7 @@ class Git_Root : private Singleton<Git_Root>
 	friend Git_Root* create_git();
 	friend void destroy_git();
 	
-	std::unordered_map<repo_path_t, std::shared_ptr<Git_Repo>> repositories_;
+	std::set<std::shared_ptr<Git_Repo>> repositories_;
 public:
 private:
 ~Git_Root();
