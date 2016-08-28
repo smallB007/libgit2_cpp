@@ -21,7 +21,7 @@ Git_Repo::~Git_Repo()
 	git_repository_free(c_git_repository_);
 	c_git_repository_ = nullptr;
 }
-#include <iterator>
+
 git_commit* Git_Repo::get_head_commit()const
 {
 	if (nullptr != head_commit_[0].first)
@@ -83,4 +83,10 @@ bool Git_Repo::is_my_path(const repo_path_t& path_to_some_repo)const
 void Git_Repo::rename(const std::string& repo_name)
 {
 	const_cast<std::string&>(repo_name_) = repo_name;
+}
+
+
+git_reference* Git_Repo::get_master_branch()const
+{
+	return nullptr;
 }

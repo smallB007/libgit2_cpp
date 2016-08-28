@@ -26,7 +26,6 @@ void create_initial_commit(git_repository *repo)
 		//fatal("Could not open repository index", NULL);
 	}
 	//	Outside of this example, you could call gitindexadd_bypath() here to put actual files into the index.For our purposes, we'll leave it empty for now.
-
 	if (git_index_write_tree(&tree_id, index) < 0)
 	{
 		//fatal("Unable to write initial tree from index", NULL);

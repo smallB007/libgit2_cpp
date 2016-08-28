@@ -8,7 +8,7 @@ class Git_Branch
 {
 private:
 	git_reference* c_git_reference_branch_{nullptr};
-	Git_Repo* parent_{nullptr};
+	Git_Repo* my_repo_{nullptr};
 	std::set<std::shared_ptr<Git_Commit>> commits_;
 
 	git_repository* get_owner()const;
@@ -17,5 +17,6 @@ public:
 	~Git_Branch();
 	branch_name_t name()const;
 	std::shared_ptr<Git_Commit> create_commit();
+	git_commit* get_head_commit()const;
 };
 

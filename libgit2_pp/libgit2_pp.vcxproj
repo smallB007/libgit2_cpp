@@ -154,8 +154,11 @@
     <ClInclude Include="Copied_From_libgit2.hpp" />
     <ClInclude Include="Git_Branch.hpp" />
     <ClInclude Include="Git_Commit.hpp" />
+    <ClInclude Include="Git_Commit_Author.hpp" />
+    <ClInclude Include="Git_Commit_Time.hpp" />
     <ClInclude Include="Git_Repo.hpp" />
     <ClInclude Include="Git_Root.hpp" />
+    <ClInclude Include="Git_Signature.hpp" />
     <ClInclude Include="LIBGIT_PP_MACROS.hpp" />
     <ClInclude Include="Singleton.hpp" />
     <ClInclude Include="stdafx.h" />
@@ -164,8 +167,11 @@
   <ItemGroup>
     <ClCompile Include="Git_Branch.cpp" />
     <ClCompile Include="Git_Commit.cpp" />
+    <ClCompile Include="Git_Commit_Author.cpp" />
+    <ClCompile Include="Git_Commit_Time.cpp" />
     <ClCompile Include="Git_Repo.cpp" />
     <ClCompile Include="Git_Root.cpp" />
+    <ClCompile Include="Git_Signature.cpp" />
     <ClCompile Include="libgit2_pp.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
