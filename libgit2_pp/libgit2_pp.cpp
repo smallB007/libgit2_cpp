@@ -11,6 +11,8 @@ int main()
 		auto repo = git->create_repository("C:\\Users\\Artie\\Desktop\\tmp_repo", false);
 		//repo->get_master_branch();
 		auto branch = repo->create_branch("branch_A");
+		auto branch_B = repo->create_branch("branch_B");
+		repo->delete_branch("branch_B");
 		auto commit = branch->create_commit();
 		auto author = commit->author();
 		auto body = commit->body();

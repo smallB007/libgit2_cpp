@@ -1,5 +1,5 @@
 #pragma once
-#ifndef EASTL
+#ifdef USE_STD
 #include <vector>
 #include <set>
 #include <string>
@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <iterator>
 #define NMS std
-#else
+#elif defined USE_EASTL
 #include <EASTL\vector.h>
 #include <EASTL\set.h>
 #include <EASTL\string.h>

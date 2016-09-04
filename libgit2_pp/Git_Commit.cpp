@@ -66,7 +66,6 @@ git_commit* Git_Commit::get_head_commit_()const
 Git_Commit::Git_Commit(const Git_Repo*const repo, git_commit* c_git_commit) :	 m_parent_repo_{repo}
 																	,c_git_commit_{c_git_commit}
 {
-	int a{ 0 };
 }
 
 NMS::vector<git_commit*> Git_Commit::get_parents()const
@@ -150,16 +149,6 @@ NMS::shared_ptr<Git_Commit_ID> Git_Commit::id()const
 	const git_oid * commit_id = git_commit_id(c_git_commit_);
 	return NMS::make_shared<Git_Commit_ID>(commit_id);
 }
-
-
-
-
-
-
-
-
-
-
 
 NMS::string Git_Commit::message()const
 {

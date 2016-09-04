@@ -29,22 +29,13 @@ Git_Repo::~Git_Repo()
  
 const NMS::shared_ptr<Git_Commit> Git_Repo::get_head_commit()const
 {
-	if (nullptr != head_commit_[0].first)
-	{
-		delete head_commit_[0].first;
-		git_commit_free(head_commit_[0].second);
-
-		head_commit_[0].first = nullptr;
-		head_commit_[0].second = nullptr;
-	}
-
 	git_oid* git_oid_out = new git_oid;
 	git_reference_name_to_id(git_oid_out, c_git_repository_, "HEAD");
 
 	git_commit* git_commit_out{ nullptr };
 	git_commit_lookup(&git_commit_out, c_git_repository_, git_oid_out);
-	auto aPair = NMS::make_pair(git_oid_out,git_commit_out);
-	head_commit_[0] = aPair;
+
+	delete git_oid_out;
 
 	return NMS::make_shared<Git_Commit>(this,git_commit_out);
 }
@@ -78,6 +69,23 @@ NMS::shared_ptr<Git_Branch> Git_Repo::create_branch(const branch_name_t& branch_
 	}
 }
 
+void Git_Repo::delete_branch(const branch_name_t& branch_name)
+{
+	auto aPair = find_branch(branch_name);
+	if (aPair.first)
+	{
+		auto res = git_branch_delete(*(aPair.second.get()));
+		if (FAILED(res))
+		{
+			throw - 1;
+		}
+		else
+		{
+			branches_.erase(aPair.second);
+		}
+	}
+}
+
 bool Git_Repo::is_my_path(const repo_path_t& path_to_some_repo)const
 {
 	const char* const c_path = git_repository_path(c_git_repository_);
@@ -108,3 +116,4 @@ const NMS::shared_ptr<Git_Commit> Git_Repo::commit_lookup(const Git_Commit_ID& c
 		return NMS::make_shared<Git_Commit>(this,commit_out);
 	}
 }
+

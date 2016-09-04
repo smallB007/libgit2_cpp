@@ -15,8 +15,12 @@ private:
 public:
 	Git_Branch(const branch_name_t& branch_name, Git_Repo* parent);
 	~Git_Branch();
+	operator git_reference*() { return c_git_reference_branch_; }
 	branch_name_t name()const;
 	NMS::shared_ptr<Git_Commit> create_commit();
 	NMS::shared_ptr<Git_Commit> get_head_commit()const;
+#pragma LIBGIT2_BRANCH
+	bool is_head()const;
+
 };
 

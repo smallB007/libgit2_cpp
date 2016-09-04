@@ -4,7 +4,7 @@
 
 Git_Branch::Git_Branch(const branch_name_t& branch_name, Git_Repo* parent) : m_parent_repo_{parent}
 {
-	git_commit* git_commit_out = *(get_head_commit().get());
+	git_commit* git_commit_out =  *(get_head_commit().get());
 	
 	auto res = git_branch_create(&c_git_reference_branch_, *parent, branch_name.c_str(), git_commit_out, false);
 	if (FAILED(res))
@@ -61,4 +61,12 @@ git_repository* Git_Branch::get_owner()const
 	{
 		return c_git_repo;
 	}
+}
+
+bool Git_Branch::is_head()const
+{
+	auto res = git_branch_is_head(c_git_reference_branch_);
+	return res == 1 ? true :
+			res == 0 ? false :
+			throw - 1;
 }
