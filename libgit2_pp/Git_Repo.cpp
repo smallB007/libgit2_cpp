@@ -1,12 +1,12 @@
 #include "Git_Repo.hpp"
 #include "Copied_From_libgit2.hpp"
+#include "Git_Commit_ID.hpp"
 /*Proper CADRe - [C]onstructor [A]cquires, [D]estructor [Re]leses*/
-Git_Repo::Git_Repo(const repo_path_t& path_to_repo, const bool is_bare):c_git_repository_{nullptr}
-,repo_name_{""}
+Git_Repo::Git_Repo(const repo_path_t& path_to_repo, const bool is_bare)
 {
 	auto err = git_repository_init(&c_git_repository_, path_to_repo.c_str(), static_cast<unsigned int>(is_bare));
 
-	if (!c_git_repository_ || (err < 0))
+	if (FAILED(c_git_repository_) || FAILED(err))
 	{
 		throw - 1;
 	}
@@ -16,13 +16,18 @@ Git_Repo::Git_Repo(const repo_path_t& path_to_repo, const bool is_bare):c_git_re
 	}
 }
 
+Git_Repo::Git_Repo(git_repository* c_git_repository):c_git_repository_{c_git_repository}
+{
+	/*empty*/
+}
+
 Git_Repo::~Git_Repo()
 {
 	git_repository_free(c_git_repository_);
 	c_git_repository_ = nullptr;
 }
-
-git_commit* Git_Repo::get_head_commit()const
+ 
+const std::shared_ptr<Git_Commit> Git_Repo::get_head_commit()const
 {
 	if (nullptr != head_commit_[0].first)
 	{
@@ -40,7 +45,8 @@ git_commit* Git_Repo::get_head_commit()const
 	git_commit_lookup(&git_commit_out, c_git_repository_, git_oid_out);
 	auto aPair = std::make_pair(git_oid_out,git_commit_out);
 	head_commit_[0] = aPair;
-	return git_commit_out;
+
+	return std::make_shared<Git_Commit>(this,git_commit_out);
 }
 
 std::pair<bool,std::shared_ptr<Git_Branch>> Git_Repo::find_branch(const branch_name_t& branch_name)const
@@ -70,8 +76,6 @@ std::shared_ptr<Git_Branch> Git_Repo::create_branch(const branch_name_t& branch_
 	{
 		return result.second;
 	}
-
-	return nullptr;
 }
 
 bool Git_Repo::is_my_path(const repo_path_t& path_to_some_repo)const
@@ -86,7 +90,21 @@ void Git_Repo::rename(const std::string& repo_name)
 }
 
 
-git_reference* Git_Repo::get_master_branch()const
+std::shared_ptr<Git_Branch> Git_Repo::get_branch(const branch_name_t& branch_name)const
 {
 	return nullptr;
+}
+
+const std::shared_ptr<Git_Commit> Git_Repo::commit_lookup(const Git_Commit_ID& commit_id)const
+{
+	git_commit* commit_out{ nullptr };
+	auto res = git_commit_lookup(&commit_out, c_git_repository_, commit_id.id());
+	if(FAILED(res))
+	{
+		throw - 1;
+	}
+	else
+	{
+		return std::make_shared<Git_Commit>(this,commit_out);
+	}
 }

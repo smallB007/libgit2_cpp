@@ -27,3 +27,4 @@
 
 #include "LIBGIT_PP_MACROS.hpp"
 #include "Common_typedefs.hpp"
+#include "Error_Handling.hpp"

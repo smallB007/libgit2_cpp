@@ -102,7 +102,7 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -148,17 +148,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+    <Text Include="ToDo.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common_typedefs.hpp" />
     <ClInclude Include="Copied_From_libgit2.hpp" />
+    <ClInclude Include="Error_Handling.hpp" />
     <ClInclude Include="Git_Branch.hpp" />
+    <ClInclude Include="Git_Buf.hpp" />
     <ClInclude Include="Git_Commit.hpp" />
     <ClInclude Include="Git_Commit_Author.hpp" />
-    <ClInclude Include="Git_Commit_Time.hpp" />
+    <ClInclude Include="Git_Commit_ID.hpp" />
+    <ClInclude Include="Git_Time.hpp" />
+    <ClInclude Include="Git_Object_ID.hpp" />
     <ClInclude Include="Git_Repo.hpp" />
     <ClInclude Include="Git_Root.hpp" />
     <ClInclude Include="Git_Signature.hpp" />
+    <ClInclude Include="Git_Tree.hpp" />
     <ClInclude Include="LIBGIT_PP_MACROS.hpp" />
     <ClInclude Include="Singleton.hpp" />
     <ClInclude Include="stdafx.h" />
@@ -166,12 +172,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Git_Branch.cpp" />
+    <ClCompile Include="Git_Buf.cpp" />
     <ClCompile Include="Git_Commit.cpp" />
     <ClCompile Include="Git_Commit_Author.cpp" />
-    <ClCompile Include="Git_Commit_Time.cpp" />
+    <ClCompile Include="Git_Commit_ID.cpp" />
+    <ClCompile Include="Git_Time.cpp" />
+    <ClCompile Include="Git_Object_ID.cpp" />
     <ClCompile Include="Git_Repo.cpp" />
     <ClCompile Include="Git_Root.cpp" />
     <ClCompile Include="Git_Signature.cpp" />
+    <ClCompile Include="Git_Tree.cpp" />
     <ClCompile Include="libgit2_pp.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>

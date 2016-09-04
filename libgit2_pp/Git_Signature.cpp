@@ -1,10 +1,16 @@
 #include "Git_Signature.hpp"
 #include "Git_Commit_Author.hpp"
-#include "Git_Commit_Time.hpp"
-
+#include "Git_Time.hpp"
+#include "Git_Buf.hpp"
 
 Git_Signature::Git_Signature(const git_signature* c_git_signature):c_git_signature_{c_git_signature}
 {
+}
+
+Git_Signature::Git_Signature(git_buf* signature_block, git_buf* signed_data):signature_block_{signature_block}
+																			,signed_data_{signed_data}
+{
+
 }
 
 
@@ -17,12 +23,27 @@ std::shared_ptr<Git_Commit_Author> Git_Signature::author()const
 	return std::make_shared<Git_Commit_Author>(c_git_signature_);
 }
 
+std::string Git_Signature::name()const
+{
+	return c_git_signature_->name;
+}
+
 std::string Git_Signature::email()const
 {
 	return c_git_signature_->email;
 }
 
-std::shared_ptr<Git_Commit_Time> Git_Signature::time()const
+std::shared_ptr<Git_Time> Git_Signature::time()const
 {
-	return std::make_shared<Git_Commit_Time>(c_git_signature_->when);
+	return std::make_shared<Git_Time>(c_git_signature_->when);
+}
+
+std::shared_ptr<Git_Buf> Git_Signature::signature_block()const
+{
+	return std::make_shared<Git_Buf>(signature_block_);
+}
+
+std::shared_ptr<Git_Buf> Git_Signature::signed_data()const
+{
+	return std::make_shared<Git_Buf>(signed_data_);
 }
