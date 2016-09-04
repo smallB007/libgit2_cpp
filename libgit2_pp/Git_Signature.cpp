@@ -18,32 +18,32 @@ Git_Signature::~Git_Signature()
 {
 }
 
-std::shared_ptr<Git_Commit_Author> Git_Signature::author()const
+NMS::shared_ptr<Git_Commit_Author> Git_Signature::author()const
 {
-	return std::make_shared<Git_Commit_Author>(c_git_signature_);
+	return NMS::make_shared<Git_Commit_Author>(c_git_signature_);
 }
 
-std::string Git_Signature::name()const
+NMS::string Git_Signature::name()const
 {
 	return c_git_signature_->name;
 }
 
-std::string Git_Signature::email()const
+NMS::string Git_Signature::email()const
 {
 	return c_git_signature_->email;
 }
 
-std::shared_ptr<Git_Time> Git_Signature::time()const
+NMS::shared_ptr<Git_Time> Git_Signature::time()const
 {
-	return std::make_shared<Git_Time>(c_git_signature_->when);
+	return NMS::make_shared<Git_Time>(c_git_signature_->when);
 }
 
-std::shared_ptr<Git_Buf> Git_Signature::signature_block()const
+NMS::shared_ptr<Git_Buf> Git_Signature::signature_block()const
 {
-	return std::make_shared<Git_Buf>(signature_block_);
+	return NMS::make_shared<Git_Buf>(signature_block_);
 }
 
-std::shared_ptr<Git_Buf> Git_Signature::signed_data()const
+NMS::shared_ptr<Git_Buf> Git_Signature::signed_data()const
 {
-	return std::make_shared<Git_Buf>(signed_data_);
+	return NMS::make_shared<Git_Buf>(signed_data_);
 }

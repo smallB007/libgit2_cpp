@@ -1,0 +1,16 @@
+1. Build libgit2 using cmake to configure & generate vs project files
+2. Link libgit2 to your project adding appropriate include and lib paths
+3. Optionally one can select eastl library for fast containers/algorithms:
+	In that case operator new needs to be supplied:
+	https://wuyingren.github.io/howto/2016/02/11/Using-EASTL-in-your-projects/
+	void* operator new[](size_t size, const char* pName, int flags, unsigned debugFlags, const char* file, int line) 
+{
+  return malloc(size);
+}  
+
+void* operator new[](size_t size, size_t alignment, size_t alignmentOffset, const char* pName, int flags, unsigned debugFlags, const char* file, int line) 
+{
+  return malloc(size);
+} 
+
+

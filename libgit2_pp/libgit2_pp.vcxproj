@@ -76,8 +76,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(LIBGIT2_LIBx64);$(LibraryPath)</LibraryPath>
-    <IncludePath>$(LIBGIT2);$(IncludePath)</IncludePath>
+    <LibraryPath>$(EA_STL_LIBx64);$(LIBGIT2_LIBx64);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(LIBGIT2);$(EA_STL_INCLUDE);$(EA_STL_BASE);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -104,12 +104,12 @@
       </PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;EASTL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>git2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>git2.lib;EASTL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="Building_libgit2_pp.txt" />
     <Text Include="ReadMe.txt" />
     <Text Include="ToDo.txt" />
   </ItemGroup>
@@ -168,6 +169,7 @@
     <ClInclude Include="LIBGIT_PP_MACROS.hpp" />
     <ClInclude Include="Singleton.hpp" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="STD_Variants.hpp" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>

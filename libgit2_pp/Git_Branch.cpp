@@ -14,7 +14,7 @@ Git_Branch::Git_Branch(const branch_name_t& branch_name, Git_Repo* parent) : m_p
 }
 
 
-std::shared_ptr<Git_Commit> Git_Branch::get_head_commit()const
+NMS::shared_ptr<Git_Commit> Git_Branch::get_head_commit()const
 {
 	return m_parent_repo_->get_head_commit();
 }
@@ -39,12 +39,12 @@ branch_name_t Git_Branch::name()const
 	}
 }
 
-std::shared_ptr<Git_Commit> Git_Branch::create_commit()
+NMS::shared_ptr<Git_Commit> Git_Branch::create_commit()
 {
 	/*git_repository* c_git_repo = get_owner();*/
-	std::vector<std::string> files_to_commit{"a.cpp","b.cpp"};
-	std::string msg = "How is it going Artie? ;)";
-	auto new_commit = std::make_shared<Git_Commit>(m_parent_repo_, files_to_commit,msg);
+	NMS::vector<NMS::string> files_to_commit{"a.cpp","b.cpp"};
+	NMS::string msg = "How is it going Artie? ;)";
+	auto new_commit = NMS::make_shared<Git_Commit>(m_parent_repo_, files_to_commit,msg);
 	commits_.insert(new_commit);
 
 	return new_commit;

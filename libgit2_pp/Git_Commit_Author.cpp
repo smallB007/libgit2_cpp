@@ -12,12 +12,12 @@ Git_Commit_Author::~Git_Commit_Author()
 }
  
 
-std::string Git_Commit_Author::name()const
+NMS::string Git_Commit_Author::name()const
 {
 	return c_git_signature_->name;
 }
 
-std::string Git_Commit_Author::email()const
+NMS::string Git_Commit_Author::email()const
 {
 	return c_git_signature_->email;
 }

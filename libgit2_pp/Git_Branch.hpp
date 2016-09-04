@@ -9,14 +9,14 @@ class Git_Branch
 private:
 	git_reference* c_git_reference_branch_{nullptr};
 	Git_Repo* m_parent_repo_{nullptr};
-	std::set<std::shared_ptr<Git_Commit>> commits_;
+	NMS::set<NMS::shared_ptr<Git_Commit>> commits_;
 
 	git_repository* get_owner()const;
 public:
 	Git_Branch(const branch_name_t& branch_name, Git_Repo* parent);
 	~Git_Branch();
 	branch_name_t name()const;
-	std::shared_ptr<Git_Commit> create_commit();
-	std::shared_ptr<Git_Commit> get_head_commit()const;
+	NMS::shared_ptr<Git_Commit> create_commit();
+	NMS::shared_ptr<Git_Commit> get_head_commit()const;
 };
 

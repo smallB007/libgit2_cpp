@@ -13,14 +13,7 @@
 
 
 // TODO: reference additional headers your program requires here
-#include <vector>
-#include <set>
-#include <string>
-#include <memory>
-#include <utility>
-#include <array>
-#include <algorithm>
-#include <iterator>
+#include "STD_Variants.hpp"
 
 
 #include <git2.h>

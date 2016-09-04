@@ -15,14 +15,14 @@ class Git_Root : private Singleton<Git_Root>
 	friend Git_Root* create_git();
 	friend void destroy_git();
 	
-	std::set<std::shared_ptr<Git_Repo>> repositories_;
+	NMS::set<NMS::shared_ptr<Git_Repo>> repositories_;
 public:
 private:
 ~Git_Root();
 Git_Root();
 /*PUBLIC GIT INTERFACE*/	
 public:
-	std::shared_ptr<Git_Repo> create_repository(const repo_path_t& path_to_repo, const bool is_bare);
+	NMS::shared_ptr<Git_Repo> create_repository(const repo_path_t& path_to_repo, const bool is_bare);
 };
 
 /***

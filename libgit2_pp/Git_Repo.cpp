@@ -27,7 +27,7 @@ Git_Repo::~Git_Repo()
 	c_git_repository_ = nullptr;
 }
  
-const std::shared_ptr<Git_Commit> Git_Repo::get_head_commit()const
+const NMS::shared_ptr<Git_Commit> Git_Repo::get_head_commit()const
 {
 	if (nullptr != head_commit_[0].first)
 	{
@@ -43,32 +43,32 @@ const std::shared_ptr<Git_Commit> Git_Repo::get_head_commit()const
 
 	git_commit* git_commit_out{ nullptr };
 	git_commit_lookup(&git_commit_out, c_git_repository_, git_oid_out);
-	auto aPair = std::make_pair(git_oid_out,git_commit_out);
+	auto aPair = NMS::make_pair(git_oid_out,git_commit_out);
 	head_commit_[0] = aPair;
 
-	return std::make_shared<Git_Commit>(this,git_commit_out);
+	return NMS::make_shared<Git_Commit>(this,git_commit_out);
 }
 
-std::pair<bool,std::shared_ptr<Git_Branch>> Git_Repo::find_branch(const branch_name_t& branch_name)const
+NMS::pair<bool,NMS::shared_ptr<Git_Branch>> Git_Repo::find_branch(const branch_name_t& branch_name)const
 {
 	for (auto aSharedPtr : branches_)
 	{
 		if ((aSharedPtr->name() == branch_name))
 		{
-			return std::make_pair(true,aSharedPtr);
+			return NMS::make_pair(true,aSharedPtr);
 		}
 	}
 
-	return std::make_pair(false,nullptr);
+	return NMS::make_pair(false,nullptr);
 }
 
-std::shared_ptr<Git_Branch> Git_Repo::create_branch(const branch_name_t& branch_name)
+NMS::shared_ptr<Git_Branch> Git_Repo::create_branch(const branch_name_t& branch_name)
 {
 	auto result = find_branch(branch_name);
 	/*Check if branch with that name already find_branch and if not create it*/
 	if (!result.first)
 	{
-		std::shared_ptr<Git_Branch> new_branch = std::make_shared<Git_Branch>(branch_name,this);
+		NMS::shared_ptr<Git_Branch> new_branch = NMS::make_shared<Git_Branch>(branch_name,this);
 		branches_.insert(new_branch);
 		return new_branch;
 	}
@@ -84,18 +84,18 @@ bool Git_Repo::is_my_path(const repo_path_t& path_to_some_repo)const
 	return (0 == strcmp(path_to_some_repo.c_str(),c_path));
 }
 
-void Git_Repo::rename(const std::string& repo_name)
+void Git_Repo::rename(const NMS::string& repo_name)
 {
-	const_cast<std::string&>(repo_name_) = repo_name;
+	const_cast<NMS::string&>(repo_name_) = repo_name;
 }
 
 
-std::shared_ptr<Git_Branch> Git_Repo::get_branch(const branch_name_t& branch_name)const
+NMS::shared_ptr<Git_Branch> Git_Repo::get_branch(const branch_name_t& branch_name)const
 {
 	return nullptr;
 }
 
-const std::shared_ptr<Git_Commit> Git_Repo::commit_lookup(const Git_Commit_ID& commit_id)const
+const NMS::shared_ptr<Git_Commit> Git_Repo::commit_lookup(const Git_Commit_ID& commit_id)const
 {
 	git_commit* commit_out{ nullptr };
 	auto res = git_commit_lookup(&commit_out, c_git_repository_, commit_id.id());
@@ -105,6 +105,6 @@ const std::shared_ptr<Git_Commit> Git_Repo::commit_lookup(const Git_Commit_ID& c
 	}
 	else
 	{
-		return std::make_shared<Git_Commit>(this,commit_out);
+		return NMS::make_shared<Git_Commit>(this,commit_out);
 	}
 }

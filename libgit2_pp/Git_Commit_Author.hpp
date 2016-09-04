@@ -6,7 +6,7 @@ class Git_Commit_Author
 public:
 	Git_Commit_Author(const git_signature*);
 	~Git_Commit_Author();
-	std::string name()const;
-	std::string email()const;
+	NMS::string name()const;
+	NMS::string email()const;
 };
 
