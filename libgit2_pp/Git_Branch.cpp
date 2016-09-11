@@ -59,7 +59,7 @@ NMS::shared_ptr<Git_Commit> Git_Branch::create_commit()
 
 NMS::shared_ptr<Git_Repo> Git_Branch::parent_repo()const
 {
-	return nullptr /*NMS::make_shared<Git_Repo>(m_parent_repo_->guts())*/;
+	return nullptr /*NMS::make_shared<Git_Repo>(m_parent_repo_->c_guts())*/;
 }
 
 git_repository* Git_Branch::get_owner_()const

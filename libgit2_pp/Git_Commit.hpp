@@ -7,7 +7,7 @@ class Git_Commit
 	const Git_Repo* m_parent_repo_{};
 private:
 	git_commit* get_head_commit_()const;
-	git_commit* guts()const { return c_git_commit_; }
+	git_commit* c_guts()const { return c_git_commit_; }
 public:
 	Git_Commit(const Git_Repo*const parent, const NMS::vector<NMS::string>& files_to_commit, const NMS::string& msg);
 	Git_Commit(const Git_Repo*const,git_commit*);

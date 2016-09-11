@@ -15,7 +15,7 @@ private:
 	void move_(const branch_name_t& new_branch_name, bool force = true);
 	Git_Branch(git_reference*,Git_Repo* parent);
 public:
-	git_reference* guts()const { return c_git_reference_branch_; };
+	git_reference* c_guts()const { return c_git_reference_branch_; };
 	Git_Branch(const branch_name_t& branch_name, Git_Repo* parent);
 	~Git_Branch();
 	

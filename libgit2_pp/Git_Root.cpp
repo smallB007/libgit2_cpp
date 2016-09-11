@@ -36,7 +36,7 @@ NMS::shared_ptr<Git_Repo> Git_Root::find_c_git_repository(git_repository* c_git_
 {
 	for (const auto& aSharedPtr : repositories_)
 	{
-		if (aSharedPtr->guts() == c_git_repo)
+		if (aSharedPtr->c_guts() == c_git_repo)
 		{
 			return aSharedPtr;
 		}

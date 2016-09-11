@@ -93,6 +93,18 @@
     <ClInclude Include="Libgit2_includes.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Git_Index.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Message.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_ODB.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_RefDB.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -135,6 +147,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Git_Config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Index.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Message.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_ODB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_RefDB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

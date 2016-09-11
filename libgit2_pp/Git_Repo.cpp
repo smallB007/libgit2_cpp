@@ -3,6 +3,10 @@
 #include "Copied_From_libgit2.hpp"
 #include "Git_Commit_ID.hpp"
 #include "Git_Config.hpp"
+#include "Git_Index.hpp"
+#include "Git_ODB.hpp"
+#include "Git_RefDB.hpp"
+#include "Git_Signature.hpp"
 
 /*Proper CADRe - [C]onstructor [A]cquires, [D]estructor [Re]leses*/
 Git_Repo::Git_Repo(const repo_path_t& path_to_repo, const bool is_bare)
@@ -210,12 +214,12 @@ namespace_name_t Git_Repo::get_namespace()const
 NMS::shared_ptr<Git_Branch> Git_Repo::head()const
 {
 	/*0 on success, GIT_EUNBORNBRANCH when HEAD points to a non existing branch, GIT_ENOTFOUND when HEAD is missing; an error code otherwise*/
-	git_reference* git_branch_ref_out;
-	auto res = git_repository_head(&git_branch_ref_out,c_git_repository_);
+	git_reference* c_git_branch_ref_out;
+	auto res = git_repository_head(&c_git_branch_ref_out,c_git_repository_);
 	if (!FAILED(res))
 	{/*find that ref amongst those branches */
-		auto aSharedPtr = find_branch_by_git_reference_(git_branch_ref_out);
-		git_reference_free(git_branch_ref_out);
+		auto aSharedPtr = find_branch_by_c_git_reference_(c_git_branch_ref_out);
+		git_reference_free(c_git_branch_ref_out);
 		return aSharedPtr;
 	}
 	else if (GIT_EUNBORNBRANCH == res)
@@ -232,15 +236,199 @@ NMS::shared_ptr<Git_Branch> Git_Repo::head()const
 	}
 }
 
-NMS::shared_ptr<Git_Branch> Git_Repo::find_branch_by_git_reference_(git_reference*const c_git_branch_ref)const
+NMS::shared_ptr<Git_Branch> Git_Repo::find_branch_by_c_git_reference_(git_reference*const c_git_branch_ref)const
 {
 	for (const auto& aSharedPtr : branches_)
 	{
-		if (aSharedPtr->guts() == c_git_branch_ref)
+		if (aSharedPtr->c_guts() == c_git_branch_ref)
 		{
 			return aSharedPtr;
 		}
 	}
 
 	return nullptr;
+}
+
+bool Git_Repo::is_head_detached()const
+{//1 if HEAD is detached, 0 if it's not; error code if there was an error.
+	auto res = git_repository_head_detached(c_git_repository_);
+	if (FAILED(res))
+	{
+		throw - 1;
+	}
+
+	return  res;
+}
+
+bool Git_Repo::is_head_unborn()const
+{//1 if the current branch is unborn, 0 if it's not; error code if there was an error
+	auto res = git_repository_head_unborn(c_git_repository_);
+	if (FAILED(res))
+	{
+		throw - 1;
+	}
+
+	return res;
+}
+
+NMS::shared_ptr<Git_Commit_Author> Git_Repo::identitiy() const
+{//The memory is owned by the repository and must not be freed by the user.
+	const char* name_out;
+	const char* email_out;
+	auto res = git_repository_ident(&name_out, &email_out, c_git_repository_);
+	if (FAILED(res))
+	{
+		throw - 1;
+	}
+
+	return nullptr;
+}
+
+NMS::shared_ptr<Git_Index> Git_Repo::index()const
+{
+	git_index* c_git_index_out;
+	auto res = git_repository_index(&c_git_index_out,c_git_repository_);
+	if (FAILED(res))
+	{
+		throw - 1;
+	}
+
+	return NMS::make_shared<Git_Index>(c_git_index_out);
+}
+
+bool Git_Repo::is_bare()const
+{
+	int is_repo_bare = git_repository_is_bare(c_git_repository_);
+	return is_repo_bare;
+}
+
+bool Git_Repo::is_empty()const
+{
+	auto res = git_repository_is_empty(c_git_repository_);
+	if (FAILED(res))
+	{
+		throw - 1;
+	}
+
+	return res;
+}
+
+bool Git_Repo::is_shallow()const
+{
+	int res = git_repository_is_shallow(c_git_repository_);
+
+	return res;
+}
+
+NMS::shared_ptr<Git_ODB> Git_Repo::odb()const
+{
+	return NMS::make_shared<Git_ODB>(c_git_repository_);
+}
+
+repo_path_t Git_Repo::path() const
+{
+	return git_repository_path(c_git_repository_);
+}
+
+NMS::shared_ptr<Git_RefDB> Git_Repo::ref_db() const
+{
+	return NMS::make_shared<Git_RefDB>(c_git_repository_);
+}
+
+void Git_Repo::set_bare()
+{
+	int res = git_repository_set_bare(c_git_repository_);
+	if (FAILED(res))
+	{
+		throw - 1;
+	}
+	git_repository_set_index(c_git_repository_, NULL);
+}
+
+void Git_Repo::set_config(const Git_Config& config)
+{
+	git_repository_set_config(c_git_repository_, config);
+}
+
+void Git_Repo::set_identity(const Git_Signature& signature)
+{
+	int res = git_repository_set_ident(c_git_repository_, signature.name().c_str(), signature.email().c_str());
+	if (FAILED(res))
+	{
+		throw - 1;
+	}
+}
+
+void Git_Repo::set_index(const Git_Index& index)
+{
+	git_repository_set_index(c_git_repository_, index);
+}
+
+void Git_Repo::set_namespace(const namespace_name_t& namespace_name)
+{
+	int res = git_repository_set_namespace(c_git_repository_, namespace_name.c_str());
+	if (FAILED(res))
+	{
+		throw - 1;
+	}
+}
+
+void Git_Repo::set_odb(const Git_ODB& odb)
+{
+	git_repository_set_odb(c_git_repository_, odb);
+}
+
+void Git_Repo::set_ref_db(const Git_RefDB & ref_db)
+{
+	git_repository_set_refdb(c_git_repository_, ref_db);
+}
+
+void Git_Repo::set_working_dir(const repo_path_t & working_dir, bool update_gitlink)
+{
+	int res = git_repository_set_workdir(c_git_repository_, working_dir.c_str(), update_gitlink);
+	if (FAILED(res))
+	{
+		throw - 1;
+	}
+}
+
+const repo_path_t Git_Repo::get_working_dir() const
+{
+	if (is_bare())
+	{
+		return repo_path_t();
+	}
+	else
+	{
+		const char * working_dir = git_repository_workdir(c_git_repository_);
+		return working_dir;
+	}
+}
+
+git_repository_state_t Git_Repo::get_state() const
+{
+	auto res = git_repository_state(c_git_repository_);
+	if (FAILED(res))
+	{
+		throw - 1;
+	}
+	return static_cast<git_repository_state_t>(res);
+}
+
+void Git_Repo::cleanup_state()
+{
+	int res = git_repository_state_cleanup(c_git_repository_);
+	if (FAILED(res))
+	{
+		throw - 1;
+	}
+}
+
+void Git_Repo::unset_identity()
+{
+	int res = git_repository_set_ident(c_git_repository_, NULL, NULL);
+	if (FAILED(res))
+	{
+		throw - 1;
+	}
 }
