@@ -1,8 +1,6 @@
 #pragma once
 #include "stdafx.h"
-class Git_Commit_Author;
-class Git_Time;
-class Git_Buf;
+
 class Git_Signature
 {
 	const git_signature* c_git_signature_{nullptr};

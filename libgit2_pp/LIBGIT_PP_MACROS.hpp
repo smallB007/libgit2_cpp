@@ -1,6 +1,5 @@
 #pragma once
-template<class T>
-class Singleton;
+#include "stdafx.h"
 
 /***
 This macro is used in each class that inherits from Singleton

@@ -1,19 +1,13 @@
 #pragma once
 #include "stdafx.h"
-class Git_Repo;
-class Git_Commit_Author;
-class Git_Signature;
-class Git_Commit_ID;
-class Git_Object_ID;
-class Git_Time;
-class Git_Tree;
 
 class Git_Commit
 {
-	git_commit* c_git_commit_{nullptr};
-	const Git_Repo* m_parent_repo_{nullptr};
+	git_commit* c_git_commit_{};
+	const Git_Repo* m_parent_repo_{};
 private:
 	git_commit* get_head_commit_()const;
+	git_commit* guts()const { return c_git_commit_; }
 public:
 	Git_Commit(const Git_Repo*const parent, const NMS::vector<NMS::string>& files_to_commit, const NMS::string& msg);
 	Git_Commit(const Git_Repo*const,git_commit*);

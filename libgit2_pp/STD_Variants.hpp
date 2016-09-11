@@ -1,5 +1,5 @@
 #pragma once
-#ifdef USE_STD
+#ifndef USE_EASTL
 #include <vector>
 #include <set>
 #include <string>

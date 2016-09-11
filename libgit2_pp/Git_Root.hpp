@@ -23,6 +23,7 @@ Git_Root();
 /*PUBLIC GIT INTERFACE*/	
 public:
 	NMS::shared_ptr<Git_Repo> create_repository(const repo_path_t& path_to_repo, const bool is_bare);
+	NMS::shared_ptr<Git_Repo> find_c_git_repository(git_repository*)const;
 };
 
 /***

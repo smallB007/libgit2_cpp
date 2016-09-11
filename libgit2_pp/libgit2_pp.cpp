@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "Git_Root.hpp"
+#include <iostream>
 
 int main()
 {
@@ -12,12 +13,24 @@ int main()
 		//repo->get_master_branch();
 		auto branch = repo->create_branch("branch_A");
 		auto branch_B = repo->create_branch("branch_B");
-		repo->delete_branch("branch_B");
+		branch_B->move("Branch_C");
+		//repo->delete_branch("branch_B");
 		auto commit = branch->create_commit();
 		auto author = commit->author();
 		auto body = commit->body();
 		auto msg = commit->message();
-		
+		for (auto i : *(repo.get()))
+		{
+			std::cout << i->name();
+		}
+		//branch->get();
+		//Git_Branch::local_iterator a;
+		//auto begi = branch->begin();
+		//auto beg1 = branch->begin();
+		//for (auto beg{ branch->begin() }, end{branch->end()}; beg != end; ++beg)
+		//{
+		//	auto b_name = beg->name();
+		//}
 	destroy_git();
     return 0;
 }

@@ -150,22 +150,28 @@
     <Text Include="Building_libgit2_pp.txt" />
     <Text Include="ReadMe.txt" />
     <Text Include="ToDo.txt" />
+    <Text Include="Wrapped_Functionality.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Common_defines.hpp" />
     <ClInclude Include="Common_typedefs.hpp" />
     <ClInclude Include="Copied_From_libgit2.hpp" />
+    <ClInclude Include="ENUMS.hpp" />
     <ClInclude Include="Error_Handling.hpp" />
+    <ClInclude Include="Forward_Declarations.hpp" />
     <ClInclude Include="Git_Branch.hpp" />
     <ClInclude Include="Git_Buf.hpp" />
     <ClInclude Include="Git_Commit.hpp" />
     <ClInclude Include="Git_Commit_Author.hpp" />
     <ClInclude Include="Git_Commit_ID.hpp" />
+    <ClInclude Include="Git_Config.hpp" />
     <ClInclude Include="Git_Time.hpp" />
     <ClInclude Include="Git_Object_ID.hpp" />
     <ClInclude Include="Git_Repo.hpp" />
     <ClInclude Include="Git_Root.hpp" />
     <ClInclude Include="Git_Signature.hpp" />
     <ClInclude Include="Git_Tree.hpp" />
+    <ClInclude Include="Libgit2_includes.hpp" />
     <ClInclude Include="LIBGIT_PP_MACROS.hpp" />
     <ClInclude Include="Singleton.hpp" />
     <ClInclude Include="stdafx.h" />
@@ -178,6 +184,7 @@
     <ClCompile Include="Git_Commit.cpp" />
     <ClCompile Include="Git_Commit_Author.cpp" />
     <ClCompile Include="Git_Commit_ID.cpp" />
+    <ClCompile Include="Git_Config.cpp" />
     <ClCompile Include="Git_Time.cpp" />
     <ClCompile Include="Git_Object_ID.cpp" />
     <ClCompile Include="Git_Repo.cpp" />

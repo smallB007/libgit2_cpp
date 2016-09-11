@@ -5,7 +5,7 @@
 #include "Git_Commit_ID.hpp"
 #include "Git_Time.hpp"
 #include "Git_Tree.hpp"
-
+#include "Git_Root.hpp"
 Git_Commit::Git_Commit(const Git_Repo*const parent, const NMS::vector<NMS::string>& files_to_commit, const NMS::string& msg):m_parent_repo_{parent}
 {
 	git_repository* rep = *const_cast<Git_Repo*>(m_parent_repo_);
@@ -179,15 +179,23 @@ NMS::shared_ptr<Git_Commit> Git_Commit::nth_gen_ancestor(const unsigned nth_gene
 
 NMS::shared_ptr<Git_Repo> Git_Commit::owner()const
 {
+	
 	git_repository* c_git_repo = git_commit_owner(c_git_commit_);
-	if (FAILED(c_git_repo))
-	{
-		throw - 1;
-	}
-	else
-	{
-		return NMS::make_shared<Git_Repo>(c_git_repo);
-	}
+	//Will this^^^ leak???
+	auto git_root = create_git();
+	auto repo = git_root->find_c_git_repository(c_git_repo);
+	return repo;
+		
+	/*In Git_Root find that repo and return it*/
+	//if (FAILED(c_git_repo))
+	//{
+	//	throw - 1;
+	//}
+	//else
+	//{
+	//
+	//	return NMS::make_shared<Git_Repo>(c_git_repo);
+	//}
 }
 
 NMS::shared_ptr<Git_Commit> Git_Commit::parent(const unsigned parent_pos)const

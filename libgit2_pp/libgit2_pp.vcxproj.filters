@@ -18,6 +18,7 @@
     <Text Include="ReadMe.txt" />
     <Text Include="ToDo.txt" />
     <Text Include="Building_libgit2_pp.txt" />
+    <Text Include="Wrapped_Functionality.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -77,6 +78,21 @@
     <ClInclude Include="STD_Variants.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ENUMS.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common_defines.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Forward_Declarations.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libgit2_includes.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -116,6 +132,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Git_Tree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

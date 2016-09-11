@@ -31,3 +31,16 @@ NMS::shared_ptr<Git_Repo> Git_Root::create_repository(const repo_path_t& path_to
 	repositories_.insert(_git_repo);
 	return _git_repo;
 }
+
+NMS::shared_ptr<Git_Repo> Git_Root::find_c_git_repository(git_repository* c_git_repo)const
+{
+	for (const auto& aSharedPtr : repositories_)
+	{
+		if (aSharedPtr->guts() == c_git_repo)
+		{
+			return aSharedPtr;
+		}
+	}
+
+	return nullptr;
+}
