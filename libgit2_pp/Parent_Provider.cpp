@@ -1,4 +1,6 @@
 #include "Parent_Provider.hpp"
+#include "Git_Repo.hpp"
+#include "Git_Root.hpp"
 
 NMS::shared_ptr<Git_Repo> Parent_Provider::parent_{};
 

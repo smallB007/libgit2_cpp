@@ -1,9 +1,6 @@
 #pragma once
 #include "stdafx.h"
 
-#include "Git_Root.hpp"
-#include "Git_Repo.hpp"
-
 class Parent_Provider
 {
 	static NMS::shared_ptr<Git_Repo> parent_;

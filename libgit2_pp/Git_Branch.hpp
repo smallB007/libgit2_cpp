@@ -1,34 +1,28 @@
 #pragma once
 #include "stdafx.h"
-#include "Git_Commit.hpp"
+#include "Provider.hpp"
 
-class Git_Branch
+class Git_Branch : public Provider<git_reference>
 {
 	friend class Git_Repo;
 private:
-	git_reference* c_git_reference_branch_{nullptr};
-	Git_Repo* m_parent_repo_{nullptr};
 	NMS::set<NMS::shared_ptr<Git_Commit>> commits_;
 
 	git_repository* get_owner_()const;
 	
 	void move_(const branch_name_t& new_branch_name, bool force = true);
-	Git_Branch(git_reference*,Git_Repo* parent);
+	Git_Branch(git_reference*);
 public:
-	git_reference* c_guts()const { return c_git_reference_branch_; };
-	Git_Branch(const branch_name_t& branch_name, Git_Repo* parent);
-	~Git_Branch();
+	Git_Branch(const branch_name_t& branch_name);
 	
-	operator git_reference*() { return c_git_reference_branch_; }
-	NMS::shared_ptr<Git_Repo> parent_repo()const;
-	branch_name_t name()const;
 	//git_branch_t type()const;
 	NMS::shared_ptr<Git_Commit> create_commit();
-	NMS::shared_ptr<Git_Commit> get_head_commit()const;
 
+LIBGIT2_BRANCH_INTERFACE
 	bool is_head()const;
 	void rename(const branch_name_t& new_branch_name);
 	void move(const branch_name_t& new_branch_name);
+	branch_name_t name()const;
 	
 private:	
 

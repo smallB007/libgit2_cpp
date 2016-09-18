@@ -2,21 +2,11 @@
 #include "stdafx.h"
 class Git_Blob : public Provider<git_blob>
 {
-	/*Those three friend declarations below have the solely purpose of allowing to create a shared ptr with private Git_Blob ctor*/
-	friend class NMS::shared_ptr<Git_Blob>;
-	
-	template<class _Ty,
-	class... _Types>
-	friend inline
-	NMS::shared_ptr<_Ty> make_shared(_Types&&... _Args);
-	
-	template<class _Ty>
-	friend class NMS::_Ref_count_obj;
 
 private:
-	Git_Blob(git_blob*);
 public:
 	Git_Blob();
+	Git_Blob(git_blob*);
 LIBGIT2_BLOB_INTERFACE
 	NMS::shared_ptr<Git_Object_ID> create_from_buffer(const NMS::vector<char>& buffer);
 	NMS::shared_ptr<Git_Object_ID> create_from_disk(const file_path_t&);

@@ -30,7 +30,7 @@ NMS::shared_ptr<Git_Repo> Git_Root::create_repository(const repo_path_t& path_to
 	repositories_.insert(_git_repo);
 	//always make just created repo active
 	active_repo_[0] = _git_repo;
-
+	_git_repo->create_initial_commit_();
 	return _git_repo;
 }
 

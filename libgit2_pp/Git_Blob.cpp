@@ -1,6 +1,6 @@
 #include "Git_Blob.hpp"
 #include "Git_Object_ID.hpp"
-
+#include "Git_Root.hpp"
 
 Git_Blob::Git_Blob():Provider(git_blob_free)
 {

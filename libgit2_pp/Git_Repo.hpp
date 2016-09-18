@@ -1,26 +1,24 @@
 #pragma once
 #include "stdafx.h"
 
-#include "Git_Branch.hpp"
+//#include "Git_Branch.hpp"
 
-class Git_Repo
+class Git_Repo : public Provider<git_repository>
 {
 	BEFRIEND_SINGLETON(Git_Repo);
+	friend class Git_Root;
 private:
-	git_repository* c_git_repository_{};
 	NMS::set<NMS::shared_ptr<Git_Branch>> branches_;
 	const NMS::string repo_name_;
 private:
 	NMS::shared_ptr<Git_Branch> find_branch_by_c_git_reference_(git_reference*const)const;
+	void create_initial_commit_();
 protected:
 	NMS::pair<bool, NMS::shared_ptr<Git_Branch>> find_branch(const branch_name_t& branch_name)const;
 public:
-	git_repository* c_guts()const { return c_git_repository_; }
 	Git_Repo(const Git_Repo&)=delete;
 	Git_Repo& operator=(const Git_Repo&) = delete;
 	Git_Repo(const repo_path_t& path_to_repo, const bool is_bare);
-	~Git_Repo();
-	operator git_repository*() { return c_git_repository_; }
 	
 	bool is_my_path(const repo_path_t& path_to_some_repo)const;
 	void rename(const NMS::string& repo_name);
