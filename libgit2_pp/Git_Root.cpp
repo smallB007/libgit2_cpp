@@ -19,7 +19,6 @@ NMS::shared_ptr<Git_Repo> Git_Root::create_repository(const repo_path_t& path_to
 	//Find out if such repo already find_branch in db
 	for (const auto aSharedPtr : repositories_)
 	{
-		//auto Git_Repo_ptr = aSharedPtr.get();
 		if (aSharedPtr->is_my_path(path_to_repo))
 		{
 			return aSharedPtr;
@@ -29,6 +28,9 @@ NMS::shared_ptr<Git_Repo> Git_Root::create_repository(const repo_path_t& path_to
 	//no repo found, create it then
 	auto _git_repo = NMS::make_shared<Git_Repo>(path_to_repo,is_bare);
 	repositories_.insert(_git_repo);
+	//always make just created repo active
+	active_repo_[0] = _git_repo;
+
 	return _git_repo;
 }
 
@@ -43,4 +45,9 @@ NMS::shared_ptr<Git_Repo> Git_Root::find_c_git_repository(git_repository* c_git_
 	}
 
 	return nullptr;
+}
+
+NMS::shared_ptr<Git_Repo> Git_Root::get_active_repo()const
+{
+	return active_repo_[0];
 }

@@ -19,6 +19,7 @@
     <Text Include="ToDo.txt" />
     <Text Include="Building_libgit2_pp.txt" />
     <Text Include="Wrapped_Functionality.txt" />
+    <Text Include="Conventions.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -105,6 +106,21 @@
     <ClInclude Include="Git_RefDB.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Parent_Provider.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Guts_Provider.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Provider.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Blame.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Blob.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -159,6 +175,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Git_RefDB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Parent_Provider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Blame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Blob.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

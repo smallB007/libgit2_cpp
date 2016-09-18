@@ -1,6 +1,7 @@
 #include "Git_Repo.hpp"
 
 #include "Copied_From_libgit2.hpp"
+
 #include "Git_Commit_ID.hpp"
 #include "Git_Config.hpp"
 #include "Git_Index.hpp"
@@ -121,7 +122,7 @@ void Git_Repo::rename(const NMS::string& repo_name)
 const NMS::shared_ptr<Git_Commit> Git_Repo::commit_lookup(const Git_Commit_ID& commit_id)const
 {/*Most likely here it is better to simply look through commits in branches but who knows?*/
 	git_commit* commit_out{ nullptr };
-	auto res = git_commit_lookup(&commit_out, c_git_repository_, commit_id.id());
+	auto res = git_commit_lookup(&commit_out, c_git_repository_, commit_id.c_guts());
 	if(FAILED(res))
 	{
 		throw - 1;
@@ -144,6 +145,7 @@ decltype(Git_Repo::branches_)::iterator Git_Repo::end()const
 
 NMS::shared_ptr<Git_Branch> Git_Repo::branch_lookup(const branch_name_t& branch_name, git_branch_t branch_type)const
 {
+	UNUSED(branch_type);
 	/*The above signature is 1:1 with libgit2 but for the momment type of branch will be ommited*/
 	for (auto aSharedPtr : branches_)
 	{
@@ -257,7 +259,7 @@ bool Git_Repo::is_head_detached()const
 		throw - 1;
 	}
 
-	return  res;
+	return res;
 }
 
 bool Git_Repo::is_head_unborn()const
@@ -322,7 +324,7 @@ bool Git_Repo::is_shallow()const
 
 NMS::shared_ptr<Git_ODB> Git_Repo::odb()const
 {
-	return NMS::make_shared<Git_ODB>(c_git_repository_);
+	return NMS::make_shared<Git_ODB>(/*c_git_repository_*/);
 }
 
 repo_path_t Git_Repo::path() const
@@ -375,7 +377,7 @@ void Git_Repo::set_namespace(const namespace_name_t& namespace_name)
 
 void Git_Repo::set_odb(const Git_ODB& odb)
 {
-	git_repository_set_odb(c_git_repository_, odb);
+	git_repository_set_odb(c_git_repository_, odb.c_guts());
 }
 
 void Git_Repo::set_ref_db(const Git_RefDB & ref_db)

@@ -13,7 +13,7 @@ protected:
 	Singleton& operator=(const Singleton&) = delete;
 	Singleton& operator=(Singleton&&) = delete;
 	~Singleton() = default;
-protected:
+public:
 	static T* GetInstance()
 	{
 		if (!inst_)
@@ -22,7 +22,7 @@ protected:
 		} 
 		return inst_;
 	}
-
+protected:
 	static void DestroyInstance()
 	{
 		delete inst_;

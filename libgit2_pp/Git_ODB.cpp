@@ -2,21 +2,11 @@
 
 
 
-Git_ODB::Git_ODB(git_repository* c_git_repo) 
+Git_ODB::Git_ODB() : Provider(git_odb_free)
 {
-	auto res = git_repository_odb(&c_git_odb_, c_git_repo);
+	auto res = git_repository_odb(&c_git_guts_, get_parent()->c_guts());
 	if (FAILED(res))
 	{
 		throw - 1;
-	}
-}
-
-
-Git_ODB::~Git_ODB()
-{
-	if (c_git_odb_)
-	{
-		git_odb_free(c_git_odb_);
-		c_git_odb_ = nullptr;
 	}
 }

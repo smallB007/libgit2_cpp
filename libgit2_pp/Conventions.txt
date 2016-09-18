@@ -1,0 +1,4 @@
+1. libgit2 internals of a C++ class are named always c_git_someting
+2. libgit2 objects that is c_git_something are passed as a non-const objects, due to the fact that libgit2 uses non-const objects.
+3. Each C++ class wrapping libgit2 inherits from Provider class giving c_git_object as a template parameter and passing to Provider ctor c_git_deleter
+4. C++ wrappers don't do checking. They assume that the data is correct. After all, they're just wrappers.

@@ -8,6 +8,7 @@
 #include <array>
 #include <algorithm>
 #include <iterator>
+#include <functional>
 #define NMS std
 #elif defined USE_EASTL
 #include <EASTL\vector.h>
@@ -19,5 +20,6 @@
 #include <EASTL\array.h>
 #include <EASTL\algorithm.h>
 #include <EASTL\iterator.h>
+#include <EASTL\functional>
 #define NMS eastl
 #endif

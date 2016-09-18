@@ -3,8 +3,9 @@
 
 #include "Git_Branch.hpp"
 
-class Git_Repo 
+class Git_Repo
 {
+	BEFRIEND_SINGLETON(Git_Repo);
 private:
 	git_repository* c_git_repository_{};
 	NMS::set<NMS::shared_ptr<Git_Branch>> branches_;
@@ -16,8 +17,8 @@ protected:
 public:
 	git_repository* c_guts()const { return c_git_repository_; }
 	Git_Repo(const Git_Repo&)=delete;
+	Git_Repo& operator=(const Git_Repo&) = delete;
 	Git_Repo(const repo_path_t& path_to_repo, const bool is_bare);
-	//Git_Repo(git_repository* c_git_repository);
 	~Git_Repo();
 	operator git_repository*() { return c_git_repository_; }
 	

@@ -12,6 +12,7 @@ class Git_Object_ID;
 class Git_ODB;
 class Git_RefDB;
 class Git_Repo;
+class Git_Root;
 class Git_Signature;
 class Git_Time;
 class Git_Tree;

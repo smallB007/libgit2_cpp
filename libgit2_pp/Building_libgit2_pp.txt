@@ -13,4 +13,4 @@ void* operator new[](size_t size, size_t alignment, size_t alignmentOffset, cons
   return malloc(size);
 } 
 
-
+4. C4800 (forcing int to bool) warning has been disabled:https://msdn.microsoft.com/en-us/library/jj715718.aspx

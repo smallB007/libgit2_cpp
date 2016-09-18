@@ -105,6 +105,8 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;USE_STD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <DisableSpecificWarnings>4800; </DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="Building_libgit2_pp.txt" />
+    <Text Include="Conventions.txt" />
     <Text Include="ReadMe.txt" />
     <Text Include="ToDo.txt" />
     <Text Include="Wrapped_Functionality.txt" />
@@ -159,6 +162,8 @@
     <ClInclude Include="ENUMS.hpp" />
     <ClInclude Include="Error_Handling.hpp" />
     <ClInclude Include="Forward_Declarations.hpp" />
+    <ClInclude Include="Git_Blame.hpp" />
+    <ClInclude Include="Git_Blob.hpp" />
     <ClInclude Include="Git_Branch.hpp" />
     <ClInclude Include="Git_Buf.hpp" />
     <ClInclude Include="Git_Commit.hpp" />
@@ -175,14 +180,19 @@
     <ClInclude Include="Git_Root.hpp" />
     <ClInclude Include="Git_Signature.hpp" />
     <ClInclude Include="Git_Tree.hpp" />
+    <ClInclude Include="Guts_Provider.hpp" />
     <ClInclude Include="Libgit2_includes.hpp" />
     <ClInclude Include="LIBGIT_PP_MACROS.hpp" />
+    <ClInclude Include="Parent_Provider.hpp" />
+    <ClInclude Include="Provider.hpp" />
     <ClInclude Include="Singleton.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="STD_Variants.hpp" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Git_Blame.cpp" />
+    <ClCompile Include="Git_Blob.cpp" />
     <ClCompile Include="Git_Branch.cpp" />
     <ClCompile Include="Git_Buf.cpp" />
     <ClCompile Include="Git_Commit.cpp" />
@@ -200,6 +210,7 @@
     <ClCompile Include="Git_Signature.cpp" />
     <ClCompile Include="Git_Tree.cpp" />
     <ClCompile Include="libgit2_pp.cpp" />
+    <ClCompile Include="Parent_Provider.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

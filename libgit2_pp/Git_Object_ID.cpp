@@ -2,11 +2,8 @@
 
 
 
-Git_Object_ID::Git_Object_ID(const git_oid* git_oid):git_oid_{git_oid}
+Git_Object_ID::Git_Object_ID(const git_oid* c_git_oid): Provider(nullptr)
 {
+	c_git_guts_ = { const_cast<git_oid*>(c_git_oid) };
 }
 
-
-Git_Object_ID::~Git_Object_ID()
-{
-}

@@ -8,15 +8,15 @@
 VERY, VERY IMPORTANT
 Unless the docs specifically say otherwise, any non-const pointer that’s filled in by libgit2 needs to be freed by the caller.
 */
-class Git_Root : private Singleton<Git_Root>
+class Git_Root : public Singleton<Git_Root>
 {
-	//friend class Singleton<Git_Root>;
 	BEFRIEND_SINGLETON(Git_Root);
 	friend Git_Root* create_git();
 	friend void destroy_git();
-	
+	NMS::array<NMS::shared_ptr<Git_Repo>,1> active_repo_;
 	NMS::set<NMS::shared_ptr<Git_Repo>> repositories_;
 public:
+	NMS::shared_ptr<Git_Repo> get_active_repo()const;
 private:
 ~Git_Root();
 Git_Root();
