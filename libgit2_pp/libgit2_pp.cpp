@@ -6,11 +6,13 @@
 #include <iostream>
 #include "Git_ODB.hpp"
 #include "Git_Blame.hpp"
+#include "Git_Config.hpp"
 int main()
 {
-		auto git = create_git();
+	Git_Config config;
+		//auto git = create_git();
 		//auto git1 = create_git();
-		auto repo = git->create_repository("C:\\Users\\Artie\\Desktop\\tmp_repo", false);
+		//auto repo = git->create_repository("C:\\Users\\Artie\\Desktop\\tmp_repo", false);
 		////repo->get_master_branch();
 		//auto branch = repo->create_branch("branch_A");
 		//auto branch_B = repo->create_branch("branch_B");
@@ -24,8 +26,8 @@ int main()
 		//{
 		//	std::cout << i->name();
 		//}
-		Git_ODB godb;
-		Git_Blame blame;
+		//Git_ODB godb;
+		//Git_Blame blame;
 		
 		//branch->get();
 		//Git_Branch::local_iterator a;
@@ -35,7 +37,7 @@ int main()
 		//{
 		//	auto b_name = beg->name();
 		//}
-	destroy_git();
+	//destroy_git();
     return 0;
 }
 

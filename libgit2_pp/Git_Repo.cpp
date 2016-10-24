@@ -2,6 +2,7 @@
 
 #include "Copied_From_libgit2.hpp"
 #include "Git_Branch.hpp"
+#include "Git_Checkout.hpp"
 #include "Git_Commit_ID.hpp"
 #include "Git_Config.hpp"
 #include "Git_Index.hpp"
@@ -9,7 +10,8 @@
 #include "Git_RefDB.hpp"
 #include "Git_Signature.hpp"
 #include "Git_Commit.hpp"
-
+#include "Git_CherryPick_Options.hpp"
+#include "Git_Clone_Options.hpp"
 /*Proper CADRe - [C]onstructor [A]cquires, [D]estructor [Re]leses*/
 Git_Repo::Git_Repo(const repo_path_t& path_to_repo, const bool is_bare):Provider(git_repository_free)
 {
@@ -28,7 +30,7 @@ Git_Repo::Git_Repo(const repo_path_t& path_to_repo, const bool is_bare):Provider
 	//	{
 	//		throw -1;
 	//	}
-	//	NMS::shared_ptr<Git_Branch> master_branch{ new Git_Branch(git_branch_ref_out) };// = std::make_shared<Git_Branch>(git_branch_ref_out, this);
+	//	shared_ptr_t<Git_Branch> master_branch{ new Git_Branch(git_branch_ref_out) };// = std::make_shared<Git_Branch>(git_branch_ref_out, this);
 	//	branches_.insert(master_branch);
 	//}
 }
@@ -47,11 +49,11 @@ void Git_Repo::create_initial_commit_()
 	{
 		throw - 1;
 	}
-	NMS::shared_ptr<Git_Branch> master_branch{ new Git_Branch(git_branch_ref_out) };// = std::make_shared<Git_Branch>(git_branch_ref_out, this);
+	shared_ptr_t<Git_Branch> master_branch{ new Git_Branch(git_branch_ref_out) };// = std::make_shared<Git_Branch>(git_branch_ref_out, this);
 	branches_.insert(master_branch);
 }
  
-const NMS::shared_ptr<Git_Commit> Git_Repo::get_head_commit()const
+const shared_ptr_t<Git_Commit> Git_Repo::get_head_commit()const
 {
 	git_oid* git_oid_out = new git_oid;
 	git_reference_name_to_id(git_oid_out, c_git_guts_, "HEAD");
@@ -64,7 +66,7 @@ const NMS::shared_ptr<Git_Commit> Git_Repo::get_head_commit()const
 	return NMS::make_shared<Git_Commit>(git_commit_out);
 }
 
-NMS::pair<bool,NMS::shared_ptr<Git_Branch>> Git_Repo::find_branch(const branch_name_t& branch_name)const
+NMS::pair<bool,shared_ptr_t<Git_Branch>> Git_Repo::find_branch(const branch_name_t& branch_name)const
 {
 	for (auto aSharedPtr : branches_)
 	{
@@ -77,13 +79,13 @@ NMS::pair<bool,NMS::shared_ptr<Git_Branch>> Git_Repo::find_branch(const branch_n
 	return NMS::make_pair(false,nullptr);
 }
 
-NMS::shared_ptr<Git_Branch> Git_Repo::create_branch(const branch_name_t& branch_name)
+shared_ptr_t<Git_Branch> Git_Repo::create_branch(const branch_name_t& branch_name)
 {
 	auto result = find_branch(branch_name);
 	/*Check if branch with that name already find_branch and if not create it*/
 	if (!result.first)
 	{
-		NMS::shared_ptr<Git_Branch> new_branch = NMS::make_shared<Git_Branch>(branch_name);
+		shared_ptr_t<Git_Branch> new_branch = NMS::make_shared<Git_Branch>(branch_name);
 		branches_.insert(new_branch);
 		return new_branch;
 	}
@@ -122,12 +124,12 @@ void Git_Repo::rename(const NMS::string& repo_name)
 }
 
 
-//NMS::shared_ptr<Git_Branch> Git_Repo::get_branch(const branch_name_t& branch_name)const
+//shared_ptr_t<Git_Branch> Git_Repo::get_branch(const branch_name_t& branch_name)const
 //{
 //	return nullptr;
 //}
 
-const NMS::shared_ptr<Git_Commit> Git_Repo::commit_lookup(const Git_Commit_ID& commit_id)const
+const shared_ptr_t<Git_Commit> Git_Repo::commit_lookup(const Git_Commit_ID& commit_id)const
 {/*Most likely here it is better to simply look through commits in branches but who knows?
  possibly if they are in unordered set and placed into buckets by oid?
  */
@@ -153,7 +155,7 @@ decltype(Git_Repo::branches_)::iterator Git_Repo::end()const
 	return std::end(branches_);
 }
 
-NMS::shared_ptr<Git_Branch> Git_Repo::branch_lookup(const branch_name_t& branch_name, git_branch_t branch_type)const
+shared_ptr_t<Git_Branch> Git_Repo::branch_lookup(const branch_name_t& branch_name, git_branch_t branch_type)const
 {
 	UNUSED(branch_type);
 	/*The above signature is 1:1 with libgit2 but for the momment type of branch will be ommited*/
@@ -175,12 +177,53 @@ NMS::shared_ptr<Git_Branch> Git_Repo::branch_lookup(const branch_name_t& branch_
 	//return NMS::make_shared<Git_Branch>(git_reference_branch_out);
 }
 
+void Git_Repo::checkout_head() const
+{
+	Git_Checkout checkout;
+	checkout.head();
+}
+
+void Git_Repo::checkout_index() const
+{
+	Git_Checkout checkout;
+	checkout.index();
+}
+
+void Git_Repo::checkout_tree() const
+{
+	Git_Checkout checkout;
+	checkout.tree();
+}
+
+void Git_Repo::cherrypick(const Git_Commit& commit, const Git_CherryPick_Options& cherrypick_options)
+{
+	int res = git_cherrypick(c_git_guts_, commit.c_guts(), cherrypick_options.c_guts());
+	if (FAILED(res))
+	{
+		throw - 1;
+	}
+}
+
+LIBGIT2_CLONE_INTERFACE shared_ptr_t<Git_Repo> Git_Repo::clone(const repo_path_t & remote_repo_path, const repo_path_t & local_target_dir, const Git_Clone_Options & clone_options) const
+{
+	git_repository* c_git_repo_out{};
+	int res = git_clone(&c_git_repo_out,remote_repo_path.c_str(), local_target_dir.c_str(), clone_options.c_guts());
+	if (FAILED(res) || FAILED(c_git_repo_out))
+	{
+		throw - 1;
+	}
+	/*This !^^^ needs to be tested if it does what it is intended to*/
+	shared_ptr_t<Git_Repo> repo_dud = NMS::make_shared<Git_Repo>(local_target_dir,git_repository_is_bare(c_git_repo_out));
+	repo_dud.get()->c_git_guts_ = c_git_repo_out;
+	return repo_dud;
+}
+
 void Git_Repo::cleanup()
 {
 	git_repository__cleanup(c_git_guts_);
 }
 
-NMS::shared_ptr<Git_Config> Git_Repo::config()const
+shared_ptr_t<Git_Config> Git_Repo::config()const
 {
 	git_config* config_out;
 	auto res = git_repository_config(&config_out,c_git_guts_);
@@ -191,7 +234,7 @@ NMS::shared_ptr<Git_Config> Git_Repo::config()const
 	return NMS::make_shared<Git_Config>(config_out);
 }
 
-NMS::shared_ptr<Git_Config> Git_Repo::config_snapshot()const
+shared_ptr_t<Git_Config> Git_Repo::config_snapshot()const
 {
 	git_config* config_snapshot_out;
 	auto res = git_repository_config_snapshot(&config_snapshot_out, c_git_guts_);
@@ -224,7 +267,7 @@ namespace_name_t Git_Repo::get_namespace()const
 	return namespace_name_t(repo_namespace);
 }
 
-NMS::shared_ptr<Git_Branch> Git_Repo::head()const
+shared_ptr_t<Git_Branch> Git_Repo::head()const
 {
 	/*0 on success, GIT_EUNBORNBRANCH when HEAD points to a non existing branch, GIT_ENOTFOUND when HEAD is missing; an error code otherwise*/
 	git_reference* c_git_branch_ref_out;
@@ -249,7 +292,7 @@ NMS::shared_ptr<Git_Branch> Git_Repo::head()const
 	}
 }
 
-NMS::shared_ptr<Git_Branch> Git_Repo::find_branch_by_c_git_reference_(git_reference*const c_git_branch_ref)const
+shared_ptr_t<Git_Branch> Git_Repo::find_branch_by_c_git_reference_(git_reference*const c_git_branch_ref)const
 {
 	for (const auto& aSharedPtr : branches_)
 	{
@@ -284,7 +327,7 @@ bool Git_Repo::is_head_unborn()const
 	return res;
 }
 
-NMS::shared_ptr<Git_Commit_Author> Git_Repo::identitiy() const
+shared_ptr_t<Git_Commit_Author> Git_Repo::identitiy() const
 {//The memory is owned by the repository and must not be freed by the user.
 	const char* name_out;
 	const char* email_out;
@@ -297,7 +340,7 @@ NMS::shared_ptr<Git_Commit_Author> Git_Repo::identitiy() const
 	return nullptr;
 }
 
-NMS::shared_ptr<Git_Index> Git_Repo::index()const
+shared_ptr_t<Git_Index> Git_Repo::index()const
 {
 	git_index* c_git_index_out;
 	auto res = git_repository_index(&c_git_index_out,c_git_guts_);
@@ -333,7 +376,7 @@ bool Git_Repo::is_shallow()const
 	return res;
 }
 
-NMS::shared_ptr<Git_ODB> Git_Repo::odb()const
+shared_ptr_t<Git_ODB> Git_Repo::odb()const
 {
 	return NMS::make_shared<Git_ODB>(/*c_git_guts_*/);
 }
@@ -343,7 +386,7 @@ repo_path_t Git_Repo::path() const
 	return git_repository_path(c_git_guts_);
 }
 
-NMS::shared_ptr<Git_RefDB> Git_Repo::ref_db() const
+shared_ptr_t<Git_RefDB> Git_Repo::ref_db() const
 {
 	return NMS::make_shared<Git_RefDB>(c_git_guts_);
 }

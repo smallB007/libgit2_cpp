@@ -12,11 +12,11 @@ Git_Root::~Git_Root()
 	git_libgit2_shutdown();
 }
 
-NMS::shared_ptr<Git_Repo> Git_Root::create_repository(const repo_path_t& path_to_repo, const bool is_bare)
+shared_ptr_t<Git_Repo> Git_Root::create_repository(const repo_path_t& path_to_repo, const bool is_bare)
 {
 	/*As a side note and something to put into your KB Artie, 'smart' ptrs should be returned by value so the proper counter incrementation
 	can take place*/
-	//Find out if such repo already find_branch in db
+	//Find out if such repo already exists
 	for (const auto aSharedPtr : repositories_)
 	{
 		if (aSharedPtr->is_my_path(path_to_repo))
@@ -30,11 +30,12 @@ NMS::shared_ptr<Git_Repo> Git_Root::create_repository(const repo_path_t& path_to
 	repositories_.insert(_git_repo);
 	//always make just created repo active
 	active_repo_[0] = _git_repo;
+	/*initial commit must be created after active_repo_ has been set*/
 	_git_repo->create_initial_commit_();
 	return _git_repo;
 }
 
-NMS::shared_ptr<Git_Repo> Git_Root::find_c_git_repository(git_repository* c_git_repo)const
+shared_ptr_t<Git_Repo> Git_Root::find_c_git_repository(git_repository* c_git_repo)const
 {
 	for (const auto& aSharedPtr : repositories_)
 	{
@@ -47,7 +48,7 @@ NMS::shared_ptr<Git_Repo> Git_Root::find_c_git_repository(git_repository* c_git_
 	return nullptr;
 }
 
-NMS::shared_ptr<Git_Repo> Git_Root::get_active_repo()const
+shared_ptr_t<Git_Repo> Git_Root::get_active_repo()const
 {
 	return active_repo_[0];
 }

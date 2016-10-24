@@ -3,9 +3,9 @@
 
 class Parent_Provider
 {
-	static NMS::shared_ptr<Git_Repo> parent_;
+	static shared_ptr_t<Git_Repo> parent_;
 public:
-	NMS::shared_ptr<Git_Repo> get_parent()const;
+	shared_ptr_t<Git_Repo> get_parent()const;
 	git_repository* c_parent_guts()const; 
 };
 

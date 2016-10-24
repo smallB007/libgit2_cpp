@@ -6,7 +6,7 @@ class Git_Branch : public Provider<git_reference>
 {
 	friend class Git_Repo;
 private:
-	NMS::set<NMS::shared_ptr<Git_Commit>> commits_;
+	NMS::set<shared_ptr_t<Git_Commit>> commits_;
 
 	git_repository* get_owner_()const;
 	
@@ -16,7 +16,7 @@ public:
 	Git_Branch(const branch_name_t& branch_name);
 	
 	//git_branch_t type()const;
-	NMS::shared_ptr<Git_Commit> create_commit();
+	shared_ptr_t<Git_Commit> create_commit();
 
 LIBGIT2_BRANCH_INTERFACE
 	bool is_head()const;

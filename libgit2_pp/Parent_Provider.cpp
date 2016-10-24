@@ -2,9 +2,9 @@
 #include "Git_Repo.hpp"
 #include "Git_Root.hpp"
 
-NMS::shared_ptr<Git_Repo> Parent_Provider::parent_{};
+shared_ptr_t<Git_Repo> Parent_Provider::parent_{};
 
-NMS::shared_ptr<Git_Repo> Parent_Provider::get_parent()const
+shared_ptr_t<Git_Repo> Parent_Provider::get_parent()const
 {
 	parent_ = Git_Root::GetInstance()->get_active_repo();
 	return parent_;

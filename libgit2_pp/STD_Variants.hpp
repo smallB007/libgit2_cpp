@@ -16,6 +16,7 @@
 #include <EASTL\string.h>
 #include <EASTL\memory.h>
 #include <EASTL\shared_ptr.h>
+#include <EASTL\unique_ptr.h>
 #include <EASTL\utility.h>
 #include <EASTL\array.h>
 #include <EASTL\algorithm.h>

@@ -34,7 +34,7 @@ branch_name_t Git_Branch::name()const
 	}
 }
 
-NMS::shared_ptr<Git_Commit> Git_Branch::create_commit()
+shared_ptr_t<Git_Commit> Git_Branch::create_commit()
 {/*THIS ^^^ should be a method of Repo: create on active branch a commit*/
 	/*git_repository* c_git_repo = get_owner();*/
 	NMS::vector<NMS::string> files_to_commit{"a.cpp","b.cpp"};

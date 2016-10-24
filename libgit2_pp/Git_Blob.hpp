@@ -8,14 +8,14 @@ public:
 	Git_Blob();
 	Git_Blob(git_blob*);
 LIBGIT2_BLOB_INTERFACE
-	NMS::shared_ptr<Git_Object_ID> create_from_buffer(const NMS::vector<char>& buffer);
-	NMS::shared_ptr<Git_Object_ID> create_from_disk(const file_path_t&);
-	NMS::shared_ptr<Git_Object_ID> create_from_workdir(const file_path_t&);
-	NMS::shared_ptr<Git_Repo> owner()const;
-	NMS::shared_ptr<Git_Object_ID> id()const;
+	shared_ptr_t<Git_Object_ID> create_from_buffer(const NMS::vector<char>& buffer);
+	shared_ptr_t<Git_Object_ID> create_from_disk(const file_path_t&);
+	shared_ptr_t<Git_Object_ID> create_from_workdir(const file_path_t&);
+	shared_ptr_t<Git_Repo> owner()const;
+	shared_ptr_t<Git_Object_ID> id()const;
 	bool is_binary()const;
-	NMS::shared_ptr<Git_Blob> duplicate()const;
-	NMS::shared_ptr<Git_Blob> lookup(const Git_Object_ID&)const;
+	shared_ptr_t<Git_Blob> duplicate()const;
+	shared_ptr_t<Git_Blob> lookup(const Git_Object_ID&)const;
 	const NMS::vector<char> raw_content()const;
 	const NMS::size_t raw_size()const;
 #ifdef _FULL_IMPLEMENTATION_

@@ -11,7 +11,7 @@ Git_Blob::Git_Blob(git_blob * c_git_blob):Provider(git_blob_free)
 	c_git_guts_ = c_git_blob;
 }
 
-NMS::shared_ptr<Git_Object_ID> Git_Blob::create_from_buffer(const NMS::vector<char>& buffer)
+shared_ptr_t<Git_Object_ID> Git_Blob::create_from_buffer(const NMS::vector<char>& buffer)
 {
 	git_oid* c_git_oid_out{};
 	int res = git_blob_create_frombuffer(c_git_oid_out, c_parent_guts(), &buffer, NMS::size(buffer));
@@ -23,7 +23,7 @@ NMS::shared_ptr<Git_Object_ID> Git_Blob::create_from_buffer(const NMS::vector<ch
 	return NMS::make_shared<Git_Object_ID>(c_git_oid_out);
 }
 
-NMS::shared_ptr<Git_Object_ID> Git_Blob::create_from_disk(const file_path_t& file_path)
+shared_ptr_t<Git_Object_ID> Git_Blob::create_from_disk(const file_path_t& file_path)
 {
 	git_oid* c_git_oid_out{};
 	int res = git_blob_create_fromdisk(c_git_oid_out, c_parent_guts(), file_path.c_str());
@@ -35,7 +35,7 @@ NMS::shared_ptr<Git_Object_ID> Git_Blob::create_from_disk(const file_path_t& fil
 	return NMS::make_shared<Git_Object_ID>(c_git_oid_out);
 }
 
-NMS::shared_ptr<Git_Object_ID> Git_Blob::create_from_workdir(const file_path_t& relative_file_path)
+shared_ptr_t<Git_Object_ID> Git_Blob::create_from_workdir(const file_path_t& relative_file_path)
 {
 	git_oid* c_git_oid_out{};
 	int res = git_blob_create_fromworkdir(c_git_oid_out, c_parent_guts(), relative_file_path.c_str());
@@ -48,7 +48,7 @@ NMS::shared_ptr<Git_Object_ID> Git_Blob::create_from_workdir(const file_path_t& 
 }
 
 
-NMS::shared_ptr<Git_Repo> Git_Blob::owner()const
+shared_ptr_t<Git_Repo> Git_Blob::owner()const
 {
 	git_repository* c_git_repo = git_blob_owner(c_git_guts_);
 	if (FAILED(c_git_repo))
@@ -61,7 +61,7 @@ NMS::shared_ptr<Git_Repo> Git_Blob::owner()const
 }
 
 
-NMS::shared_ptr<Git_Object_ID> Git_Blob::id()const
+shared_ptr_t<Git_Object_ID> Git_Blob::id()const
 {
 
 	const git_oid* c_git_oid = git_blob_id(c_git_guts_);
@@ -90,7 +90,7 @@ bool Git_Blob::is_binary()const
 	return res;
 }
 
-NMS::shared_ptr<Git_Blob> Git_Blob::duplicate() const
+shared_ptr_t<Git_Blob> Git_Blob::duplicate() const
 {
 	git_blob* c_git_blob_out;
 #ifdef LIBGIT2_DUPLICATION_IMPLEMENTED
@@ -102,12 +102,12 @@ NMS::shared_ptr<Git_Blob> Git_Blob::duplicate() const
 	{
 		throw - 1;
 	}
-	NMS::shared_ptr<Git_Blob> duplicated = NMS::make_shared<Git_Blob>(c_git_blob_out);
+	shared_ptr_t<Git_Blob> duplicated = NMS::make_shared<Git_Blob>(c_git_blob_out);
 	//duplicated->c_git_guts_ = c_git_blob_out;
 	return duplicated;
 }
 
-NMS::shared_ptr<Git_Blob> Git_Blob::lookup(const Git_Object_ID& oid) const
+shared_ptr_t<Git_Blob> Git_Blob::lookup(const Git_Object_ID& oid) const
 {
 	git_blob* c_git_blob_out{};
 	int res = git_blob_lookup(&c_git_blob_out, c_parent_guts(), oid.c_guts());
