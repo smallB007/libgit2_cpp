@@ -10,6 +10,7 @@ class Git_Commit;
 class Git_Commit_Author;
 class Git_Commit_ID;
 class Git_Config;
+class Git_Config_Backend;
 class Git_Config_Entry;
 class Git_Config_Level;
 class Git_Index;

@@ -3,6 +3,7 @@
 
 class Git_Config_Backend : public Parent_Provider
 {
+	friend class Git_Config;
 	git_config_backend c_git_config_backend_{ GIT_CONFIG_BACKEND_VERSION };
 public:
 	Git_Config_Backend();
