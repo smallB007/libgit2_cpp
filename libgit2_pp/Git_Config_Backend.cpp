@@ -106,7 +106,7 @@ bool Git_Config_Backend::lock()
 
 bool Git_Config_Backend::unlock()
 {
-	int success;
+	int success{};
 	int res = c_git_config_backend_.unlock(&c_git_config_backend_, success);
 	if (FAILED(res))
 	{

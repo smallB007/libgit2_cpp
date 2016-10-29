@@ -195,6 +195,7 @@
     <ClInclude Include="LIBGIT_PP_MACROS.hpp" />
     <ClInclude Include="Parent_Provider.hpp" />
     <ClInclude Include="Provider.hpp" />
+    <ClInclude Include="Scoped_Deleter.hpp" />
     <ClInclude Include="Singleton.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="STD_Variants.hpp" />
