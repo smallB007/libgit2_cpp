@@ -6,6 +6,11 @@ Git_Config_Entry::Git_Config_Entry():Provider(git_config_entry_free)
 {
 }
 
+Git_Config_Entry::Git_Config_Entry(git_config_entry * c_git_config_entry):Provider(git_config_entry_free)
+{
+	c_git_guts_ = c_git_config_entry;
+}
+
 
 string_t Git_Config_Entry::name() const
 {
