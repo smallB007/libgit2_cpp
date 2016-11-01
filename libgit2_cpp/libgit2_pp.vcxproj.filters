@@ -157,6 +157,9 @@
     <ClInclude Include="Git_Transaction.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Git_Credentials.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -250,6 +253,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Git_Transaction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Credentials.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

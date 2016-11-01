@@ -23,6 +23,7 @@
 #include "Common_defines.hpp"
 #include "Forward_Declarations.hpp"
 #include "Error_Handling.hpp"
+#include "Check_Result.hpp"
 #include "ENUMS.hpp"
 
 #include "Provider.hpp"

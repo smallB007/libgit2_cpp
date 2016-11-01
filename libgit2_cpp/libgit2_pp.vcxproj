@@ -72,8 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Artie\Documents\Visual Studio 2015\Projects\libgit2_pp\libgit2_pp\libgit2-0.24.1\include;$(IncludePath)</IncludePath>
-    <SourcePath>C:\Users\Artie\Documents\Visual Studio 2015\Projects\libgit2_pp\libgit2_pp\libgit2-0.24.1\src;$(SourcePath)</SourcePath>
+    <IncludePath>C:\Users\Artie\Documents\Visual Studio 2015\Projects\libgit2_cpp\libgit2_cpp\libgit2-0.24.1\include;$(IncludePath)</IncludePath>
+    <SourcePath>C:\Users\Artie\Documents\Visual Studio 2015\Projects\libgit2_cpp\libgit2_cpp\libgit2-0.24.1\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -182,6 +182,7 @@
     <ClInclude Include="Git_Config_Backend.hpp" />
     <ClInclude Include="Git_Config_Entry.hpp" />
     <ClInclude Include="Git_Config_Level.hpp" />
+    <ClInclude Include="Git_Credentials.hpp" />
     <ClInclude Include="Git_CVar_Map.hpp" />
     <ClInclude Include="Git_Index.hpp" />
     <ClInclude Include="Git_Merge_Options.hpp" />
@@ -222,6 +223,7 @@
     <ClCompile Include="Git_Config_Backend.cpp" />
     <ClCompile Include="Git_Config_Entry.cpp" />
     <ClCompile Include="Git_Config_Level.cpp" />
+    <ClCompile Include="Git_Credentials.cpp" />
     <ClCompile Include="Git_CVar_Map.cpp" />
     <ClCompile Include="Git_Index.cpp" />
     <ClCompile Include="Git_Merge_Options.cpp" />

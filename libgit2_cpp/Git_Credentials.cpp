@@ -30,3 +30,27 @@ shared_ptr_t<Git_Credentials> Git_Credentials::ssh_key_from_memory(const string_
 
 	return make_shared_ver<Git_Credentials>(c_git_cred_out);
 }
+
+shared_ptr_t<Git_Credentials> Git_Credentials::ssh_key_create(const string_t& username, const string_t & public_key, const string_t & private_key, const string_t & passphrase)
+{
+	git_cred* c_git_cred_out;
+	check_for_error(git_cred_ssh_key_new(&c_git_cred_out, username.c_str(), public_key.c_str(), private_key.c_str(), passphrase.c_str()));
+
+	return make_shared_ver<Git_Credentials>(c_git_cred_out);
+}
+
+shared_ptr_t<Git_Credentials> Git_Credentials::create_username(const string_t& username)
+{
+	git_cred* c_git_cred_out;
+	check_for_error(git_cred_username_new(&c_git_cred_out, username.c_str()));
+
+	return make_shared_ver<Git_Credentials>(c_git_cred_out);
+}
+
+shared_ptr_t<Git_Credentials> Git_Credentials::create_userpass_plain_text(const string_t & username, const string_t& pass)
+{
+	git_cred* c_git_cred_out;
+	check_for_error(git_cred_userpass_plaintext_new(&c_git_cred_out, username.c_str(),pass.c_str()));
+
+	return make_shared_ver<Git_Credentials>(c_git_cred_out);
+}

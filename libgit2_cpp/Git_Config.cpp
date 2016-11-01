@@ -6,7 +6,6 @@
 #include "Git_Config_Backend.hpp"
 #include "Git_Config_Entry.hpp"
 #include "Scoped_Deleter.hpp"
-#include "Check_Result.hpp"
 #include "Git_CVar_Map.hpp"
 
 
