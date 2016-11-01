@@ -28,7 +28,7 @@ public:
 		return c_git_type_;
 	}
 
-	template<class A>
+	template<class A = T>
 	const A* const get_type()const
 	{
 		return reinterpret_cast<A*>(c_git_type_);

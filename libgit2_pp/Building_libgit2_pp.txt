@@ -5,12 +5,12 @@
 	https://wuyingren.github.io/howto/2016/02/11/Using-EASTL-in-your-projects/
 	void* operator new[](size_t size, const char* pName, int flags, unsigned debugFlags, const char* file, int line) 
 {
-  return malloc(size);
-}  
+ return malloc(size);
+} 
 
 void* operator new[](size_t size, size_t alignment, size_t alignmentOffset, const char* pName, int flags, unsigned debugFlags, const char* file, int line) 
 {
-  return malloc(size);
+ return malloc(size);
 } 
 
 4. C4800 (forcing int to bool) warning has been disabled:https://msdn.microsoft.com/en-us/library/jj715718.aspx

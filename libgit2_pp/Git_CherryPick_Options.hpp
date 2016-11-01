@@ -5,7 +5,7 @@ class Git_CherryPick_Options
 {
 	git_cherrypick_options c_git_cherrypick_options_{ GIT_CHERRYPICK_OPTIONS_VERSION };
 public:
-#pragma message("ToDo [Git_CherryPick_Options] - implement setters and getters")
+#pragma message("ToDo  [Git_CherryPick_Options] - implement setters and getters")
 	Git_CherryPick_Options(unsigned ver = GIT_CHERRYPICK_OPTIONS_VERSION);
 	const git_cherrypick_options* c_guts() const { return &c_git_cherrypick_options_; }
 	void set_default();

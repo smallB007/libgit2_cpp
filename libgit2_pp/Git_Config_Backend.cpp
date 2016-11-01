@@ -12,6 +12,12 @@ Git_Config_Backend::Git_Config_Backend()
 	}
 }
 
+Git_Config_Backend& Git_Config_Backend::operator=(const git_config_backend * c_git_config_backend)
+{
+	c_git_config_backend_ = *c_git_config_backend;
+	return *this;
+}
+
 Git_Config_Backend::Git_Config_Backend(git_config_backend* c_git_config_backend) :c_git_config_backend_{ *c_git_config_backend }
 {
 	
@@ -64,7 +70,7 @@ shared_ptr_t<Git_Config_Entry> Git_Config_Backend::get(const string_t& key)
 		throw - 1;
 	}
 
-	return NMS::make_shared<Git_Config_Entry>(c_git_config_entry_out);
+	return make_shared_ver<Git_Config_Entry>(c_git_config_entry_out);
 }
 
 void Git_Config_Backend::set(const string_t & key, const string_t & value)
@@ -94,7 +100,7 @@ shared_ptr_t<Git_Config_Backend> Git_Config_Backend::snapshot()
 		throw - 1;
 	}
 
-	return NMS::make_shared<Git_Config_Backend>(c_git_config_backend_out);
+	return make_shared_ver<Git_Config_Backend>(c_git_config_backend_out);
 }
 
 bool Git_Config_Backend::lock()

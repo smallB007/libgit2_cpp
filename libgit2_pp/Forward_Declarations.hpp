@@ -13,6 +13,7 @@ class Git_Config;
 class Git_Config_Backend;
 class Git_Config_Entry;
 class Git_Config_Level;
+class Git_CVar_Map;
 class Git_Index;
 class Git_Message;
 class Git_Merge_Options;
@@ -23,6 +24,7 @@ class Git_Repo;
 class Git_Root;
 class Git_Signature;
 class Git_Time;
+class Git_Transaction;
 class Git_Tree;
 
 template<class T>

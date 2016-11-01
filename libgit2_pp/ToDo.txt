@@ -1,5 +1,5 @@
 1[0].	Check every libgit fnc for error returned i.e. else if (GIT_EUNBORNBRANCH == res)
 2[0].	-=- for freeing 
 3[1].	Every libgit2 wrapper should have operator to convert to native libgit2
-4[0].   Tests 
+4[0].  Tests 
 5[1]. Check if every c_guts is const

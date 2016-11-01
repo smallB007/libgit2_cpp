@@ -21,8 +21,9 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2F5D9C75-6250-49D7-B3FA-76D15EF34CD2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>libgit2_pp</RootNamespace>
+    <RootNamespace>libgit2_cpp</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>libgit2_cpp</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -76,8 +77,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(EA_STL_LIBx64);$(LIBGIT2_LIBx64);$(LibraryPath)</LibraryPath>
-    <IncludePath>$(LIBGIT2);$(EA_STL_INCLUDE);$(EA_STL_BASE);$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_LIBx64);$(EA_STL_LIBx64);$(LIBGIT2_LIBx64);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(BOOST);$(LIBGIT2);$(EA_STL_INCLUDE);$(EA_STL_BASE);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -105,10 +106,11 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;USE_STD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <DisableSpecificWarnings>4800; </DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
+      <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -158,6 +160,7 @@
     <Text Include="Wrapped_Functionality.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Check_Result.hpp" />
     <ClInclude Include="Common_defines.hpp" />
     <ClInclude Include="Common_typedefs.hpp" />
     <ClInclude Include="Copied_From_libgit2.hpp" />
@@ -179,6 +182,7 @@
     <ClInclude Include="Git_Config_Backend.hpp" />
     <ClInclude Include="Git_Config_Entry.hpp" />
     <ClInclude Include="Git_Config_Level.hpp" />
+    <ClInclude Include="Git_CVar_Map.hpp" />
     <ClInclude Include="Git_Index.hpp" />
     <ClInclude Include="Git_Merge_Options.hpp" />
     <ClInclude Include="Git_Message.hpp" />
@@ -189,6 +193,7 @@
     <ClInclude Include="Git_Repo.hpp" />
     <ClInclude Include="Git_Root.hpp" />
     <ClInclude Include="Git_Signature.hpp" />
+    <ClInclude Include="Git_Transaction.hpp" />
     <ClInclude Include="Git_Tree.hpp" />
     <ClInclude Include="Guts_Provider.hpp" />
     <ClInclude Include="Libgit2_includes.hpp" />
@@ -217,6 +222,7 @@
     <ClCompile Include="Git_Config_Backend.cpp" />
     <ClCompile Include="Git_Config_Entry.cpp" />
     <ClCompile Include="Git_Config_Level.cpp" />
+    <ClCompile Include="Git_CVar_Map.cpp" />
     <ClCompile Include="Git_Index.cpp" />
     <ClCompile Include="Git_Merge_Options.cpp" />
     <ClCompile Include="Git_Message.cpp" />
@@ -227,6 +233,7 @@
     <ClCompile Include="Git_Repo.cpp" />
     <ClCompile Include="Git_Root.cpp" />
     <ClCompile Include="Git_Signature.cpp" />
+    <ClCompile Include="Git_Transaction.cpp" />
     <ClCompile Include="Git_Tree.cpp" />
     <ClCompile Include="libgit2_pp.cpp" />
     <ClCompile Include="Parent_Provider.cpp" />

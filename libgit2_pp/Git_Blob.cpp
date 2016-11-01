@@ -20,7 +20,7 @@ shared_ptr_t<Git_Object_ID> Git_Blob::create_from_buffer(const NMS::vector<char>
 		throw - 1;
 	}
 
-	return NMS::make_shared<Git_Object_ID>(c_git_oid_out);
+	return make_shared_ver<Git_Object_ID>(c_git_oid_out);
 }
 
 shared_ptr_t<Git_Object_ID> Git_Blob::create_from_disk(const file_path_t& file_path)
@@ -32,7 +32,7 @@ shared_ptr_t<Git_Object_ID> Git_Blob::create_from_disk(const file_path_t& file_p
 		throw - 1;
 	}
 
-	return NMS::make_shared<Git_Object_ID>(c_git_oid_out);
+	return make_shared_ver<Git_Object_ID>(c_git_oid_out);
 }
 
 shared_ptr_t<Git_Object_ID> Git_Blob::create_from_workdir(const file_path_t& relative_file_path)
@@ -44,7 +44,7 @@ shared_ptr_t<Git_Object_ID> Git_Blob::create_from_workdir(const file_path_t& rel
 		throw - 1;
 	}
 	
-	return NMS::make_shared<Git_Object_ID>(c_git_oid_out);
+	return make_shared_ver<Git_Object_ID>(c_git_oid_out);
 }
 
 
@@ -65,7 +65,7 @@ shared_ptr_t<Git_Object_ID> Git_Blob::id()const
 {
 
 	const git_oid* c_git_oid = git_blob_id(c_git_guts_);
-	return NMS::make_shared<Git_Object_ID>(c_git_oid);
+	return make_shared_ver<Git_Object_ID>(c_git_oid);
 
 }
 
@@ -102,7 +102,7 @@ shared_ptr_t<Git_Blob> Git_Blob::duplicate() const
 	{
 		throw - 1;
 	}
-	shared_ptr_t<Git_Blob> duplicated = NMS::make_shared<Git_Blob>(c_git_blob_out);
+	shared_ptr_t<Git_Blob> duplicated = make_shared_ver<Git_Blob>(c_git_blob_out);
 	//duplicated->c_git_guts_ = c_git_blob_out;
 	return duplicated;
 }
@@ -116,5 +116,5 @@ shared_ptr_t<Git_Blob> Git_Blob::lookup(const Git_Object_ID& oid) const
 		throw - 1;
 	}
 
-	return NMS::make_shared<Git_Blob>(c_git_blob_out);
+	return make_shared_ver<Git_Blob>(c_git_blob_out);
 }

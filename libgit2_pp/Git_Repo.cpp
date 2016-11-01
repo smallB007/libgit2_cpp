@@ -63,7 +63,7 @@ const shared_ptr_t<Git_Commit> Git_Repo::get_head_commit()const
 
 	delete git_oid_out;
 
-	return NMS::make_shared<Git_Commit>(git_commit_out);
+	return make_shared_ver<Git_Commit>(git_commit_out);
 }
 
 NMS::pair<bool,shared_ptr_t<Git_Branch>> Git_Repo::find_branch(const branch_name_t& branch_name)const
@@ -85,7 +85,7 @@ shared_ptr_t<Git_Branch> Git_Repo::create_branch(const branch_name_t& branch_nam
 	/*Check if branch with that name already find_branch and if not create it*/
 	if (!result.first)
 	{
-		shared_ptr_t<Git_Branch> new_branch = NMS::make_shared<Git_Branch>(branch_name);
+		shared_ptr_t<Git_Branch> new_branch = make_shared_ver<Git_Branch>(branch_name);
 		branches_.insert(new_branch);
 		return new_branch;
 	}
@@ -141,7 +141,7 @@ const shared_ptr_t<Git_Commit> Git_Repo::commit_lookup(const Git_Commit_ID& comm
 	}
 	else
 	{
-		return NMS::make_shared<Git_Commit>(commit_out);
+		return make_shared_ver<Git_Commit>(commit_out);
 	}
 }
 
@@ -174,7 +174,7 @@ shared_ptr_t<Git_Branch> Git_Repo::branch_lookup(const branch_name_t& branch_nam
 	//{
 	//	throw - 1;
 	//}
-	//return NMS::make_shared<Git_Branch>(git_reference_branch_out);
+	//return make_shared_ver<Git_Branch>(git_reference_branch_out);
 }
 
 void Git_Repo::checkout_head() const
@@ -213,7 +213,7 @@ LIBGIT2_CLONE_INTERFACE shared_ptr_t<Git_Repo> Git_Repo::clone(const repo_path_t
 		throw - 1;
 	}
 	/*This !^^^ needs to be tested if it does what it is intended to*/
-	shared_ptr_t<Git_Repo> repo_dud = NMS::make_shared<Git_Repo>(local_target_dir,git_repository_is_bare(c_git_repo_out));
+	shared_ptr_t<Git_Repo> repo_dud = make_shared_ver<Git_Repo>(local_target_dir,git_repository_is_bare(c_git_repo_out));
 	repo_dud.get()->c_git_guts_ = c_git_repo_out;
 	return repo_dud;
 }
@@ -231,7 +231,7 @@ shared_ptr_t<Git_Config> Git_Repo::config()const
 	{
 		throw - 1;
 	}
-	return NMS::make_shared<Git_Config>(config_out);
+	return make_shared_ver<Git_Config>(config_out);
 }
 
 shared_ptr_t<Git_Config> Git_Repo::config_snapshot()const
@@ -242,7 +242,7 @@ shared_ptr_t<Git_Config> Git_Repo::config_snapshot()const
 	{
 		throw - 1;
 	}
-	return NMS::make_shared<Git_Config>(config_snapshot_out);
+	return make_shared_ver<Git_Config>(config_snapshot_out);
 }
 
 repo_path_t Git_Repo::discover(const repo_path_t start_path)const
@@ -349,7 +349,7 @@ shared_ptr_t<Git_Index> Git_Repo::index()const
 		throw - 1;
 	}
 
-	return NMS::make_shared<Git_Index>(c_git_index_out);
+	return make_shared_ver<Git_Index>(c_git_index_out);
 }
 
 bool Git_Repo::is_bare()const
@@ -378,7 +378,7 @@ bool Git_Repo::is_shallow()const
 
 shared_ptr_t<Git_ODB> Git_Repo::odb()const
 {
-	return NMS::make_shared<Git_ODB>(/*c_git_guts_*/);
+	return make_shared_ver<Git_ODB>(/*c_git_guts_*/);
 }
 
 repo_path_t Git_Repo::path() const
@@ -388,7 +388,7 @@ repo_path_t Git_Repo::path() const
 
 shared_ptr_t<Git_RefDB> Git_Repo::ref_db() const
 {
-	return NMS::make_shared<Git_RefDB>(c_git_guts_);
+	return make_shared_ver<Git_RefDB>(c_git_guts_);
 }
 
 void Git_Repo::set_bare()

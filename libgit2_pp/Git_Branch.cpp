@@ -39,7 +39,7 @@ shared_ptr_t<Git_Commit> Git_Branch::create_commit()
 	/*git_repository* c_git_repo = get_owner();*/
 	NMS::vector<NMS::string> files_to_commit{"a.cpp","b.cpp"};
 	NMS::string msg = "How is it going Artie? ;)";
-	auto new_commit = NMS::make_shared<Git_Commit>(files_to_commit, msg);
+	auto new_commit = make_shared_ver<Git_Commit>(files_to_commit, msg);
 	commits_.insert(new_commit);
 
 	return new_commit;

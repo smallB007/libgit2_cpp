@@ -20,7 +20,7 @@ Git_Signature::~Git_Signature()
 
 shared_ptr_t<Git_Commit_Author> Git_Signature::author()const
 {
-	return NMS::make_shared<Git_Commit_Author>(c_git_signature_);
+	return make_shared_ver<Git_Commit_Author>(c_git_signature_);
 }
 
 NMS::string Git_Signature::name()const
@@ -35,15 +35,15 @@ NMS::string Git_Signature::email()const
 
 shared_ptr_t<Git_Time> Git_Signature::time()const
 {
-	return NMS::make_shared<Git_Time>(c_git_signature_->when);
+	return make_shared_ver<Git_Time>(c_git_signature_->when);
 }
 
 shared_ptr_t<Git_Buf> Git_Signature::signature_block()const
 {
-	return NMS::make_shared<Git_Buf>(signature_block_);
+	return make_shared_ver<Git_Buf>(signature_block_);
 }
 
 shared_ptr_t<Git_Buf> Git_Signature::signed_data()const
 {
-	return NMS::make_shared<Git_Buf>(signed_data_);
+	return make_shared_ver<Git_Buf>(signed_data_);
 }

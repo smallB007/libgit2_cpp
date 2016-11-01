@@ -26,7 +26,7 @@ shared_ptr_t<Git_Repo> Git_Root::create_repository(const repo_path_t& path_to_re
 	}
 	
 	//no repo found, create it then
-	auto _git_repo = NMS::make_shared<Git_Repo>(path_to_repo,is_bare);
+	auto _git_repo = make_shared_ver<Git_Repo>(path_to_repo,is_bare);
 	repositories_.insert(_git_repo);
 	//always make just created repo active
 	active_repo_[0] = _git_repo;

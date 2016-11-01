@@ -9,7 +9,9 @@ class Git_Config_Backend : public Parent_Provider
 public:
 	Git_Config_Backend(git_config_backend*);
 	Git_Config_Backend();
+	Git_Config_Backend& operator=(const git_config_backend*);
 	~Git_Config_Backend();
+	operator git_config_backend() { return c_git_config_backend_; }
 	LIBGIT2_CONFIG_BACKEND_INTERFACE
 		/*All or parts of this interface may need to be moved into Git_Config*/
 	void add_backend(const Git_Config& cfg,const Git_Config_Backend& file, const Git_Config_Level& level, bool force);

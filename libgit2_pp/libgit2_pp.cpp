@@ -38,6 +38,6 @@ int main()
 		//	auto b_name = beg->name();
 		//}
 	//destroy_git();
-    return 0;
+  return 0;
 }
 

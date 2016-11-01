@@ -24,3 +24,5 @@
 #include <EASTL\functional>
 #define NMS eastl
 #endif
+
+#define make_shared_ver NMS::make_shared
