@@ -1,8 +1,0 @@
-[Partially wrapped[FIRST_CUT]]
-1. git_commit
-2. git_branch
-3. git_repo
-4. git_buf
-5. git_blob
-6. git_cherrypick
-7. git_clone

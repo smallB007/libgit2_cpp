@@ -1,2 +1,0 @@
-#pragma once
-//enum BRANCH_TYPE { BRANCH_LOCAL = 0, BRANCH_REMOTE, BRANCH_ALL };
