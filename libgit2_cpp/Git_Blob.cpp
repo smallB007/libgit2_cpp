@@ -2,11 +2,11 @@
 #include "Git_Object_ID.hpp"
 #include "Git_Root.hpp"
 
-Git_Blob::Git_Blob():Provider(git_blob_free)
-{
-}
+//Git_Blob::Git_Blob():Provider(git_blob_free),Git_Object(this)
+//{
+//}
 
-Git_Blob::Git_Blob(git_blob * c_git_blob):Provider(git_blob_free)
+Git_Blob::Git_Blob(git_blob * c_git_blob):Provider(c_git_blob,git_blob_free)
 {
 	c_git_guts_ = c_git_blob;
 }
@@ -65,7 +65,7 @@ shared_ptr_t<Git_Object_ID> Git_Blob::id()const
 {
 
 	const git_oid* c_git_oid = git_blob_id(c_git_guts_);
-	return make_shared_ver<Git_Object_ID>(c_git_oid);
+	return make_shared_ver<Git_Object_ID>(const_cast<git_oid*>(c_git_oid));
 
 }
 

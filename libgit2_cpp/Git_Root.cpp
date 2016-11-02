@@ -14,9 +14,9 @@ Git_Root::~Git_Root()
 
 shared_ptr_t<Git_Repo> Git_Root::create_repository(const repo_path_t& path_to_repo, const bool is_bare)
 {
-	/*As a side note and something to put into your KB Artie, 'smart' ptrs should be returned by value so the proper counter incrementation
+	/**As a side note and something to put into your KB Artie, 'smart' ptrs should be returned by value so the proper counter incrementation
 	can take place*/
-	//Find out if such repo already exists
+	/**Find out if such repo already exists*/
 	for (const auto aSharedPtr : repositories_)
 	{
 		if (aSharedPtr->is_my_path(path_to_repo))
@@ -24,13 +24,14 @@ shared_ptr_t<Git_Repo> Git_Root::create_repository(const repo_path_t& path_to_re
 			return aSharedPtr;
 		}
 	}
-	
-	//no repo found, create it then
-	auto _git_repo = make_shared_ver<Git_Repo>(path_to_repo,is_bare);
+	/**no repo found, create it then*/
+	git_repository* c_git_repository_out;
+	check_for_error( git_repository_init(&c_git_repository_out, path_to_repo.c_str(), is_bare));
+	auto _git_repo = make_shared_ver<Git_Repo>(c_git_repository_out);
 	repositories_.insert(_git_repo);
-	//always make just created repo active
+	/**always make just created repo active*/
 	active_repo_[0] = _git_repo;
-	/*initial commit must be created after active_repo_ has been set*/
+	/**initial commit must be created after active_repo_ has been set*/
 	_git_repo->create_initial_commit_();
 	return _git_repo;
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-#include "Provider.hpp"
+//#include "Provider.hpp"
 
 class Git_Branch : public Provider<git_reference>
 {
@@ -13,8 +13,7 @@ private:
 	void move_(const branch_name_t& new_branch_name, bool force = true);
 	Git_Branch(git_reference*);
 public:
-	Git_Branch(const branch_name_t& branch_name);
-	
+	//Git_Branch(const branch_name_t& branch_name);
 	//git_branch_t type()const;
 	shared_ptr_t<Git_Commit> create_commit();
 

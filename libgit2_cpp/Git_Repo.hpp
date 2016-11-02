@@ -18,7 +18,8 @@ protected:
 public:
 	Git_Repo(const Git_Repo&)=delete;
 	Git_Repo& operator=(const Git_Repo&) = delete;
-	Git_Repo(const repo_path_t& path_to_repo, const bool is_bare);
+	Git_Repo(git_repository*);
+//	Git_Repo(const repo_path_t& path_to_repo, const bool is_bare);
 	
 	bool is_my_path(const repo_path_t& path_to_some_repo)const;
 	void rename(const NMS::string& repo_name);

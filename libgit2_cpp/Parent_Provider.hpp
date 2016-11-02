@@ -1,7 +1,6 @@
 #pragma once
 #include "stdafx.h"
-
-class Parent_Provider
+class Parent_Provider 
 {
 	static shared_ptr_t<Git_Repo> parent_;
 public:

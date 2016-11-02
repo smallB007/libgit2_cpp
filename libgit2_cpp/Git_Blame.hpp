@@ -4,7 +4,7 @@
 class Git_Blame : public Provider<git_blame>
 {
 public:
-	Git_Blame();
+	Git_Blame(git_blame* c_git_blame);
 	LIBGIT2_BLAME_INTERFACE
 #ifdef _FULL_IMPLEMENTATION_
 		git_blame_buffer

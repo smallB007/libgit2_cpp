@@ -10,22 +10,21 @@
 
 
 
-Git_Config::Git_Config(git_config* git_config):Provider(git_config_free)
+Git_Config::Git_Config(git_config* c_git_config):Provider(c_git_config,git_config_free)
 {
-	c_git_guts_ = git_config;
 }
 
-Git_Config::Git_Config():Provider(git_config_free)
-{
-	int res = git_config_new(&c_git_guts_);
-	/*
-	This object is empty, so you have to add a file to it before you can do anything with it.
-	*/
-	if (FAILED(res) || FAILED(c_git_guts_))
-	{
-		throw - 1;
-	}
-}
+//Git_Config::Git_Config():Provider(git_config_free)
+//{
+//	int res = git_config_new(&c_git_guts_);
+//	/*
+//	This object is empty, so you have to add a file to it before you can do anything with it.
+//	*/
+//	if (FAILED(res) || FAILED(c_git_guts_))
+//	{
+//		throw - 1;
+//	}
+//}
 
 void Git_Config::add_backend(const Git_Config_Backend& config_backend, const Git_Config_Level& config_level, bool force)
 {
@@ -307,7 +306,7 @@ Git_Config::Git_Config_Iterator Git_Config::Git_Config_Iterator::operator++()con
 
 Git_Config::Git_Config_Iterator::Git_Config_Iterator(const Git_Config& gitConfig) :git_config_parent_{ gitConfig }
 {
-	check_for_error( git_config_iterator_new(&c_git_config_iterator_, gitConfig.c_git_guts_));
+	check_for_error( git_config_iterator_new(&c_git_config_iterator_, gitConfig.c_guts()));
 }
 
 Git_Config::Git_Config_Iterator::Git_Config_Iterator(git_config_iterator* c_git_config_iterator, const Git_Config& gitConfig) :c_git_config_iterator_{ c_git_config_iterator },
@@ -351,7 +350,7 @@ shared_ptr_t<Git_Config> Git_Config::open_default() const
 shared_ptr_t<Git_Config> Git_Config::open_global() const
 {
 	git_config* c_git_config_out;
-	check_for_error(git_config_open_global(&c_git_config_out,c_git_guts_));
+	check_for_error(git_config_open_global(&c_git_config_out, c_git_guts_));
 	return make_shared_ver<Git_Config>(c_git_config_out);
 }
 

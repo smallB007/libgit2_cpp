@@ -1,18 +1,18 @@
 #include "Git_Credentials.hpp"
 
-Git_Credentials::Git_Credentials():Provider(git_cred_free)
-{
-	check_for_error(git_cred_default_new(&c_git_guts_));
-}
+//Git_Credentials::Git_Credentials():Provider(git_cred_free)
+//{
+//	check_for_error(git_cred_default_new(&c_git_guts_));
+//}
 
-Git_Credentials::Git_Credentials(git_cred * c_git_cred):Provider(git_cred_free)
+Git_Credentials::Git_Credentials(git_cred * c_git_cred):Provider(c_git_cred,git_cred_free)
 {
-	c_git_guts_ = c_git_cred;
 }
 
 bool Git_Credentials::has_username() const
 {
 	return git_cred_has_username(c_git_guts_);
+#pragma message("ToDo ^^^ const_cast on type of c_git_guts_ should be used here")
 }
 
 shared_ptr_t<Git_Credentials> Git_Credentials::ssh_key_from_agent(const string_t &username)

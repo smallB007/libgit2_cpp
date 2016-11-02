@@ -9,7 +9,7 @@
 #include "Git_Config.hpp"
 int main()
 {
-	Git_Config config;
+//	Git_Config config;
 		//auto git = create_git();
 		//auto git1 = create_git();
 		//auto repo = git->create_repository("C:\\Users\\Artie\\Desktop\\tmp_repo", false);

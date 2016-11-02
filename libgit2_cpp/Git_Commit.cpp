@@ -6,59 +6,59 @@
 #include "Git_Time.hpp"
 #include "Git_Tree.hpp"
 #include "Git_Root.hpp"
-Git_Commit::Git_Commit(const NMS::vector<NMS::string>& files_to_commit, const NMS::string& msg):Provider(git_commit_free)
-{
-	git_repository* rep = c_parent_guts();
-	git_signature *sig;//must be freed
-	if (git_signature_default(&sig, rep) < 0)
-	{
-		throw - 1;
-		//	"Perhaps 'user.name' and 'user.email' are not vector");
-	}
-	git_index *index;//must be freed
-	if (git_repository_index(&index, rep) < 0)
-	{
-		throw - 1;
-		//fatal("Could not open repository index", NULL);
-	}
-	
-	
-	for (auto aString : files_to_commit)
-	{
-		if (git_index_add_bypath(index, aString.c_str()) < 0)
-		{
-			throw - 1;
-		}
-	}
-	
-	
+//Git_Commit::Git_Commit(const NMS::vector<NMS::string>& files_to_commit, const NMS::string& msg):Provider(git_commit_free)
+//{
+//	git_repository* rep = c_parent_guts();
+//	git_signature *sig;//must be freed
+//	if (git_signature_default(&sig, rep) < 0)
+//	{
+//		throw - 1;
+//		//	"Perhaps 'user.name' and 'user.email' are not vector");
+//	}
+//	git_index *index;//must be freed
+//	if (git_repository_index(&index, rep) < 0)
+//	{
+//		throw - 1;
+//		//fatal("Could not open repository index", NULL);
+//	}
+//	
+//	
+//	for (auto aString : files_to_commit)
+//	{
+//		if (git_index_add_bypath(index, aString.c_str()) < 0)
+//		{
+//			throw - 1;
+//		}
+//	}
+//	
+//	
+//
+//	git_commit* git_commit_out = get_parent()->get_head_commit()->c_guts();
+//	
+//	const git_commit* c_parents[] { git_commit_out };
+//	const git_oid * git_oid_tree = git_commit_tree_id(git_commit_out);
+//
+//	if (git_index_write_tree(const_cast<git_oid *>(git_oid_tree), index) < 0)
+//	{
+//		git_index_free(index);
+//		throw - 1;
+//	}
+//
+//	git_tree* git_tree_out;
+//	git_tree_lookup(&git_tree_out, rep, git_oid_tree);
+//
+//	//	Normally creating a commit would involve looking up the current HEAD commit and making that be the parent of the initial commit, but here this is the first commit so there will be no parent.
+//	git_oid commit_id;
+//	if (
+//		git_commit_create(&commit_id, rep, "HEAD", sig, sig, "UTF-8", msg.c_str(), git_tree_out, sizeof(c_parents) / sizeof(c_parents[0]), c_parents) < 0)
+//	{
+//		throw -1;
+//	}
+//	
+//	//git_commit_lookup(&c_git_guts_, rep, &commit_id);
+//}
 
-	git_commit* git_commit_out = get_parent()->get_head_commit()->c_guts();
-	
-	const git_commit* c_parents[] { git_commit_out };
-	const git_oid * git_oid_tree = git_commit_tree_id(git_commit_out);
-
-	if (git_index_write_tree(const_cast<git_oid *>(git_oid_tree), index) < 0)
-	{
-		git_index_free(index);
-		throw - 1;
-	}
-
-	git_tree* git_tree_out;
-	git_tree_lookup(&git_tree_out, rep, git_oid_tree);
-
-	//	Normally creating a commit would involve looking up the current HEAD commit and making that be the parent of the initial commit, but here this is the first commit so there will be no parent.
-	git_oid commit_id;
-	if (
-		git_commit_create(&commit_id, rep, "HEAD", sig, sig, "UTF-8", msg.c_str(), git_tree_out, sizeof(c_parents) / sizeof(c_parents[0]), c_parents) < 0)
-	{
-		throw -1;
-	}
-	
-	//git_commit_lookup(&c_git_guts_, rep, &commit_id);
-}
-
-Git_Commit::Git_Commit(git_commit* c_git_commit) : Provider(git_commit_free)
+Git_Commit::Git_Commit(git_commit* c_git_commit) : Provider(c_git_commit, git_commit_free)
 {
 	c_git_guts_ = c_git_commit;
 }
@@ -124,20 +124,15 @@ shared_ptr_t<Git_Signature> Git_Commit::signature()const
 		
 	const git_oid * 	commit_id = git_commit_id(c_git_guts_);
 	const char * 	field = nullptr;// the name of the header field containing the signature block; pass `NULL` to extract the default 'gpgsig'
-	if (git_commit_extract_signature(signature_block, signed_data, c_parent_guts(), const_cast<git_oid *>(commit_id), field) < 0)
-	{
-		throw - 1;
-	}
-	else
-	{
-		return make_shared_ver<Git_Signature>(signature_block, signed_data);
-	}
+	check_for_error(git_commit_extract_signature(signature_block, signed_data, c_parent_guts(), const_cast<git_oid *>(commit_id), field));
+
+	return make_shared_ver<Git_Signature>(signature_block, signed_data);
 }
 
 shared_ptr_t<Git_Commit_ID> Git_Commit::id()const
 {
 	const git_oid * commit_id = git_commit_id(c_git_guts_);
-	return make_shared_ver<Git_Commit_ID>(commit_id);
+	return make_shared_ver<Git_Commit_ID>(const_cast<git_oid*>(commit_id));
 }
 
 NMS::string Git_Commit::message()const
@@ -216,7 +211,7 @@ shared_ptr_t<Git_Object_ID> Git_Commit::parent_id(const unsigned parent_pos)cons
 	}
 	else
 	{
-		return make_shared_ver<Git_Object_ID>(c_git_oid);
+		return make_shared_ver<Git_Object_ID>(const_cast<git_oid *>(c_git_oid));
 	}
 }
 
@@ -287,6 +282,6 @@ shared_ptr_t<Git_Object_ID> Git_Commit::tree_id()const
 	}
 	else
 	{
-		return make_shared_ver<Git_Object_ID>(c_git_oid);
+		return make_shared_ver<Git_Object_ID>(const_cast<git_oid*>(c_git_oid));
 	}
 }

@@ -1,11 +1,11 @@
 #pragma once
 #include "stdafx.h"
-#include "Provider.hpp"
+
 
 class Git_Credentials : Provider<git_cred>
 {
 public:
-	Git_Credentials();
+	//Git_Credentials();
 	Git_Credentials(git_cred*);
 	LIBGIT2_CREDENTIALS_INTERFACE
 	bool has_username()const;

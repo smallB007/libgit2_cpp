@@ -2,7 +2,7 @@
 
 
 
-Git_Blame::Git_Blame(): Provider(git_blame_free)
+Git_Blame::Git_Blame(git_blame* c_git_blame): Provider(c_git_blame,git_blame_free)
 {
 }
 

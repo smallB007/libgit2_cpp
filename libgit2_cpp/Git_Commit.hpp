@@ -1,13 +1,13 @@
 #pragma once
 #include "stdafx.h"
-#include "Provider.hpp"
+//#include "Provider.hpp"
 
 class Git_Commit : public Provider<git_commit>
 {
 private:
 	
 public:
-	Git_Commit(const NMS::vector<NMS::string>& files_to_commit, const NMS::string& msg);
+//	Git_Commit(const NMS::vector<NMS::string>& files_to_commit, const NMS::string& msg);
 	Git_Commit(git_commit*);
 	
 	NMS::vector<git_commit*> get_parents()const;
