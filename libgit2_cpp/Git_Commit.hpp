@@ -2,14 +2,22 @@
 #include "stdafx.h"
 //#include "Provider.hpp"
 
+
+
 class Git_Commit : public Provider<git_commit>
 {
 private:
 	
 public:
-//	Git_Commit(const NMS::vector<NMS::string>& files_to_commit, const NMS::string& msg);
-	Git_Commit(git_commit*);
 	
+	/*template<class git_class, class... Args>
+	static void creator(git_class a,Args... args)
+	{
+		Git_Commit ab(a,args...);
+	}*/
+
+	Git_Commit(git_commit*);/**Works simply as a stub to pass around*/
+	Git_Commit(git_commit*c_git_commit, const NMS::vector<NMS::string>& files_to_commit, const NMS::string& msg) ;
 	NMS::vector<git_commit*> get_parents()const;
 
 LIBGIT2_COMMIT_INTERFACE

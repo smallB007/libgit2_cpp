@@ -25,14 +25,13 @@ shared_ptr_t<Git_Repo> Git_Root::create_repository(const repo_path_t& path_to_re
 		}
 	}
 	/**no repo found, create it then*/
-	git_repository* c_git_repository_out;
-	check_for_error( git_repository_init(&c_git_repository_out, path_to_repo.c_str(), is_bare));
-	auto _git_repo = make_shared_ver<Git_Repo>(c_git_repository_out);
+	auto _git_repo = Git_Object_Factory<Git_Repo>::create(path_to_repo.c_str(), is_bare);
 	repositories_.insert(_git_repo);
 	/**always make just created repo active*/
 	active_repo_[0] = _git_repo;
 	/**initial commit must be created after active_repo_ has been set*/
 	_git_repo->create_initial_commit_();
+#pragma message("Error this ^^^call caused infinite recursion");
 	return _git_repo;
 }
 

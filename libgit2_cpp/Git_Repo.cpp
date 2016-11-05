@@ -13,27 +13,27 @@
 #include "Git_CherryPick_Options.hpp"
 #include "Git_Clone_Options.hpp"
 /*Proper CADRe - [C]onstructor [A]cquires, [D]estructor [Re]leses*/
-//Git_Repo::Git_Repo(const repo_path_t& path_to_repo, const bool is_bare):Provider(git_repository_free)
-//{
-//	auto err = git_repository_init(&c_git_guts_, path_to_repo.c_str(), static_cast<unsigned int>(is_bare));
-//
-//	if (FAILED(c_git_guts_) || FAILED(err))
-//	{
-//		throw - 1;
-//	}
-//	//else
-//	//{
-//	//	create_initial_commit(c_git_guts_);
-//	//	git_reference* git_branch_ref_out;
-//	//	auto res = git_repository_head(&git_branch_ref_out, c_git_guts_);
-//	//	if (FAILED(res))
-//	//	{
-//	//		throw -1;
-//	//	}
-//	//	shared_ptr_t<Git_Branch> master_branch{ new Git_Branch(git_branch_ref_out) };// = std::make_shared<Git_Branch>(git_branch_ref_out, this);
-//	//	branches_.insert(master_branch);
-//	//}
-//}
+Git_Repo::Git_Repo(git_repository* c_git_repository,const repo_path_t& path_to_repo, const bool is_bare) :Provider(c_git_repository, git_repository_free)
+{
+	check_for_error(git_repository_init(&c_git_guts_, path_to_repo.c_str(), static_cast<unsigned int>(is_bare)));
+
+	//if (FAILED(c_git_guts_) || FAILED(err))
+	//{
+	//	throw - 1;
+	//}
+	//else
+	//{
+	//	//create_initial_commit(c_git_guts_);
+	//	//git_reference* git_branch_ref_out;
+	//	//auto res = git_repository_head(&git_branch_ref_out, c_git_guts_);
+	//	//if (FAILED(res))
+	//	//{
+	//	//	throw -1;
+	//	//}
+	//	//shared_ptr_t<Git_Branch> master_branch{ new Git_Branch(git_branch_ref_out) };// = std::make_shared<Git_Branch>(git_branch_ref_out, this);
+	//	//branches_.insert(master_branch);
+	//}
+}
 
 Git_Repo::Git_Repo(git_repository* c_git_repository) :Provider(c_git_repository, git_repository_free)
 {
@@ -43,26 +43,42 @@ void Git_Repo::create_initial_commit_()
 {
 	create_initial_commit(c_git_guts_);
 	git_reference* git_branch_ref_out;
-	auto res = git_repository_head(&git_branch_ref_out, c_git_guts_);
-	if (FAILED(res))
-	{
-		throw - 1;
-	}
-	shared_ptr_t<Git_Branch> master_branch{ new Git_Branch(git_branch_ref_out) };// = std::make_shared<Git_Branch>(git_branch_ref_out, this);
+	check_for_error(git_repository_head(&git_branch_ref_out, c_git_guts_));
+	/*@return 0 on success, GIT_EUNBORNBRANCH when HEAD points to a non existing
+ * branch, GIT_ENOTFOUND when HEAD is missing; an error code otherwise*/
+
+	shared_ptr_t<Git_Branch> master_branch = make_shared_ver<Git_Branch>(git_branch_ref_out);
 	branches_.insert(master_branch);
 }
- 
+
 const shared_ptr_t<Git_Commit> Git_Repo::get_head_commit()const
 {
 	git_oid* git_oid_out = new git_oid;
-	git_reference_name_to_id(git_oid_out, c_git_guts_, "HEAD");
+#pragma message("ToDo make this scoped_del Artie for the love of God!")
+	check_for_error(git_reference_name_to_id(git_oid_out, c_git_guts_, "HEAD"));
 
 	git_commit* git_commit_out{ nullptr };
-	git_commit_lookup(&git_commit_out, c_git_guts_, git_oid_out);
+	check_for_error(git_commit_lookup(&git_commit_out, c_git_guts_, git_oid_out));
 
 	delete git_oid_out;
-
 	return make_shared_ver<Git_Commit>(git_commit_out);
+}
+
+vector_t<file_name_t> Git_Repo::get_files_to_commit()
+{
+	return vector_t<file_name_t>();
+#pragma message("ToDo fix that");
+}
+
+string_t Git_Repo::get_msg_to_commit()
+{
+	return string_t();
+#pragma message("ToDo fix that");
+}
+
+branch_name_t Git_Repo::get_current_branch()
+{
+	return branch_name_t();
 }
 
 NMS::pair<bool,shared_ptr_t<Git_Branch>> Git_Repo::find_branch(const branch_name_t& branch_name)const
@@ -82,36 +98,28 @@ shared_ptr_t<Git_Branch> Git_Repo::create_branch(const branch_name_t& branch_nam
 {
 	auto result = find_branch(branch_name);
 	/*Check if branch with that name already find_branch and if not create it*/
-	//if (!result.first)
-	//{
-	//	shared_ptr_t<Git_Branch> new_branch = make_shared_ver<Git_Branch>(branch_name);
-	//	branches_.insert(new_branch);
-	//	return new_branch;
-	//}
-	//else
-	//{
-	//	return result.second;
-	//}
-	return nullptr;
-#pragma message("Error fix that")
+	if (!result.first)
+	{
+		shared_ptr_t<Git_Branch> new_branch = Git_Object_Factory<Git_Branch>::create(branch_name);
+		branches_.insert(new_branch);
+		return new_branch;
+	}
+	else
+	{
+		return result.second;
+	}
 }
 
 void Git_Repo::delete_branch(const branch_name_t& branch_name)
 {
 	auto aPair = find_branch(branch_name);
-	/*if (aPair.first)
+	if (aPair.first)
 	{
-		auto res = git_branch_delete(*(aPair.second.get()));
-		if (FAILED(res))
-		{
-			throw - 1;
-		}
-		else
-		{
-			branches_.erase(aPair.second);
-		}
-	}*/
-#pragma message("Error fix that")
+		check_for_error(git_branch_delete(*(aPair.second.get())));
+		
+		branches_.erase(aPair.second);
+		
+	}
 }
 
 
@@ -209,16 +217,9 @@ void Git_Repo::cherrypick(const Git_Commit& commit, const Git_CherryPick_Options
 LIBGIT2_CLONE_INTERFACE shared_ptr_t<Git_Repo> Git_Repo::clone(const repo_path_t & remote_repo_path, const repo_path_t & local_target_dir, const Git_Clone_Options & clone_options) const
 {
 	git_repository* c_git_repo_out{};
-	int res = git_clone(&c_git_repo_out,remote_repo_path.c_str(), local_target_dir.c_str(), clone_options.c_guts());
-	//if (FAILED(res) || FAILED(c_git_repo_out))
-	//{
-	//	throw - 1;
-	//}
-	///*This !^^^ needs to be tested if it does what it is intended to*/
-	//shared_ptr_t<Git_Repo> repo_dud = make_shared_ver<Git_Repo>(local_target_dir,git_repository_is_bare(c_git_repo_out));
-	//repo_dud.get()->c_git_guts_ = c_git_repo_out;
-	shared_ptr_t<Git_Repo> repo_dud;
-#pragma message("Error fix that")
+	check_for_error( git_clone(&c_git_repo_out,remote_repo_path.c_str(), local_target_dir.c_str(), clone_options.c_guts()));
+	shared_ptr_t<Git_Repo> repo_dud = make_shared_ver<Git_Repo>(c_git_repo_out);
+#pragma message("ToDo make sure that this works as intended, that is the clone of the repo is correct one and doesn't need to be created/written on hdd etc")
 	return repo_dud;
 }
 

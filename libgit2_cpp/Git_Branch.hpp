@@ -4,16 +4,16 @@
 
 class Git_Branch : public Provider<git_reference>
 {
-	friend class Git_Repo;
+	//friend class Git_Repo;
 private:
 	NMS::set<shared_ptr_t<Git_Commit>> commits_;
 
 	git_repository* get_owner_()const;
 	
 	void move_(const branch_name_t& new_branch_name, bool force = true);
-	Git_Branch(git_reference*);
 public:
-	//Git_Branch(const branch_name_t& branch_name);
+	Git_Branch(git_reference*);
+	Git_Branch(git_reference* c_git_branch_ref, const branch_name_t& branch_name, bool force = false);
 	//git_branch_t type()const;
 	shared_ptr_t<Git_Commit> create_commit();
 

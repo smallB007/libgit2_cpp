@@ -19,12 +19,15 @@ public:
 	Git_Repo(const Git_Repo&)=delete;
 	Git_Repo& operator=(const Git_Repo&) = delete;
 	Git_Repo(git_repository*);
-//	Git_Repo(const repo_path_t& path_to_repo, const bool is_bare);
+	Git_Repo(git_repository* c_git_repository,const repo_path_t& path_to_repo, const bool is_bare);
 	
 	bool is_my_path(const repo_path_t& path_to_some_repo)const;
 	void rename(const NMS::string& repo_name);
 
 	const shared_ptr_t<Git_Commit> get_head_commit()const;
+	vector_t<file_name_t> get_files_to_commit();
+	string_t get_msg_to_commit();
+	branch_name_t get_current_branch();
 	//shared_ptr_t<Git_Branch> get_branch(const branch_name_t& branch_name)const;
 LIBGIT2_REPO_INTERFACE
 	void cleanup();

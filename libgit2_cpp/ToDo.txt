@@ -3,3 +3,5 @@
 3[1].	Every libgit2 wrapper should have operator to convert to native libgit2
 4[0].  Tests 
 5[1]. Check if every c_guts is const
+6[v].http://stackoverflow.com/questions/12550412/has-the-vs2012-nativede-stepover-registry-entry-that-prevents-step-into-for-spec
+7[3]. check_for_error should be parametrized so the type of errors i.e. GIT_EEXIST can be passed and checked for

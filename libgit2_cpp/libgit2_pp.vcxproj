@@ -77,8 +77,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(BOOST_LIBx64);$(EA_STL_LIBx64);$(LIBGIT2_LIBx64);$(LibraryPath)</LibraryPath>
-    <IncludePath>$(BOOST);$(LIBGIT2);$(EA_STL_INCLUDE);$(EA_STL_BASE);$(IncludePath)</IncludePath>
+    <LibraryPath>$(LIBGIT2_LIBx64);$(BOOST_LIBx64);$(EA_STL_LIBx64);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(BOOST);$(EA_STL_INCLUDE);$(EA_STL_BASE);$(LIBGIT2);$(IncludePath)</IncludePath>
+    <SourcePath>C:\Downloads\soft\libs\libgit2-0.24.1\libgit2-0.24.1\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -110,11 +111,11 @@
       <DisableSpecificWarnings>4800; </DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <CompileAs>CompileAsCpp</CompileAs>
+      <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>git2.lib;EASTL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -155,6 +156,7 @@
   <ItemGroup>
     <Text Include="Building_libgit2_pp.txt" />
     <Text Include="Conventions.txt" />
+    <Text Include="KB.txt" />
     <Text Include="ReadMe.txt" />
     <Text Include="ToDo.txt" />
     <Text Include="Wrapped_Functionality.txt" />
@@ -189,6 +191,7 @@
     <ClInclude Include="Git_Merge_Options.hpp" />
     <ClInclude Include="Git_Message.hpp" />
     <ClInclude Include="Git_Object.hpp" />
+    <ClInclude Include="Git_Object_Factory.hpp" />
     <ClInclude Include="Git_Object_iface.hpp" />
     <ClInclude Include="Git_ODB.hpp" />
     <ClInclude Include="Git_RefDB.hpp" />
@@ -206,7 +209,7 @@
     <ClInclude Include="Provider.hpp" />
     <ClInclude Include="Provider_iface_.hpp" />
     <ClInclude Include="Remove_Const_From_Ptr.hpp" />
-    <ClInclude Include="Scoped_Deleter.hpp" />
+    <ClInclude Include="Git_Buf_Scoped_Deleter.hpp" />
     <ClInclude Include="Singleton.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="STD_Variants.hpp" />

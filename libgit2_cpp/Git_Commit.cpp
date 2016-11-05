@@ -6,62 +6,60 @@
 #include "Git_Time.hpp"
 #include "Git_Tree.hpp"
 #include "Git_Root.hpp"
-//Git_Commit::Git_Commit(const NMS::vector<NMS::string>& files_to_commit, const NMS::string& msg):Provider(git_commit_free)
-//{
-//	git_repository* rep = c_parent_guts();
-//	git_signature *sig;//must be freed
-//	if (git_signature_default(&sig, rep) < 0)
-//	{
-//		throw - 1;
-//		//	"Perhaps 'user.name' and 'user.email' are not vector");
-//	}
-//	git_index *index;//must be freed
-//	if (git_repository_index(&index, rep) < 0)
-//	{
-//		throw - 1;
-//		//fatal("Could not open repository index", NULL);
-//	}
-//	
-//	
-//	for (auto aString : files_to_commit)
-//	{
-//		if (git_index_add_bypath(index, aString.c_str()) < 0)
-//		{
-//			throw - 1;
-//		}
-//	}
-//	
-//	
-//
-//	git_commit* git_commit_out = get_parent()->get_head_commit()->c_guts();
-//	
-//	const git_commit* c_parents[] { git_commit_out };
-//	const git_oid * git_oid_tree = git_commit_tree_id(git_commit_out);
-//
-//	if (git_index_write_tree(const_cast<git_oid *>(git_oid_tree), index) < 0)
-//	{
-//		git_index_free(index);
-//		throw - 1;
-//	}
-//
-//	git_tree* git_tree_out;
-//	git_tree_lookup(&git_tree_out, rep, git_oid_tree);
-//
-//	//	Normally creating a commit would involve looking up the current HEAD commit and making that be the parent of the initial commit, but here this is the first commit so there will be no parent.
-//	git_oid commit_id;
-//	if (
-//		git_commit_create(&commit_id, rep, "HEAD", sig, sig, "UTF-8", msg.c_str(), git_tree_out, sizeof(c_parents) / sizeof(c_parents[0]), c_parents) < 0)
-//	{
-//		throw -1;
-//	}
-//	
-//	//git_commit_lookup(&c_git_guts_, rep, &commit_id);
-//}
+ Git_Commit::Git_Commit(git_commit* c_git_commit, const NMS::vector<NMS::string>& files_to_commit, const NMS::string& msg):Provider(c_git_commit, git_commit_free)
+{
+	git_repository* rep = c_parent_guts();
+	git_signature *sig;//must be freed
+	if (git_signature_default(&sig, rep) < 0)
+	{
+		throw - 1;
+		//	"Perhaps 'user.name' and 'user.email' are not vector");
+	}
+	git_index *index;//must be freed
+	if (git_repository_index(&index, rep) < 0)
+	{
+		throw - 1;
+		//fatal("Could not open repository index", NULL);
+	}
+	
+	
+	for (auto aString : files_to_commit)
+	{
+		if (git_index_add_bypath(index, aString.c_str()) < 0)
+		{
+			throw - 1;
+		}
+	}
+	
+	
+
+	git_commit* git_commit_out = get_parent()->get_head_commit()->c_guts();
+	
+	const git_commit* c_parents[] { git_commit_out };
+	const git_oid * git_oid_tree = git_commit_tree_id(git_commit_out);
+
+	if (git_index_write_tree(const_cast<git_oid *>(git_oid_tree), index) < 0)
+	{
+		git_index_free(index);
+		throw - 1;
+	}
+
+	git_tree* git_tree_out;
+#pragma message("ToDo put git_tree_out and sig into scoped deleter");
+	check_for_error(git_tree_lookup(&git_tree_out, rep, git_oid_tree));
+
+	//	Normally creating a commit would involve looking up the current HEAD commit and making that be the parent of the initial commit, but here this is the first commit so there will be no parent.
+	git_oid commit_id;
+	check_for_error(git_commit_create(&commit_id, rep, "HEAD", sig, sig, "UTF-8", msg.c_str(), git_tree_out, sizeof(c_parents) / sizeof(c_parents[0]), c_parents));
+	git_signature_free(sig);
+	/*assign the newly created commit to c_git_guts_*/
+	c_git_guts_ = get_parent()->get_head_commit()->c_guts();
+	check_for_error(git_commit_lookup(&c_git_guts_, rep, &commit_id));
+}
+
 
 Git_Commit::Git_Commit(git_commit* c_git_commit) : Provider(c_git_commit, git_commit_free)
-{
-	c_git_guts_ = c_git_commit;
-}
+{/*Only for passing around*/}
 
 NMS::vector<git_commit*> Git_Commit::get_parents()const
 {
@@ -72,7 +70,7 @@ NMS::vector<git_commit*> Git_Commit::get_parents()const
 																					 ++i)
 	{
 		git_commit* parent;
-		git_commit_parent(&parent, c_git_guts_, i);
+		check_for_error(git_commit_parent(&parent, c_git_guts_, i));
 		result.push_back(parent);
 	}
 	return result;

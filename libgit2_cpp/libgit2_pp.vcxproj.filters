@@ -20,6 +20,7 @@
     <Text Include="Building_libgit2_pp.txt" />
     <Text Include="Wrapped_Functionality.txt" />
     <Text Include="Conventions.txt" />
+    <Text Include="KB.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -142,9 +143,6 @@
     <ClInclude Include="Git_Config_Entry.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scoped_Deleter.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Check_Result.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -173,6 +171,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Remove_Const_From_Ptr.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Object_Factory.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Buf_Scoped_Deleter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

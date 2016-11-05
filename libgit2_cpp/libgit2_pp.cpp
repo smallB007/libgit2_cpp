@@ -7,14 +7,16 @@
 #include "Git_ODB.hpp"
 #include "Git_Blame.hpp"
 #include "Git_Config.hpp"
+#include "Git_Branch.hpp"
 int main()
 {
 //	Git_Config config;
-		//auto git = create_git();
+		auto git = create_git();
 		//auto git1 = create_git();
-		//auto repo = git->create_repository("C:\\Users\\Artie\\Desktop\\tmp_repo", false);
+		auto repo = git->create_repository("C:\\Users\\Artie\\Desktop\\tmp_repo", false);
 		////repo->get_master_branch();
-		//auto branch = repo->create_branch("branch_A");
+		auto branch = repo->create_branch("branch_A");
+		branch->create_commit();
 		//auto branch_B = repo->create_branch("branch_B");
 		////branch_B->move("Branch_C");
 		////repo->delete_branch("branch_B");

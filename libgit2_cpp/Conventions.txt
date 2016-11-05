@@ -2,3 +2,8 @@
 2. libgit2 objects that is c_git_something are passed as a non-const objects, due to the fact that libgit2 uses non-const objects.
 3. Each C++ class wrapping libgit2 inherits from Provider class giving c_git_object as a template parameter and passing to Provider ctor c_git_deleter
 4. C++ wrappers don't do checking. They assume that the data is correct. After all, they're just wrappers.
+5. Creating every Git_Object is done via:
+
+Git_Object_Factor<Git_Object>::create(args...);
+This^^^ works because every Git_Object has ctor with following form Git_Object(git_class*, args...)
+6. In order to pass Git_Object use make_shared_ver<Git_Object>(git_object*)
