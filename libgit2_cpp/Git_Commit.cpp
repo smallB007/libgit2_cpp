@@ -54,7 +54,6 @@
 	git_signature_free(sig);
 	/*assign the newly created commit to c_git_guts_*/
 	c_git_guts_ = get_parent()->get_head_commit()->c_guts();
-	check_for_error(git_commit_lookup(&c_git_guts_, rep, &commit_id));
 }
 
 
