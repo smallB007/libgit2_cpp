@@ -186,7 +186,9 @@
     <ClInclude Include="Git_Config_Level.hpp" />
     <ClInclude Include="Git_Credentials.hpp" />
     <ClInclude Include="Git_CVar_Map.hpp" />
-    <ClInclude Include="Git_Describe.hpp" />
+    <ClInclude Include="Git_Describe_Result.hpp" />
+    <ClInclude Include="Git_Describe_Format_Options.hpp" />
+    <ClInclude Include="Git_Describe_Options.hpp" />
     <ClInclude Include="Git_Index.hpp" />
     <ClInclude Include="Git_Merge_Options.hpp" />
     <ClInclude Include="Git_Message.hpp" />
@@ -233,7 +235,9 @@
     <ClCompile Include="Git_Config_Level.cpp" />
     <ClCompile Include="Git_Credentials.cpp" />
     <ClCompile Include="Git_CVar_Map.cpp" />
-    <ClCompile Include="Git_Describe.cpp" />
+    <ClCompile Include="Git_Describe_Result.cpp" />
+    <ClCompile Include="Git_Describe_Format_Options.cpp" />
+    <ClCompile Include="Git_Describe_Options.cpp" />
     <ClCompile Include="Git_Index.cpp" />
     <ClCompile Include="Git_Merge_Options.cpp" />
     <ClCompile Include="Git_Message.cpp" />

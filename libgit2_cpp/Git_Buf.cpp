@@ -6,10 +6,6 @@ Git_Buf::Git_Buf(git_buf* c_git_buf) :Provider(c_git_buf,git_buf_free)
 {
 }
 
-Git_Buf::~Git_Buf()
-{
-}
-
 bool Git_Buf::contains_null()const
 {
 	return git_buf_contains_nul(c_git_guts_);

@@ -155,9 +155,6 @@
     <ClInclude Include="Git_Credentials.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Git_Describe.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Provider.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -177,6 +174,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Git_Buf_Scoped_Deleter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Describe_Options.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Describe_Format_Options.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Describe_Result.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -277,7 +283,13 @@
     <ClCompile Include="Git_Credentials.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Git_Describe.cpp">
+    <ClCompile Include="Git_Describe_Options.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Describe_Format_Options.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Describe_Result.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

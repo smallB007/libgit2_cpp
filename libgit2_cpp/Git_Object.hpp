@@ -6,3 +6,5 @@ inline Git_Object<T>::Git_Object(T * c_git_object, c_git_deleter_t<T> c_git_clas
 {
 	c_git_guts_ = c_git_object ;
 }
+
+
