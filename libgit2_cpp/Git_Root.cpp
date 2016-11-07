@@ -25,7 +25,7 @@ shared_ptr_t<Git_Repo> Git_Root::create_repository(const repo_path_t& path_to_re
 		}
 	}
 	/**no repo found, create it then*/
-	auto _git_repo = Git_Object_Factory<Git_Repo>::create(path_to_repo.c_str(), is_bare);
+	auto _git_repo = Factory_Git_Object<Git_Repo>::create(path_to_repo.c_str(), is_bare);
 	repositories_.insert(_git_repo);
 	/**always make just created repo active*/
 	active_repo_[0] = _git_repo;

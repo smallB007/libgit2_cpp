@@ -11,8 +11,12 @@
 //	c_git_class* c_guts() { return &c_git_guts_; }
 //	operator c_git_class*() const { return &c_git_guts_; }
 //};
+enum E_MEM_MANAGEMENT{NO,YES};
+template<E_MEM_MANAGEMENT>
+struct Memory_Management
+{};
 
-template<class c_git_class, bool mem_management = true>
+template<class c_git_class, class mem_management = Memory_Management<YES>>
 class Guts_Provider 
 {
 		c_git_deleter_t<c_git_class> c_git_class_deleter_;
@@ -39,7 +43,7 @@ public:
 //struct No_Mem_Management
 //{};
 template<class c_git_class>
-class Guts_Provider<c_git_class,false>//: public Guts<c_git_class>
+class Guts_Provider<c_git_class, Memory_Management<NO>>//: public Guts<c_git_class>
 {
 protected:
 	c_git_class c_git_guts_;
@@ -47,3 +51,10 @@ public:
 	c_git_class* c_guts() { return &c_git_guts_; }
 	operator c_git_class*() const { return &c_git_guts_; }
 };
+
+
+template<class T>
+T c_guts(const Guts_Provider<T>& git_object)
+{
+	return git_object.c_guts();
+}

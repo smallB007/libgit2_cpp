@@ -1,5 +1,7 @@
 #pragma once
 
+class Git_Blame;
+class Git_Blob;
 class Git_Branch;
 class Git_Buf;
 class Git_Checkout;
@@ -13,13 +15,15 @@ class Git_Config;
 class Git_Config_Backend;
 class Git_Config_Entry;
 class Git_Config_Level;
+class Git_Credentials;
 class Git_CVar_Map;
-class Git_Describe_Result;
-class Git_Describe_Options;
 class Git_Describe_Format_Options;
+class Git_Describe_Options;
+class Git_Describe_Result;
+class Git_Diff;
 class Git_Index;
-class Git_Message;
 class Git_Merge_Options;
+class Git_Message;
 class Git_Object_ID;
 class Git_ODB;
 class Git_RefDB;

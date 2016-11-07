@@ -2,10 +2,6 @@
 #include "Git_Object_ID.hpp"
 #include "Git_Root.hpp"
 
-//Git_Blob::Git_Blob():Provider(git_blob_free),Git_Object(this)
-//{
-//}
-
 Git_Blob::Git_Blob(git_blob * c_git_blob):Provider(c_git_blob,git_blob_free)
 {
 	c_git_guts_ = c_git_blob;
@@ -14,11 +10,7 @@ Git_Blob::Git_Blob(git_blob * c_git_blob):Provider(c_git_blob,git_blob_free)
 shared_ptr_t<Git_Object_ID> Git_Blob::create_from_buffer(const NMS::vector<char>& buffer)
 {
 	git_oid* c_git_oid_out{};
-	int res = git_blob_create_frombuffer(c_git_oid_out, c_parent_guts(), &buffer, NMS::size(buffer));
-	if (FAILED(res) || FAILED(c_git_oid_out))
-	{
-		throw - 1;
-	}
+	check_for_error(git_blob_create_frombuffer(c_git_oid_out, c_parent_guts(), &buffer, NMS::size(buffer)));
 
 	return make_shared_ver<Git_Object_ID>(c_git_oid_out);
 }
@@ -26,11 +18,7 @@ shared_ptr_t<Git_Object_ID> Git_Blob::create_from_buffer(const NMS::vector<char>
 shared_ptr_t<Git_Object_ID> Git_Blob::create_from_disk(const file_path_t& file_path)
 {
 	git_oid* c_git_oid_out{};
-	int res = git_blob_create_fromdisk(c_git_oid_out, c_parent_guts(), file_path.c_str());
-	if (FAILED(res) || FAILED(c_git_oid_out))
-	{
-		throw - 1;
-	}
+	check_for_error(git_blob_create_fromdisk(c_git_oid_out, c_parent_guts(), file_path.c_str()));
 
 	return make_shared_ver<Git_Object_ID>(c_git_oid_out);
 }
@@ -38,11 +26,7 @@ shared_ptr_t<Git_Object_ID> Git_Blob::create_from_disk(const file_path_t& file_p
 shared_ptr_t<Git_Object_ID> Git_Blob::create_from_workdir(const file_path_t& relative_file_path)
 {
 	git_oid* c_git_oid_out{};
-	int res = git_blob_create_fromworkdir(c_git_oid_out, c_parent_guts(), relative_file_path.c_str());
-	if (FAILED(res) || FAILED(c_git_oid_out))
-	{
-		throw - 1;
-	}
+	check_for_error(git_blob_create_fromworkdir(c_git_oid_out, c_parent_guts(), relative_file_path.c_str()));
 	
 	return make_shared_ver<Git_Object_ID>(c_git_oid_out);
 }
@@ -103,18 +87,13 @@ shared_ptr_t<Git_Blob> Git_Blob::duplicate() const
 		throw - 1;
 	}
 	shared_ptr_t<Git_Blob> duplicated = make_shared_ver<Git_Blob>(c_git_blob_out);
-	//duplicated->c_git_guts_ = c_git_blob_out;
 	return duplicated;
 }
 
 shared_ptr_t<Git_Blob> Git_Blob::lookup(const Git_Object_ID& oid) const
 {
 	git_blob* c_git_blob_out{};
-	int res = git_blob_lookup(&c_git_blob_out, c_parent_guts(), oid.c_guts());
-	if (FAILED(res) || FAILED(c_git_blob_out))
-	{
-		throw - 1;
-	}
+	check_for_error(git_blob_lookup(&c_git_blob_out, c_parent_guts(), oid.c_guts()));
 
 	return make_shared_ver<Git_Blob>(c_git_blob_out);
 }

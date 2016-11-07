@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
 template<class Git_Class>
-class Git_Object_Factory
+class Factory_Git_Object
 {
 public:
 	template<class... Args>

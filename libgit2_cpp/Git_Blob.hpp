@@ -5,7 +5,6 @@ class Git_Blob : public Provider<git_blob>
 
 private:
 public:
-	//Git_Blob();
 	Git_Blob(git_blob*);
 LIBGIT2_BLOB_INTERFACE
 	shared_ptr_t<Git_Object_ID> create_from_buffer(const NMS::vector<char>& buffer);

@@ -5,7 +5,7 @@
 
 #include "Git_Config_Backend.hpp"
 #include "Git_Config_Entry.hpp"
-#include "Git_Buf_Scoped_Deleter.hpp"
+#include "Scoped_Deleter_Buf.hpp"
 #include "Git_CVar_Map.hpp"
 
 
@@ -79,7 +79,7 @@ file_path_t Git_Config::find_path_helper_() const
 	}
 
 	size_t file_path_length{ 256 };
-	Git_Buf_Scoped_Deleter<git_buf> c_git_buf_out(file_path_length);
+	Scoped_Deleter_Buf<git_buf> c_git_buf_out(file_path_length);
 	check_for_error(git_config_find(c_git_buf_out));
 
 	file_path_t file_path(c_git_buf_out.get_string());
@@ -262,7 +262,7 @@ file_path_t Git_Config::get_path(const string_t & varName) const
 	//return file_path_t();
 
 	size_t file_path_length{ 256 };
-	Git_Buf_Scoped_Deleter<git_buf> c_git_buf_out(file_path_length);
+	Scoped_Deleter_Buf<git_buf> c_git_buf_out(file_path_length);
 	check_for_error( git_config_get_path(c_git_buf_out, c_git_guts_, varName.c_str()));
 	return c_git_buf_out.get_string();
 }
@@ -423,7 +423,7 @@ T Git_Config::parse_int(const string_t & int_val) const
 file_path_t Git_Config::parse_path(const string_t & path) const
 {
 	size_t file_path_length{ 256 };
-	Git_Buf_Scoped_Deleter<git_buf> c_git_buf_out(file_path_length);
+	Scoped_Deleter_Buf<git_buf> c_git_buf_out(file_path_length);
 	check_for_error( git_config_parse_path(const_cast<git_buf*>(c_git_buf_out.get_type()),path.c_str()));
 	return c_git_buf_out.get_string();
 }

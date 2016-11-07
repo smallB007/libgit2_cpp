@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-class Git_Describe_Options : public Guts_Provider<git_describe_options,false>
+class Git_Describe_Options : public Guts_Provider<git_describe_options, Memory_Management<NO>>
 {
 public:
 	Git_Describe_Options();

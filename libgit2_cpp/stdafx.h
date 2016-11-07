@@ -27,5 +27,5 @@
 #include "Remove_Const_From_Ptr.hpp"
 #include "ENUMS.hpp"
 
-#include "Git_Object_Factory.hpp"
+#include "Factory_Git_Object.hpp"
 #include "Provider.hpp"

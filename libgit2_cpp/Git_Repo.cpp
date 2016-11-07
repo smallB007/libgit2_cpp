@@ -100,7 +100,7 @@ shared_ptr_t<Git_Branch> Git_Repo::create_branch(const branch_name_t& branch_nam
 	/*Check if branch with that name already find_branch and if not create it*/
 	if (!result.first)
 	{
-		shared_ptr_t<Git_Branch> new_branch = Git_Object_Factory<Git_Branch>::create(branch_name);
+		shared_ptr_t<Git_Branch> new_branch = Factory_Git_Object<Git_Branch>::create(branch_name);
 		branches_.insert(new_branch);
 		return new_branch;
 	}

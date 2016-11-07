@@ -1,17 +1,17 @@
 #pragma once
 template<class T>
-class Git_Buf_Scoped_Deleter
+class Scoped_Deleter_Buf
 {
 	T* c_git_type_;
 public:
-	Git_Buf_Scoped_Deleter(const size_t size)
+	Scoped_Deleter_Buf(const size_t size)
 	{
 		c_git_type_ = new T[size];
 	}
 
 	operator T*()const { return c_git_type_; }
 
-	~Git_Buf_Scoped_Deleter()
+	~Scoped_Deleter_Buf()
 	{
 		delete[] c_git_type_;
 		c_git_type_ = nullptr;

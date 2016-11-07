@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
 
-class Git_Describe_Format_Options : public Guts_Provider<git_describe_format_options,false>
+class Git_Describe_Format_Options : public Guts_Provider<git_describe_format_options, Memory_Management<NO>>
 {
 public:
 	Git_Describe_Format_Options();

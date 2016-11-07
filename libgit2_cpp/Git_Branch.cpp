@@ -34,7 +34,7 @@ shared_ptr_t<Git_Commit> Git_Branch::create_commit()
 #pragma message("ToDo THIS ^^^ should be a method of Repo: create on active branch a commit")
 	
 
-	auto new_commit = Git_Object_Factory<Git_Commit>::create(files_to_commit, msg);
+	auto new_commit = Factory_Git_Object<Git_Commit>::create(files_to_commit, msg);
 	commits_.insert(new_commit);
 	
 	return new_commit;
