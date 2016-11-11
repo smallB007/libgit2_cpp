@@ -48,8 +48,10 @@ class Guts_Provider<c_git_class, Memory_Management<NO>>//: public Guts<c_git_cla
 protected:
 	c_git_class c_git_guts_;
 public:
+	const c_git_class* c_guts() const { return &c_git_guts_; }
 	c_git_class* c_guts() { return &c_git_guts_; }
-	operator c_git_class*() const { return &c_git_guts_; }
+	operator c_git_class*(){ return &c_git_guts_; }
+	operator const c_git_class*()const { return &c_git_guts_; }
 };
 
 

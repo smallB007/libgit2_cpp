@@ -5,9 +5,9 @@ class Git_Signature
 {
 	const git_signature* c_git_signature_{nullptr};
 
-	git_buf* signature_block_{nullptr};//the signature block
-	git_buf* signed_data_{nullptr};
-
+	git_buf* signature_block_{};
+	git_buf* signed_data_{};
+#pragma message("ToDo review this design")
 public:
 	Git_Signature(const git_signature* c_git_signature);
 	Git_Signature(git_buf* signature_block, git_buf* signed_data);

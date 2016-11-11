@@ -3,7 +3,7 @@
 class Git_Describe_Options : public Guts_Provider<git_describe_options, Memory_Management<NO>>
 {
 public:
-	Git_Describe_Options();
+	Git_Describe_Options(git_describe_options = GIT_DESCRIBE_OPTIONS_INIT);
 	~Git_Describe_Options() = default;
 #pragma message("ToDo perhaps there is a way to make the desig of Guts_Provider that actually can cope with non ptr types of c_git_class")
 	LIBGIT2_DESCRIBE_OPTIONS_INTERFACE

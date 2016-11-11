@@ -2,8 +2,28 @@
 
 
 
-Git_Buf::Git_Buf(git_buf* c_git_buf) :Provider(c_git_buf,git_buf_free)
+
+Git_Buf::Git_Buf(git_buf* c_git_buf ) :Provider(c_git_buf,git_buf_free)
 {
+}
+
+Git_Buf::Git_Buf(git_buf && c_git_buf):Provider(&c_git_buf,git_buf_free)
+{
+}
+
+size_t Git_Buf::size() const
+{
+	return c_git_guts_->size;
+}
+
+size_t Git_Buf::capacity() const
+{
+	return c_git_guts_->asize;
+}
+
+git_buf* Git_Buf::head() const
+{
+	return c_git_guts_;
 }
 
 bool Git_Buf::contains_null()const

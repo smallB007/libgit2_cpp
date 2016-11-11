@@ -5,7 +5,7 @@ Git_Diff_Options::Git_Diff_Options()
 	check_for_error(git_diff_init_options(&c_git_guts_, GIT_DIFF_OPTIONS_VERSION));
 }
 
-unsigned int 	Git_Diff_Options::version()const 
+unsigned int 	Git_Diff_Options::version()const
 {
 	return c_git_guts_.version;
 }

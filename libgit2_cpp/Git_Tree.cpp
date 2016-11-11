@@ -2,12 +2,8 @@
 
 
 
-Git_Tree::Git_Tree(const git_tree * c_git_tree):c_git_tree_{c_git_tree}
+Git_Tree::Git_Tree(git_tree * c_git_tree):Provider(c_git_tree,git_tree_free)
 {
 	
 }
 
-
-Git_Tree::~Git_Tree()
-{
-}

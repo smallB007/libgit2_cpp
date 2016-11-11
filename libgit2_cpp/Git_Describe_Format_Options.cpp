@@ -1,10 +1,8 @@
 #include "Git_Describe_Format_Options.hpp"
 
-
-
-Git_Describe_Format_Options::Git_Describe_Format_Options()
+Git_Describe_Format_Options::Git_Describe_Format_Options(git_describe_format_options c_git_describe_format_options)
 {
-	c_git_guts_ = GIT_DESCRIBE_FORMAT_OPTIONS_INIT;
+	c_git_guts_ = c_git_describe_format_options;
 }
 
 unsigned int 	Git_Describe_Format_Options::version()const

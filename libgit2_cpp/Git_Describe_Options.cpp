@@ -2,9 +2,9 @@
 
 
 
-Git_Describe_Options::Git_Describe_Options() 
+Git_Describe_Options::Git_Describe_Options(git_describe_options c_git_describe_options)
 {
-	c_git_guts_ = GIT_DESCRIBE_OPTIONS_INIT;
+	c_git_guts_ = c_git_describe_options;
 }
 
 unsigned int 	Git_Describe_Options::version()const

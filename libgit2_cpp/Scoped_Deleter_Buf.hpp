@@ -1,5 +1,6 @@
 #pragma once
-template<class T>
+#include "stdafx.h"
+template<class T = git_buf>
 class Scoped_Deleter_Buf
 {
 	T* c_git_type_;

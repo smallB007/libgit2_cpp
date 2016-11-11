@@ -7,3 +7,4 @@
 Git_Object_Factor<Git_Object>::create(args...);
 This^^^ works because every Git_Object has ctor with following form Git_Object(git_class*, args...)
 6. In order to pass Git_Object use make_shared_ver<Git_Object>(git_object*)
+7. Every function should be given correct args so there is no need to check for validity of any form of those. No checking if object is nullptr or not etc.
