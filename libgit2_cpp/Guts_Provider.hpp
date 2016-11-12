@@ -22,7 +22,6 @@ class Guts_Provider
 		c_git_deleter_t<c_git_class> c_git_class_deleter_;
 protected:
 	c_git_class* c_guts_{};
-#pragma message("Idea consider renaming it to c_guts_ or c_guts() renaming to c_git_guts()")
 public:
 	c_git_class* c_guts() const { return c_guts_; }
 	operator c_git_class*() const { return c_guts_; }

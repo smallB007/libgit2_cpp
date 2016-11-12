@@ -34,6 +34,7 @@ class Git_Fetch_Options;
 class Git_Filter;
 class Git_Filter_List;
 class Git_Index;
+class Git_Index_Entry;
 class Git_Merge_Options;
 class Git_Message;
 class Git_Object_ID;

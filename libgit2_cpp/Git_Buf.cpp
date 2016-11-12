@@ -7,7 +7,7 @@ Git_Buf::Git_Buf(git_buf* c_git_buf ) :Provider(c_git_buf,git_buf_free)
 {
 }
 
-Git_Buf::Git_Buf(git_buf & c_git_buf):Provider(reinterpret_cast<git_buf*>(malloc(sizeof( git_buf))),git_buf_free)
+Git_Buf::Git_Buf(git_buf & c_git_buf):Provider(c_guts_,git_buf_free)
 {
 	check_for_error(git_buf_set(c_guts_, &c_git_buf, c_git_buf.size));
 }

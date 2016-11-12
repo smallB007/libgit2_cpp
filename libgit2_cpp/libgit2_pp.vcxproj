@@ -204,6 +204,7 @@
     <ClInclude Include="Git_Filter_List.hpp" />
     <ClInclude Include="Git_Filter_Source.hpp" />
     <ClInclude Include="Git_Index.hpp" />
+    <ClInclude Include="Git_Index_Entry.hpp" />
     <ClInclude Include="Git_Merge_Options.hpp" />
     <ClInclude Include="Git_Message.hpp" />
     <ClInclude Include="Git_Object.hpp" />
@@ -268,6 +269,7 @@
     <ClCompile Include="Git_Filter_List.cpp" />
     <ClCompile Include="Git_Filter_Source.cpp" />
     <ClCompile Include="Git_Index.cpp" />
+    <ClCompile Include="Git_Index_Entry.cpp" />
     <ClCompile Include="Git_Merge_Options.cpp" />
     <ClCompile Include="Git_Message.cpp" />
     <ClCompile Include="Git_ODB.cpp" />
