@@ -240,7 +240,13 @@
       <Filter>Header Files\Git</Filter>
     </ClInclude>
     <ClInclude Include="Git_Delta.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Fetch_Options.hpp">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Strarray.hpp">
+      <Filter>Header Files\Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -377,7 +383,13 @@
       <Filter>Source Files\Git</Filter>
     </ClCompile>
     <ClCompile Include="Git_Delta.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Fetch_Options.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Strarray.cpp">
+      <Filter>Source Files\Git</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

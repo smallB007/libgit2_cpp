@@ -199,6 +199,7 @@
     <ClInclude Include="Git_Diff_Perfdata.hpp" />
     <ClInclude Include="Git_Diff_Similarity_Metric.hpp" />
     <ClInclude Include="Git_Diff_Stats.hpp" />
+    <ClInclude Include="Git_Fetch_Options.hpp" />
     <ClInclude Include="Git_Index.hpp" />
     <ClInclude Include="Git_Merge_Options.hpp" />
     <ClInclude Include="Git_Message.hpp" />
@@ -207,6 +208,7 @@
     <ClInclude Include="Git_Object_iface.hpp" />
     <ClInclude Include="Git_ODB.hpp" />
     <ClInclude Include="Git_RefDB.hpp" />
+    <ClInclude Include="Git_Strarray.hpp" />
     <ClInclude Include="Git_Time.hpp" />
     <ClInclude Include="Git_Object_ID.hpp" />
     <ClInclude Include="Git_Repo.hpp" />
@@ -258,11 +260,13 @@
     <ClCompile Include="Git_Diff_Perfdata.cpp" />
     <ClCompile Include="Git_Diff_Similarity_Metric.cpp" />
     <ClCompile Include="Git_Diff_Stats.cpp" />
+    <ClCompile Include="Git_Fetch_Options.cpp" />
     <ClCompile Include="Git_Index.cpp" />
     <ClCompile Include="Git_Merge_Options.cpp" />
     <ClCompile Include="Git_Message.cpp" />
     <ClCompile Include="Git_ODB.cpp" />
     <ClCompile Include="Git_RefDB.cpp" />
+    <ClCompile Include="Git_Strarray.cpp" />
     <ClCompile Include="Git_Time.cpp" />
     <ClCompile Include="Git_Object_ID.cpp" />
     <ClCompile Include="Git_Repo.cpp" />
