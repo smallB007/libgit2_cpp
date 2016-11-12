@@ -15,17 +15,17 @@
 /*Proper CADRe - [C]onstructor [A]cquires, [D]estructor [Re]leses*/
 Git_Repo::Git_Repo(git_repository* c_git_repository,const repo_path_t& path_to_repo, const bool is_bare) :Provider(c_git_repository, git_repository_free)
 {
-	check_for_error(git_repository_init(&c_git_guts_, path_to_repo.c_str(), static_cast<unsigned int>(is_bare)));
+	check_for_error(git_repository_init(&c_guts_, path_to_repo.c_str(), static_cast<unsigned int>(is_bare)));
 
-	//if (FAILED(c_git_guts_) || FAILED(err))
+	//if (FAILED(c_guts_) || FAILED(err))
 	//{
 	//	throw - 1;
 	//}
 	//else
 	//{
-	//	//create_initial_commit(c_git_guts_);
+	//	//create_initial_commit(c_guts_);
 	//	//git_reference* git_branch_ref_out;
-	//	//auto res = git_repository_head(&git_branch_ref_out, c_git_guts_);
+	//	//auto res = git_repository_head(&git_branch_ref_out, c_guts_);
 	//	//if (FAILED(res))
 	//	//{
 	//	//	throw -1;
@@ -41,9 +41,9 @@ Git_Repo::Git_Repo(git_repository* c_git_repository) :Provider(c_git_repository,
 
 void Git_Repo::create_initial_commit_()
 {
-	create_initial_commit(c_git_guts_);
+	create_initial_commit(c_guts_);
 	git_reference* git_branch_ref_out;
-	check_for_error(git_repository_head(&git_branch_ref_out, c_git_guts_));
+	check_for_error(git_repository_head(&git_branch_ref_out, c_guts_));
 	/*@return 0 on success, GIT_EUNBORNBRANCH when HEAD points to a non existing
  * branch, GIT_ENOTFOUND when HEAD is missing; an error code otherwise*/
 
@@ -55,10 +55,10 @@ const shared_ptr_t<Git_Commit> Git_Repo::get_head_commit()const
 {
 	git_oid* git_oid_out = new git_oid;
 #pragma message("ToDo make this scoped_del Artie for the love of God!")
-	check_for_error(git_reference_name_to_id(git_oid_out, c_git_guts_, "HEAD"));
+	check_for_error(git_reference_name_to_id(git_oid_out, c_guts_, "HEAD"));
 
 	git_commit* git_commit_out{ nullptr };
-	check_for_error(git_commit_lookup(&git_commit_out, c_git_guts_, git_oid_out));
+	check_for_error(git_commit_lookup(&git_commit_out, c_guts_, git_oid_out));
 
 	delete git_oid_out;
 	return make_shared_ver<Git_Commit>(git_commit_out);
@@ -126,7 +126,7 @@ void Git_Repo::delete_branch(const branch_name_t& branch_name)
 
 bool Git_Repo::is_my_path(const repo_path_t& path_to_some_repo)const
 {
-	const char* const c_path = git_repository_path(c_git_guts_);
+	const char* const c_path = git_repository_path(c_guts_);
 	return (0 == strcmp(path_to_some_repo.c_str(),c_path));
 }
 
@@ -146,7 +146,7 @@ const shared_ptr_t<Git_Commit> Git_Repo::commit_lookup(const Git_Commit_ID& comm
  possibly if they are in unordered set and placed into buckets by oid?
  */
 	git_commit* commit_out{ nullptr };
-	auto res = git_commit_lookup(&commit_out, c_git_guts_, commit_id.c_guts());
+	auto res = git_commit_lookup(&commit_out, c_guts_, commit_id.c_guts());
 	if(FAILED(res))
 	{
 		throw - 1;
@@ -181,7 +181,7 @@ shared_ptr_t<Git_Branch> Git_Repo::branch_lookup(const branch_name_t& branch_nam
 
 	return nullptr;
 	//git_reference* git_reference_branch_out;
-	//auto res = git_branch_lookup(&git_reference_branch_out, c_git_guts_, branch_name.c_str(),branch_type);
+	//auto res = git_branch_lookup(&git_reference_branch_out, c_guts_, branch_name.c_str(),branch_type);
 	//if (FAILED(res))
 	//{
 	//	throw - 1;
@@ -209,7 +209,7 @@ void Git_Repo::checkout_tree() const
 
 void Git_Repo::cherrypick(const Git_Commit& commit, const Git_CherryPick_Options& cherrypick_options)
 {
-	check_for_error(git_cherrypick(c_git_guts_, 
+	check_for_error(git_cherrypick(c_guts_, 
 								commit.c_guts() , 
 								cherrypick_options.c_guts()));
 }
@@ -225,13 +225,13 @@ LIBGIT2_CLONE_INTERFACE shared_ptr_t<Git_Repo> Git_Repo::clone(const repo_path_t
 
 void Git_Repo::cleanup()
 {
-	git_repository__cleanup(c_git_guts_);
+	git_repository__cleanup(c_guts_);
 }
 
 shared_ptr_t<Git_Config> Git_Repo::config()const
 {
 	git_config* config_out;
-	auto res = git_repository_config(&config_out,c_git_guts_);
+	auto res = git_repository_config(&config_out,c_guts_);
 	if (FAILED(res))
 	{
 		throw - 1;
@@ -242,7 +242,7 @@ shared_ptr_t<Git_Config> Git_Repo::config()const
 shared_ptr_t<Git_Config> Git_Repo::config_snapshot()const
 {
 	git_config* config_snapshot_out;
-	auto res = git_repository_config_snapshot(&config_snapshot_out, c_git_guts_);
+	auto res = git_repository_config_snapshot(&config_snapshot_out, c_guts_);
 	if (FAILED(res))
 	{
 		throw - 1;
@@ -264,7 +264,7 @@ repo_path_t Git_Repo::discover(const repo_path_t start_path)const
 
 namespace_name_t Git_Repo::get_namespace()const
 {
-	const char* repo_namespace = git_repository_get_namespace(c_git_guts_);
+	const char* repo_namespace = git_repository_get_namespace(c_guts_);
 	if (FAILED(repo_namespace))
 	{
 		throw - 1;
@@ -276,7 +276,7 @@ shared_ptr_t<Git_Branch> Git_Repo::head()const
 {
 	/*0 on success, GIT_EUNBORNBRANCH when HEAD points to a non existing branch, GIT_ENOTFOUND when HEAD is missing; an error code otherwise*/
 	git_reference* c_git_branch_ref_out;
-	auto res = git_repository_head(&c_git_branch_ref_out,c_git_guts_);
+	auto res = git_repository_head(&c_git_branch_ref_out,c_guts_);
 	if (!FAILED(res))
 	{/*find that ref amongst those branches */
 		auto aSharedPtr = find_branch_by_c_git_reference_(c_git_branch_ref_out);
@@ -312,7 +312,7 @@ shared_ptr_t<Git_Branch> Git_Repo::find_branch_by_c_git_reference_(git_reference
 
 bool Git_Repo::is_head_detached()const
 {//1 if HEAD is detached, 0 if it's not; error code if there was an error.
-	auto res = git_repository_head_detached(c_git_guts_);
+	auto res = git_repository_head_detached(c_guts_);
 	if (FAILED(res))
 	{
 		throw - 1;
@@ -323,7 +323,7 @@ bool Git_Repo::is_head_detached()const
 
 bool Git_Repo::is_head_unborn()const
 {//1 if the current branch is unborn, 0 if it's not; error code if there was an error
-	auto res = git_repository_head_unborn(c_git_guts_);
+	auto res = git_repository_head_unborn(c_guts_);
 	if (FAILED(res))
 	{
 		throw - 1;
@@ -336,7 +336,7 @@ shared_ptr_t<Git_Commit_Author> Git_Repo::identitiy() const
 {//The memory is owned by the repository and must not be freed by the user.
 	const char* name_out;
 	const char* email_out;
-	auto res = git_repository_ident(&name_out, &email_out, c_git_guts_);
+	auto res = git_repository_ident(&name_out, &email_out, c_guts_);
 	if (FAILED(res))
 	{
 		throw - 1;
@@ -348,7 +348,7 @@ shared_ptr_t<Git_Commit_Author> Git_Repo::identitiy() const
 shared_ptr_t<Git_Index> Git_Repo::index()const
 {
 	git_index* c_git_index_out;
-	auto res = git_repository_index(&c_git_index_out,c_git_guts_);
+	auto res = git_repository_index(&c_git_index_out,c_guts_);
 	if (FAILED(res))
 	{
 		throw - 1;
@@ -359,13 +359,13 @@ shared_ptr_t<Git_Index> Git_Repo::index()const
 
 bool Git_Repo::is_bare()const
 {
-	int is_repo_bare = git_repository_is_bare(c_git_guts_);
+	int is_repo_bare = git_repository_is_bare(c_guts_);
 	return is_repo_bare;
 }
 
 bool Git_Repo::is_empty()const
 {
-	auto res = git_repository_is_empty(c_git_guts_);
+	auto res = git_repository_is_empty(c_guts_);
 	if (FAILED(res))
 	{
 		throw - 1;
@@ -376,7 +376,7 @@ bool Git_Repo::is_empty()const
 
 bool Git_Repo::is_shallow()const
 {
-	int res = git_repository_is_shallow(c_git_guts_);
+	int res = git_repository_is_shallow(c_guts_);
 
 	return res;
 }
@@ -390,32 +390,32 @@ shared_ptr_t<Git_ODB> Git_Repo::odb()const
 
 repo_path_t Git_Repo::path() const
 {
-	return git_repository_path(c_git_guts_);
+	return git_repository_path(c_guts_);
 }
 
 shared_ptr_t<Git_RefDB> Git_Repo::ref_db() const
 {
-	return make_shared_ver<Git_RefDB>(c_git_guts_);
+	return make_shared_ver<Git_RefDB>(c_guts_);
 }
 
 void Git_Repo::set_bare()
 {
-	int res = git_repository_set_bare(c_git_guts_);
+	int res = git_repository_set_bare(c_guts_);
 	if (FAILED(res))
 	{
 		throw - 1;
 	}
-	git_repository_set_index(c_git_guts_, NULL);
+	git_repository_set_index(c_guts_, NULL);
 }
 
 void Git_Repo::set_config(const Git_Config& config)
 {
-	git_repository_set_config(c_git_guts_, config.c_guts());
+	git_repository_set_config(c_guts_, config.c_guts());
 }
 
 void Git_Repo::set_identity(const Git_Signature& signature)
 {
-	int res = git_repository_set_ident(c_git_guts_, signature.name().c_str(), signature.email().c_str());
+	int res = git_repository_set_ident(c_guts_, signature.name().c_str(), signature.email().c_str());
 	if (FAILED(res))
 	{
 		throw - 1;
@@ -424,12 +424,12 @@ void Git_Repo::set_identity(const Git_Signature& signature)
 
 void Git_Repo::set_index(const Git_Index& index)
 {
-	git_repository_set_index(c_git_guts_, index);
+	git_repository_set_index(c_guts_, index);
 }
 
 void Git_Repo::set_namespace(const namespace_name_t& namespace_name)
 {
-	int res = git_repository_set_namespace(c_git_guts_, namespace_name.c_str());
+	int res = git_repository_set_namespace(c_guts_, namespace_name.c_str());
 	if (FAILED(res))
 	{
 		throw - 1;
@@ -438,17 +438,17 @@ void Git_Repo::set_namespace(const namespace_name_t& namespace_name)
 
 void Git_Repo::set_odb(const Git_ODB& odb)
 {
-	git_repository_set_odb(c_git_guts_, odb.c_guts());
+	git_repository_set_odb(c_guts_, odb.c_guts());
 }
 
 void Git_Repo::set_ref_db(const Git_RefDB & ref_db)
 {
-	git_repository_set_refdb(c_git_guts_, ref_db);
+	git_repository_set_refdb(c_guts_, ref_db);
 }
 
 void Git_Repo::set_working_dir(const repo_path_t & working_dir, bool update_gitlink)
 {
-	int res = git_repository_set_workdir(c_git_guts_, working_dir.c_str(), update_gitlink);
+	int res = git_repository_set_workdir(c_guts_, working_dir.c_str(), update_gitlink);
 	if (FAILED(res))
 	{
 		throw - 1;
@@ -463,14 +463,14 @@ const repo_path_t Git_Repo::get_working_dir() const
 	}
 	else
 	{
-		const char * working_dir = git_repository_workdir(c_git_guts_);
+		const char * working_dir = git_repository_workdir(c_guts_);
 		return working_dir;
 	}
 }
 
 git_repository_state_t Git_Repo::get_state() const
 {
-	auto res = git_repository_state(c_git_guts_);
+	auto res = git_repository_state(c_guts_);
 	if (FAILED(res))
 	{
 		throw - 1;
@@ -480,7 +480,7 @@ git_repository_state_t Git_Repo::get_state() const
 
 void Git_Repo::cleanup_state()
 {
-	int res = git_repository_state_cleanup(c_git_guts_);
+	int res = git_repository_state_cleanup(c_guts_);
 	if (FAILED(res))
 	{
 		throw - 1;
@@ -489,7 +489,7 @@ void Git_Repo::cleanup_state()
 
 void Git_Repo::unset_identity()
 {
-	int res = git_repository_set_ident(c_git_guts_, NULL, NULL);
+	int res = git_repository_set_ident(c_guts_, NULL, NULL);
 	if (FAILED(res))
 	{
 		throw - 1;

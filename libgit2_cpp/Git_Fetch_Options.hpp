@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-class Git_Fetch_Options : Guts_Provider<git_fetch_options,Memory_Management<NO>>
+class Git_Fetch_Options : public Guts_Provider<git_fetch_options,Memory_Management<NO>>
 {
 public:
 	Git_Fetch_Options();

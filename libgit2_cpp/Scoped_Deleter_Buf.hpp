@@ -4,6 +4,7 @@ template<class T = git_buf>
 class Scoped_Deleter_Buf
 {
 	T* c_git_type_;
+#pragma message("Warning perhaps instead of using this class simply create object of buf class on stack(non-ptr)")
 public:
 	Scoped_Deleter_Buf(const size_t size)
 	{

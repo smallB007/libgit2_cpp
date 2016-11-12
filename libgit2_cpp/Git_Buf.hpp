@@ -5,7 +5,7 @@ class Git_Buf : public Provider<git_buf>
 	
 public:
 	Git_Buf(git_buf* c_git_buf);
-	Git_Buf(git_buf&&);
+	Git_Buf(git_buf&);
 	~Git_Buf()=default;
 	size_t size()const;
 	size_t capacity()const;

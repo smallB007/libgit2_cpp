@@ -248,6 +248,15 @@
     <ClInclude Include="Git_Strarray.hpp">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="Git_Filter.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Filter_List.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Filter_Source.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -389,6 +398,15 @@
       <Filter>Source Files\Git</Filter>
     </ClCompile>
     <ClCompile Include="Git_Strarray.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Filter.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Filter_List.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Filter_Source.cpp">
       <Filter>Source Files\Git</Filter>
     </ClCompile>
   </ItemGroup>

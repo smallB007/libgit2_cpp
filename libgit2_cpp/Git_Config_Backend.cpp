@@ -31,7 +31,7 @@ Git_Config_Backend::~Git_Config_Backend()
 void Git_Config_Backend::add_backend(const Git_Config & cfg, const Git_Config_Backend & file, const Git_Config_Level & level, bool force)
 {
 	int res = git_config_add_backend(const_cast<git_config*>(cfg.c_guts()), const_cast<git_config_backend*>(&file.c_git_config_backend_), level.get_level(), force);
-#pragma message("ToDo ^^^ const_cast on type of c_git_guts_ should be used here")
+#pragma message("ToDo ^^^ const_cast on type of c_guts_ should be used here")
 	if (FAILED(res) || GIT_EEXISTS == res)
 	{
 		throw - 1;

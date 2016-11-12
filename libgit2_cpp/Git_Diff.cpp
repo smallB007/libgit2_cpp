@@ -91,14 +91,14 @@ Git_Diff_Delta Git_Diff::get_delta(const Git_Diff &diff, const size_t idx)const
 Git_Diff_Perfdata Git_Diff::get_perfdata(const Git_Diff & diff) const
 {
 	git_diff_perfdata c_git_diff_perfdata_out;
-	check_for_error(git_diff_get_perfdata(&c_git_diff_perfdata_out, diff.c_git_guts_));
+	check_for_error(git_diff_get_perfdata(&c_git_diff_perfdata_out, diff.c_guts_));
 	return c_git_diff_perfdata_out;
 }
 
 shared_ptr_t<Git_Diff_Stats> Git_Diff::get_stats(const Git_Diff & diff) const
 {
 	git_diff_stats* c_git_diff_stats;
-	check_for_error(git_diff_get_stats(&c_git_diff_stats, diff.c_git_guts_));
+	check_for_error(git_diff_get_stats(&c_git_diff_stats, diff.c_guts_));
 	return make_shared_ver<Git_Diff_Stats>(c_git_diff_stats);
 }
 
@@ -122,23 +122,23 @@ shared_ptr_t<Git_Diff> Git_Diff::diff_index_to_workdir(const Git_Index & index, 
 
 bool Git_Diff::is_sorted_icase(const Git_Diff & gitDiff) const
 {
-	return  1 == git_diff_is_sorted_icase(gitDiff.c_git_guts_);
+	return  1 == git_diff_is_sorted_icase(gitDiff.c_guts_);
 }
 
 shared_ptr_t<Git_Diff> Git_Diff::diff_merge(const Git_Diff & diffFrom)
 {
-	check_for_error(git_diff_merge(c_git_guts_, diffFrom.c_git_guts_));
-	return make_shared_ver<Git_Diff>(c_git_guts_);
+	check_for_error(git_diff_merge(c_guts_, diffFrom.c_guts_));
+	return make_shared_ver<Git_Diff>(c_guts_);
 }
 
 size_t Git_Diff::number_of_deltas(const Git_Diff & gitDiff) const
 {
-	return git_diff_num_deltas(gitDiff.c_git_guts_);
+	return git_diff_num_deltas(gitDiff.c_guts_);
 }
 
 size_t Git_Diff::number_of_deltas_of_type(const Git_Diff & gitDiff, const Git_Delta & gitDelta) const
 {
-	return git_diff_num_deltas_of_type(gitDiff.c_git_guts_, *(gitDelta.c_guts()));
+	return git_diff_num_deltas_of_type(gitDiff.c_guts_, *(gitDelta.c_guts()));
 }
 
 size_t Git_Diff::deletions() const
@@ -186,7 +186,7 @@ shared_ptr_t<Git_Buf> Git_Diff::diff_to_buf(const Git_Diff & diff, git_diff_form
 #pragma message("ToDo native libgit2 enum used")
 
 	git_buf* c_git_buf_out;
-	check_for_error(git_diff_to_buf(&c_git_buf_out, diff.c_git_guts_, format));
+	check_for_error(git_diff_to_buf(&c_git_buf_out, diff.c_guts_, format));
 	return make_shared_ver<Git_Buf>(c_git_buf_out);
 }
 #endif

@@ -10,7 +10,7 @@ Git_Branch::Git_Branch(git_reference* c_git_branch_ref, const branch_name_t& bra
 {
 	const git_commit* git_commit_in = get_parent()->get_head_commit()->c_guts();
 	
-	check_for_error(git_branch_create(&c_git_guts_, c_parent_guts(), branch_name.c_str(), git_commit_in, force));
+	check_for_error(git_branch_create(&c_guts_, c_parent_guts(), branch_name.c_str(), git_commit_in, force));
 }
 
 
@@ -20,7 +20,7 @@ Git_Branch::Git_Branch(git_reference* c_git_branch_ref, const branch_name_t& bra
 branch_name_t Git_Branch::name()const
 {
 	const char* name_out{};
-	check_for_error(git_branch_name(&name_out, c_git_guts_));
+	check_for_error(git_branch_name(&name_out, c_guts_));
 	
 	return name_out;
 	
@@ -42,7 +42,7 @@ shared_ptr_t<Git_Commit> Git_Branch::create_commit()
 
 git_repository* Git_Branch::get_owner_()const
 {
-	git_repository* c_git_repo = git_reference_owner(c_git_guts_);
+	git_repository* c_git_repo = git_reference_owner(c_guts_);
 	if (FAILED(c_git_repo))
 	{
 		throw - 1;
@@ -55,7 +55,7 @@ git_repository* Git_Branch::get_owner_()const
 
 bool Git_Branch::is_head()const
 {
-	auto res = git_branch_is_head(c_git_guts_);
+	auto res = git_branch_is_head(c_guts_);
 	return res == 1 ? true :
 			res == 0 ? false :
 			throw - 1;
@@ -75,7 +75,7 @@ void Git_Branch::move_(const branch_name_t& new_branch_name, bool force)
 {
 	git_reference* git_branch_ref_out;
 #pragma message("ToDo What to do with it^^^?")
-	check_for_error(git_branch_move(&git_branch_ref_out, c_git_guts_, new_branch_name.c_str(), force));
+	check_for_error(git_branch_move(&git_branch_ref_out, c_guts_, new_branch_name.c_str(), force));
 	
 }
 
