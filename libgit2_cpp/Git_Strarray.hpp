@@ -8,5 +8,6 @@ public:
 	~Git_Strarray()=default;
 	size_t size()const;
 #pragma message("ToDo implement iterator")
+#pragma message("Idea implement conversion operator to the most common containers")
 };
 

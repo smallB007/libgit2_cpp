@@ -11,4 +11,12 @@
 			throw - 1;
 		}
 	}
+	template<class T>
+	inline void check_for_nullptr(T* p)
+	{
+		if (FAILED(p))
+		{
+			throw - 1;
+		}
+	}
 //};

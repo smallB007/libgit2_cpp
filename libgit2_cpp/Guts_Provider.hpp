@@ -29,7 +29,11 @@ public:
 	Guts_Provider(c_git_deleter_t<c_git_class> c_git_class_deleter):
 																c_git_class_deleter_(NMS::move(c_git_class_deleter))
 	{
-
+#pragma message("Todo remove this ctor in favour of the bottom one")
+	}
+	Guts_Provider(c_git_class* c_ptr, c_git_deleter_t<c_git_class> c_git_class_deleter) :c_guts_{c_ptr},
+																							c_git_class_deleter_(NMS::move(c_git_class_deleter))
+	{
 	}
 	~Guts_Provider()
 	{
