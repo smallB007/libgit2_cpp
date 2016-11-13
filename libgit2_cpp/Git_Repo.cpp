@@ -53,14 +53,12 @@ void Git_Repo::create_initial_commit_()
 
 const shared_ptr_t<Git_Commit> Git_Repo::get_head_commit()const
 {
-	git_oid* git_oid_out = new git_oid;
-#pragma message("ToDo make this scoped_del Artie for the love of God!")
-	check_for_error(git_reference_name_to_id(git_oid_out, c_guts_, "HEAD"));
+	git_oid git_oid_out;
+	check_for_error(git_reference_name_to_id(&git_oid_out, c_guts_, "HEAD"));
 
 	git_commit* git_commit_out{ nullptr };
-	check_for_error(git_commit_lookup(&git_commit_out, c_guts_, git_oid_out));
+	check_for_error(git_commit_lookup(&git_commit_out, c_guts_, &git_oid_out));
 
-	delete git_oid_out;
 	return make_shared_ver<Git_Commit>(git_commit_out);
 }
 

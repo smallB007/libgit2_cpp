@@ -79,7 +79,7 @@
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(LIBGIT2_LIBx64);$(BOOST_LIBx64);$(EA_STL_LIBx64);$(LibraryPath)</LibraryPath>
     <IncludePath>$(BOOST);$(EA_STL_INCLUDE);$(EA_STL_BASE);$(LIBGIT2);$(IncludePath)</IncludePath>
-    <SourcePath>C:\Downloads\soft\libs\libgit2-0.24.1\libgit2-0.24.1\src;$(SourcePath)</SourcePath>
+    <SourcePath>$(LIBGIT2_SRC);$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
