@@ -2,7 +2,7 @@
 #include "Git_Object_ID.hpp"
 #include "Scoped_Deleter_Buf.hpp"
 #include "Git_Repo.hpp"
-#include "Git_C_Object.hpp"
+#include "Git_Object.hpp"
 Git_Reference::Git_Reference(git_reference*c_git_reference):Provider(c_git_reference,git_reference_free)
 {
 
@@ -142,13 +142,13 @@ shared_ptr_t<Git_Repo> Git_Reference::owner() const
 
 	return make_shared_ver<Git_Repo>(c_git_repository);
 }
-
-shared_ptr_t<Git_C_Object> Git_Reference::peel(git_otype type) const
+template<class T>
+shared_ptr_t<Git_Object<T>> Git_Reference::peel(git_otype type) const
 {
 	git_object* c_git_object_out;
 	check_for_error(git_reference_peel(&c_git_object_out, c_guts_, type));
 
-	return make_shared_ver<Git_C_Object>(c_git_object_out);
+	return make_shared_ver<Git_Object<T>>(c_git_object_out);
 }
 
 void Git_Reference::remove(const string_t &name) const

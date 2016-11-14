@@ -4,7 +4,7 @@
 #include "Git_Checkout_Options.hpp"
 class Git_Checkout : public Parent_Provider
 {
-	Git_Checkout_Options c_git_checkout_options_{ GIT_CHECKOUT_OPTIONS_INIT };
+	Git_Checkout_Options c_git_checkout_options_;
 public:
 	enum GIT_PP_CHECKOUT_OPTIONS_INIT{ DEFAULT = GIT_CHECKOUT_OPTIONS_VERSION};
 	void head()const;

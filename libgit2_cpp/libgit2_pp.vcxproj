@@ -188,7 +188,6 @@
     <ClInclude Include="Git_Config_Level.hpp" />
     <ClInclude Include="Git_Credentials.hpp" />
     <ClInclude Include="Git_CVar_Map.hpp" />
-    <ClInclude Include="Git_C_Object.hpp" />
     <ClInclude Include="Git_Delta.hpp" />
     <ClInclude Include="Git_Describe_Result.hpp" />
     <ClInclude Include="Git_Describe_Format_Options.hpp" />
@@ -260,7 +259,6 @@
     <ClCompile Include="Git_Config_Level.cpp" />
     <ClCompile Include="Git_Credentials.cpp" />
     <ClCompile Include="Git_CVar_Map.cpp" />
-    <ClCompile Include="Git_C_Object.cpp" />
     <ClCompile Include="Git_Delta.cpp" />
     <ClCompile Include="Git_Describe_Result.cpp" />
     <ClCompile Include="Git_Describe_Format_Options.cpp" />

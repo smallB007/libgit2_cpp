@@ -17,7 +17,6 @@ class Git_Config_Entry;
 class Git_Config_Level;
 class Git_Credentials;
 class Git_CVar_Map;
-class Git_C_Object;
 class Git_Describe_Format_Options;
 class Git_Describe_Options;
 class Git_Describe_Result;

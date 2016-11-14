@@ -263,9 +263,6 @@
     <ClInclude Include="Git_Annotated_Commit.hpp">
       <Filter>Header Files\Git</Filter>
     </ClInclude>
-    <ClInclude Include="Git_C_Object.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
     <ClInclude Include="Git_Merge_File_Input.hpp">
       <Filter>Header Files\Git</Filter>
     </ClInclude>
@@ -437,9 +434,6 @@
       <Filter>Source Files\Git</Filter>
     </ClCompile>
     <ClCompile Include="Git_Annotated_Commit.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_C_Object.cpp">
       <Filter>Source Files\Git</Filter>
     </ClCompile>
     <ClCompile Include="Git_Merge_File_Input.cpp">

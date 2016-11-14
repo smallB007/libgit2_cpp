@@ -26,7 +26,8 @@ public:
 		shared_ptr_t<Git_Object_ID> name_to_id(const string_t&)const;
 		string_t normalize_name(const string_t& name, int flags) const;
 		shared_ptr_t<Git_Repo> owner()const;
-		shared_ptr_t<Git_C_Object> peel(git_otype type) const;
+		template<class T>
+		shared_ptr_t<Git_Object<T>> peel(git_otype type) const;
 		void remove(const string_t&)const;
 		shared_ptr_t<Git_Reference> rename(const string_t& newName, int force, const string_t& logMessage) const;
 		shared_ptr_t<Git_Reference> resolve()const;

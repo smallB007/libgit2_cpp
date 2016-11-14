@@ -31,9 +31,9 @@ void Git_CherryPick_Options::set_mainline(unsigned int mainline)
 
 void Git_CherryPick_Options::set_merge_options(const Git_Merge_Options& merge_options)
 {
-	c_git_cherrypick_options_.merge_opts = merge_options.c_guts();
+	c_git_cherrypick_options_.merge_opts = *merge_options.c_guts();
 }
 void Git_CherryPick_Options::set_checkout_options(const Git_Checkout_Options& checkout_options)
 {
-	c_git_cherrypick_options_.checkout_opts = checkout_options.c_guts();
+	c_git_cherrypick_options_.checkout_opts = *checkout_options.c_guts();
 }
