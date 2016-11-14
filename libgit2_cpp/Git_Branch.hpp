@@ -6,7 +6,7 @@ class Git_Branch : public Provider<git_reference>
 {
 	//friend class Git_Repo;
 private:
-	NMS::set<shared_ptr_t<Git_Commit>> commits_;
+	set_t<shared_ptr_t<Git_Commit>> commits_;
 
 	git_repository* get_owner_()const;
 	

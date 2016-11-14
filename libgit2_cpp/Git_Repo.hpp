@@ -8,13 +8,13 @@ class Git_Repo : public Provider<git_repository>
 	BEFRIEND_SINGLETON(Git_Repo);
 	friend class Git_Root;
 private:
-	NMS::set<shared_ptr_t<Git_Branch>> branches_;
+	set_t<shared_ptr_t<Git_Branch>> branches_;
 	const string_t repo_name_;
 private:
 	shared_ptr_t<Git_Branch> find_branch_by_c_git_reference_(git_reference*const)const;
 	void create_initial_commit_();
 protected:
-	NMS::pair<bool, shared_ptr_t<Git_Branch>> find_branch(const branch_name_t& branch_name)const;
+	pair_t<bool, shared_ptr_t<Git_Branch>> find_branch(const branch_name_t& branch_name)const;
 public:
 	Git_Repo(const Git_Repo&)=delete;
 	Git_Repo& operator=(const Git_Repo&) = delete;

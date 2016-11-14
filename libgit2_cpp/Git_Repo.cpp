@@ -80,7 +80,7 @@ branch_name_t Git_Repo::get_current_branch()
 #pragma message("ToDo fix that");
 }
 
-NMS::pair<bool,shared_ptr_t<Git_Branch>> Git_Repo::find_branch(const branch_name_t& branch_name)const
+pair_t<bool,shared_ptr_t<Git_Branch>> Git_Repo::find_branch(const branch_name_t& branch_name)const
 {
 	for (auto aSharedPtr : branches_)
 	{

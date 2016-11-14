@@ -14,7 +14,7 @@ class Git_Root : public Singleton<Git_Root>
 	friend Git_Root* create_git();
 	friend void destroy_git();
 	NMS::array<shared_ptr_t<Git_Repo>,1> active_repo_;
-	NMS::set<shared_ptr_t<Git_Repo>> repositories_;
+	set_t<shared_ptr_t<Git_Repo>> repositories_;
 public:
 	shared_ptr_t<Git_Repo> get_active_repo()const;
 private:

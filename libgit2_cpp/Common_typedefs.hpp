@@ -12,6 +12,12 @@ template<class T>
 using vector_t = NMS::vector<T>;
 
 template<class T>
+using set_t = NMS::set<T>;
+
+template<class T,class Y>
+using pair_t = NMS::pair<T,Y>;
+
+template<class T>
 using shared_ptr_t = NMS::shared_ptr<T>;
 
 template<class T>
