@@ -170,6 +170,7 @@
     <ClInclude Include="ENUMS.hpp" />
     <ClInclude Include="Error_Handling.hpp" />
     <ClInclude Include="Forward_Declarations.hpp" />
+    <ClInclude Include="Git_Annotated_Commit.hpp" />
     <ClInclude Include="Git_Blame.hpp" />
     <ClInclude Include="Git_Blob.hpp" />
     <ClInclude Include="Git_Branch.hpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="Git_Config_Level.hpp" />
     <ClInclude Include="Git_Credentials.hpp" />
     <ClInclude Include="Git_CVar_Map.hpp" />
+    <ClInclude Include="Git_C_Object.hpp" />
     <ClInclude Include="Git_Delta.hpp" />
     <ClInclude Include="Git_Describe_Result.hpp" />
     <ClInclude Include="Git_Describe_Format_Options.hpp" />
@@ -205,6 +207,9 @@
     <ClInclude Include="Git_Filter_Source.hpp" />
     <ClInclude Include="Git_Index.hpp" />
     <ClInclude Include="Git_Index_Entry.hpp" />
+    <ClInclude Include="Git_Merge_File_Input.hpp" />
+    <ClInclude Include="Git_Merge_File_Options.hpp" />
+    <ClInclude Include="Git_Merge_File_Result.hpp" />
     <ClInclude Include="Git_Merge_Options.hpp" />
     <ClInclude Include="Git_Message.hpp" />
     <ClInclude Include="Git_Object.hpp" />
@@ -212,6 +217,7 @@
     <ClInclude Include="Git_Object_iface.hpp" />
     <ClInclude Include="Git_ODB.hpp" />
     <ClInclude Include="Git_RefDB.hpp" />
+    <ClInclude Include="Git_Reference.hpp" />
     <ClInclude Include="Git_Strarray.hpp" />
     <ClInclude Include="Git_Time.hpp" />
     <ClInclude Include="Git_Object_ID.hpp" />
@@ -223,6 +229,7 @@
     <ClInclude Include="Guts_Provider.hpp" />
     <ClInclude Include="Libgit2_includes.hpp" />
     <ClInclude Include="LIBGIT_PP_MACROS.hpp" />
+    <ClInclude Include="MergingEngine.hpp" />
     <ClInclude Include="Parent_Provider.hpp" />
     <ClInclude Include="Provider.hpp" />
     <ClInclude Include="Provider_iface_.hpp" />
@@ -235,6 +242,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Diff_File_Stats.cpp" />
+    <ClCompile Include="Git_Annotated_Commit.cpp" />
     <ClCompile Include="Git_Blame.cpp" />
     <ClCompile Include="Git_Blob.cpp" />
     <ClCompile Include="Git_Branch.cpp" />
@@ -252,6 +260,7 @@
     <ClCompile Include="Git_Config_Level.cpp" />
     <ClCompile Include="Git_Credentials.cpp" />
     <ClCompile Include="Git_CVar_Map.cpp" />
+    <ClCompile Include="Git_C_Object.cpp" />
     <ClCompile Include="Git_Delta.cpp" />
     <ClCompile Include="Git_Describe_Result.cpp" />
     <ClCompile Include="Git_Describe_Format_Options.cpp" />
@@ -270,10 +279,14 @@
     <ClCompile Include="Git_Filter_Source.cpp" />
     <ClCompile Include="Git_Index.cpp" />
     <ClCompile Include="Git_Index_Entry.cpp" />
+    <ClCompile Include="Git_Merge_File_Input.cpp" />
+    <ClCompile Include="Git_Merge_File_Options.cpp" />
+    <ClCompile Include="Git_Merge_File_Result.cpp" />
     <ClCompile Include="Git_Merge_Options.cpp" />
     <ClCompile Include="Git_Message.cpp" />
     <ClCompile Include="Git_ODB.cpp" />
     <ClCompile Include="Git_RefDB.cpp" />
+    <ClCompile Include="Git_Reference.cpp" />
     <ClCompile Include="Git_Strarray.cpp" />
     <ClCompile Include="Git_Time.cpp" />
     <ClCompile Include="Git_Object_ID.cpp" />
@@ -283,6 +296,7 @@
     <ClCompile Include="Git_Transaction.cpp" />
     <ClCompile Include="Git_Tree.cpp" />
     <ClCompile Include="libgit2_pp.cpp" />
+    <ClCompile Include="MergingEngine.cpp" />
     <ClCompile Include="Parent_Provider.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>

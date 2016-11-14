@@ -1,12 +1,10 @@
 #pragma once
 #include "stdafx.h"
-class Git_Checkout_Options
+class Git_Checkout_Options : public Guts_Provider<git_checkout_options,Memory_Management<NO>>
 {
-	git_checkout_options c_git_checkout_options_{ GIT_CHECKOUT_OPTIONS_INIT };
 public:
 #pragma message("ToDo  [Git_Checkout_Options] - implement setters and getters")
-	Git_Checkout_Options(unsigned ver = GIT_CHECKOUT_OPTIONS_INIT);
-	git_checkout_options c_guts() const { return c_git_checkout_options_; }
+	Git_Checkout_Options();
 	void set_default();
 };
 

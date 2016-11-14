@@ -10,3 +10,4 @@
 8[1]. check_for_error should be adapted so it can be applied in cases where ptr is returned
 9[1]. Make every non_ptr git_class wrapper to inherit from Guts_Provider i.e. class Git_Diff_Options : public Guts_Provider<git_diff_options,false>
 10[3] intrusive_ptr in place of shared?
+11[5] Make #include in alphabetical order

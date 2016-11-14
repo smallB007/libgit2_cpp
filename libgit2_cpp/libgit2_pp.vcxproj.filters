@@ -260,6 +260,27 @@
     <ClInclude Include="Git_Index_Entry.hpp">
       <Filter>Header Files\Git</Filter>
     </ClInclude>
+    <ClInclude Include="Git_Annotated_Commit.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_C_Object.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Merge_File_Input.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Merge_File_Options.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Merge_File_Result.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Reference.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="MergingEngine.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -413,6 +434,27 @@
       <Filter>Source Files\Git</Filter>
     </ClCompile>
     <ClCompile Include="Git_Index_Entry.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Annotated_Commit.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_C_Object.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Merge_File_Input.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Merge_File_Options.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Merge_File_Result.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Reference.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="MergingEngine.cpp">
       <Filter>Source Files\Git</Filter>
     </ClCompile>
   </ItemGroup>

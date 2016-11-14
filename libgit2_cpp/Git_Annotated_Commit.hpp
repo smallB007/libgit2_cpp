@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-class Git_Annotated_Commit : Provider<git_annotated_commit>
+class Git_Annotated_Commit : public Provider<git_annotated_commit>
 {
 public:
 	Git_Annotated_Commit(git_annotated_commit*);
