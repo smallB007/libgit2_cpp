@@ -6,7 +6,7 @@
 #include "Git_Time.hpp"
 #include "Git_Tree.hpp"
 #include "Git_Root.hpp"
- Git_Commit::Git_Commit(git_commit* c_git_commit, const NMS::vector<NMS::string>& files_to_commit, const NMS::string& msg):Provider(c_git_commit, git_commit_free)
+ Git_Commit::Git_Commit(git_commit* c_git_commit, const vector_t<NMS::string>& files_to_commit, const NMS::string& msg):Provider(c_git_commit, git_commit_free)
 {
 	git_repository* rep = c_parent_guts();
 	git_signature *sig;//must be freed
@@ -60,9 +60,9 @@
 Git_Commit::Git_Commit(git_commit* c_git_commit) : Provider(c_git_commit, git_commit_free)
 {/*Only for passing around*/}
 
-NMS::vector<git_commit*> Git_Commit::get_parents()const
+vector_t<shared_ptr_t<Git_Commit>> Git_Commit::get_parents()const
 {
-	NMS::vector<git_commit*> result;
+	vector_t<shared_ptr_t<Git_Commit>> result;
 
 	for (unsigned int i{ 0 }, count{ git_commit_parentcount(c_guts_) };
 																			i < count; 
@@ -70,7 +70,7 @@ NMS::vector<git_commit*> Git_Commit::get_parents()const
 	{
 		git_commit* parent;
 		check_for_error(git_commit_parent(&parent, c_guts_, i));
-		result.push_back(parent);
+		result.emplace_back(make_shared_ver<Git_Commit>(parent));
 	}
 	return result;
 }
@@ -78,29 +78,25 @@ NMS::vector<git_commit*> Git_Commit::get_parents()const
 shared_ptr_t<Git_Commit_Author> Git_Commit::author()const
 {
 	const git_signature* c_git_signature = git_commit_author(c_guts_);
-	auto git_commit_author = make_shared_ver<Git_Commit_Author>(c_git_signature);
-	return git_commit_author;
+	check_for_nullptr(c_git_signature);
+
+	return make_shared_ver<Git_Commit_Author>(c_git_signature);
 }
 
 NMS::string Git_Commit::body()const
 {
 	const char * c_commit_body = git_commit_body(c_guts_);
-	if (nullptr != c_commit_body)
-	{
-		return c_commit_body;
-	}
-	else
-	{
-		return "";
-	}
+	check_for_nullptr(c_commit_body);
+
+	return c_commit_body;
 }
 
 shared_ptr_t<Git_Signature> Git_Commit::commiter()const
 {
 	const git_signature* c_git_signature = git_commit_committer(c_guts_);
-	auto signature = make_shared_ver<Git_Signature>(c_git_signature);
+	check_for_nullptr(c_git_signature);
 
-	return signature;
+	return make_shared_ver<Git_Signature>(c_git_signature);
 }
 
 #ifdef _FULL_IMPLEMENTATION_
@@ -129,55 +125,31 @@ shared_ptr_t<Git_Signature> Git_Commit::signature()const
 shared_ptr_t<Git_Commit_ID> Git_Commit::id()const
 {
 	const git_oid * commit_id = git_commit_id(c_guts_);
-	return make_shared_ver<Git_Commit_ID>(const_cast<git_oid*>(commit_id));
+	return make_shared_ver<Git_Commit_ID>(commit_id);
 }
 
 NMS::string Git_Commit::message()const
 {
 	const char * c_git_commit_msg =	git_commit_message(c_guts_);
-	if (FAILED(c_git_commit_msg))
-	{
-		throw - 1;
-	}
-	else
-	{
-		return c_git_commit_msg;
-	}
+	check_for_nullptr(c_git_commit_msg);
+
+	return c_git_commit_msg;
 }
 
 shared_ptr_t<Git_Commit> Git_Commit::nth_gen_ancestor(const unsigned nth_generation)const
 {
 	git_commit* ancestor_out;
-	auto res = git_commit_nth_gen_ancestor(&ancestor_out, c_guts_, nth_generation);
-	if (FAILED(res))
-	{
-		throw - 1;
-	}
-	else
-	{
-		return make_shared_ver<Git_Commit>(ancestor_out);
-	}
+	check_for_error(git_commit_nth_gen_ancestor(&ancestor_out, c_guts_, nth_generation));
+
+	return make_shared_ver<Git_Commit>(ancestor_out);
 }
 
 shared_ptr_t<Git_Repo> Git_Commit::owner()const
 {
-	
 	git_repository* c_git_repo = git_commit_owner(c_guts_);
-	//Will this^^^ leak???
-	auto git_root = create_git();
-	auto repo = git_root->find_c_git_repository(c_git_repo);
-	return repo;
-		
-	/*In Git_Root find that repo and return it*/
-	//if (FAILED(c_git_repo))
-	//{
-	//	throw - 1;
-	//}
-	//else
-	//{
-	//
-	//	return make_shared_ver<Git_Repo>(c_git_repo);
-	//}
+	check_for_nullptr(c_git_repo);
+
+	return make_shared_ver<Git_Repo>(c_git_repo);
 }
 
 shared_ptr_t<Git_Commit> Git_Commit::parent(const unsigned parent_pos)const
@@ -188,28 +160,18 @@ shared_ptr_t<Git_Commit> Git_Commit::parent(const unsigned parent_pos)const
 		throw - 1;
 	}
 	git_commit* commit_out;
-	auto res = git_commit_parent(&commit_out, c_guts_, parent_pos);
-	if (FAILED(res))
-	{
-		throw - 1;
-	}
-	else
-	{
-		return make_shared_ver<Git_Commit>(commit_out);
-	}
+	check_for_error( git_commit_parent(&commit_out, c_guts_, parent_pos));
+
+	return make_shared_ver<Git_Commit>(commit_out);
 }
 
 shared_ptr_t<Git_Object_ID> Git_Commit::parent_id(const unsigned parent_pos)const
 {
 	const git_oid * c_git_oid = git_commit_parent_id(c_guts_, parent_pos);
-	if (FAILED(c_git_oid))
-	{
-		throw - 1;
-	}
-	else
-	{
-		return make_shared_ver<Git_Object_ID>(const_cast<git_oid *>(c_git_oid));
-	}
+	check_for_nullptr(c_git_oid);
+
+	return make_shared_ver<Git_Object_ID>(const_cast<git_oid *>(c_git_oid));
+	
 }
 
 unsigned Git_Commit::parent_count()const
@@ -220,27 +182,17 @@ unsigned Git_Commit::parent_count()const
 NMS::string Git_Commit::raw_header()const
 {
 	const char * raw_header = git_commit_raw_header(c_guts_);
-	if (FAILED(raw_header))
-	{
-		throw - 1;
-	}
-	else
-	{
-		return raw_header;
-	}
+	check_for_nullptr(raw_header);
+
+	return raw_header;
 }
 
 NMS::string Git_Commit::summary()const
 {
 	const char * c_commit_summary = git_commit_summary(c_guts_);
-	if (FAILED(c_commit_summary))
-	{
-		throw - 1;
-	}
-	else
-	{
-		return c_commit_summary;
-	}
+	check_for_nullptr(c_commit_summary);
+
+	return c_commit_summary;
 }
 
 shared_ptr_t<Git_Time> Git_Commit::time()const
@@ -248,6 +200,7 @@ shared_ptr_t<Git_Time> Git_Commit::time()const
 	git_time_t c_git_time_t = git_commit_time(c_guts_);
 	git_time c_git_time{ c_git_time_t };
 	c_git_time.offset = git_commit_time_offset(c_guts_);
+
 	return make_shared_ver<Git_Time>(c_git_time);
 }
 
@@ -259,26 +212,15 @@ int Git_Commit::time_offset()const
 shared_ptr_t<Git_Tree> Git_Commit::tree()const
 {
 	git_tree* c_tree_out;
-	auto res = git_commit_tree(&c_tree_out,c_guts_);
-	if (FAILED(res))
-	{
-		throw - 1;
-	}
-	else
-	{
-		return make_shared_ver<Git_Tree>(c_tree_out);
-	}
+	check_for_error(git_commit_tree(&c_tree_out,c_guts_));
+
+	return make_shared_ver<Git_Tree>(c_tree_out);
 }
 
 shared_ptr_t<Git_Object_ID> Git_Commit::tree_id()const
 {
 	const git_oid * c_git_oid = git_commit_tree_id(c_guts_);
-	if (FAILED(c_git_oid))
-	{
-		throw - 1;
-	}
-	else
-	{
-		return make_shared_ver<Git_Object_ID>(const_cast<git_oid*>(c_git_oid));
-	}
+	check_for_nullptr(c_git_oid);
+
+	return make_shared_ver<Git_Object_ID>(const_cast<git_oid*>(c_git_oid));
 }

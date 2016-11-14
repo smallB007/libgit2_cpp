@@ -87,7 +87,7 @@ git_otype Git_Object<T>::string_2_type(const string_t& str)const
 template<class T>
 git_otype Git_Object<T>::type()const
 {
-	return git_object_type(c_guts_);
+	return git_object_type((git_object*)c_guts_);
 }
 
 template<class T>

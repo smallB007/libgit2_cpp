@@ -9,7 +9,7 @@ class Git_Repo : public Provider<git_repository>
 	friend class Git_Root;
 private:
 	NMS::set<shared_ptr_t<Git_Branch>> branches_;
-	const NMS::string repo_name_;
+	const string_t repo_name_;
 private:
 	shared_ptr_t<Git_Branch> find_branch_by_c_git_reference_(git_reference*const)const;
 	void create_initial_commit_();
@@ -22,7 +22,7 @@ public:
 	Git_Repo(git_repository* c_git_repository,const repo_path_t& path_to_repo, const bool is_bare);
 	
 	bool is_my_path(const repo_path_t& path_to_some_repo)const;
-	void rename(const NMS::string& repo_name);
+	void rename(const string_t& repo_name);
 
 	const shared_ptr_t<Git_Commit> get_head_commit()const;
 	vector_t<file_name_t> get_files_to_commit();

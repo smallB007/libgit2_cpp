@@ -77,6 +77,7 @@ string_t Git_Repo::get_msg_to_commit()
 branch_name_t Git_Repo::get_current_branch()
 {
 	return branch_name_t();
+#pragma message("ToDo fix that");
 }
 
 NMS::pair<bool,shared_ptr_t<Git_Branch>> Git_Repo::find_branch(const branch_name_t& branch_name)const

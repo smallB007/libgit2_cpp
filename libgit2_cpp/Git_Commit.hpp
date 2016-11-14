@@ -17,26 +17,26 @@ public:
 	}*/
 
 	Git_Commit(git_commit*);/**Works simply as a stub to pass around*/
-	Git_Commit(git_commit*c_git_commit, const NMS::vector<NMS::string>& files_to_commit, const NMS::string& msg) ;
-	NMS::vector<git_commit*> get_parents()const;
+	Git_Commit(git_commit*c_git_commit, const vector_t<string_t>& files_to_commit, const string_t& msg) ;
+	vector_t<shared_ptr_t<Git_Commit>> get_parents()const;
 
 LIBGIT2_COMMIT_INTERFACE
 	shared_ptr_t<Git_Commit_Author> author()const;
-	NMS::string body()const;
+	string_t body()const;
 	shared_ptr_t<Git_Signature> commiter()const;
 	shared_ptr_t<Git_Commit_ID> id()const;
 
 		
 	shared_ptr_t<Git_Signature> signature()const;
 	
-	NMS::string message()const;
+	string_t message()const;
 	shared_ptr_t<Git_Commit> nth_gen_ancestor(const unsigned nth_generation)const;
 	shared_ptr_t<Git_Repo> owner()const;
 	shared_ptr_t<Git_Commit> parent(const unsigned parent_pos = 0)const;
 	shared_ptr_t<Git_Object_ID> parent_id(const unsigned parent_pos = 0)const;
 	unsigned parent_count()const;
-	NMS::string raw_header()const;
-	NMS::string summary()const;
+	string_t raw_header()const;
+	string_t summary()const;
 	shared_ptr_t<Git_Time> time()const;
 	int time_offset()const;
 	shared_ptr_t<Git_Tree> tree()const;
