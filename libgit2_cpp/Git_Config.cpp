@@ -36,7 +36,7 @@ void Git_Config::add_backend(const Git_Config_Backend& config_backend, const Git
 	}
 }
 
-void Git_Config::add_file_on_disk(const file_path_t& path, const Git_Config_Level& config_level, bool force)
+void Git_Config::add_file_on_disk(const path_name_t& path, const Git_Config_Level& config_level, bool force)
 {
 	int res = git_config_add_file_ondisk(c_guts_, path.c_str(), config_level, force);
 
@@ -58,7 +58,7 @@ void Git_Config::delete_entry(const string_t & name)
 }
 
 template<Git_Config::E_Path_Type e_path>
-file_path_t Git_Config::find_path_helper_() const
+path_name_t Git_Config::find_path_helper_() const
 {
 	typedef int(*git_config_find_t)(git_buf*);
 	git_config_find_t git_config_find{};
@@ -82,7 +82,7 @@ file_path_t Git_Config::find_path_helper_() const
 	Scoped_Deleter_Buf<git_buf> c_git_buf_out(file_path_length);
 	check_for_error(git_config_find(c_git_buf_out));
 
-	file_path_t file_path(c_git_buf_out.get_string());
+	path_name_t file_path(c_git_buf_out.get_string());
 	return file_path;
 }
 
@@ -90,17 +90,17 @@ file_path_t Git_Config::find_path_helper_() const
 
 
 
-file_path_t Git_Config::find_global_path() const
+path_name_t Git_Config::find_global_path() const
 {
 	return find_path_helper_<GLOBAL>();
 }
 
-file_path_t Git_Config::find_program_data_path() const
+path_name_t Git_Config::find_program_data_path() const
 {
 	return find_path_helper_<PROGRAM>();
 }
 
-file_path_t Git_Config::find_system_path() const
+path_name_t Git_Config::find_system_path() const
 {
 	return find_path_helper_<SYSTEM>();
 }
@@ -255,11 +255,11 @@ int Git_Config::get_mapped(const string_t & varName) const
 	return out;
 }
 
-file_path_t Git_Config::get_path(const string_t & varName) const
+path_name_t Git_Config::get_path(const string_t & varName) const
 {
 	//git_buf* c_git_buf_out;
 	//check_for_error( git_config_get_path(c_git_buf_out, c_guts_, varName.c_str()));
-	//return file_path_t();
+	//return path_name_t();
 
 	size_t file_path_length{ 256 };
 	Scoped_Deleter_Buf<git_buf> c_git_buf_out(file_path_length);
@@ -361,7 +361,7 @@ shared_ptr_t<Git_Config> Git_Config::open_level(const Git_Config_Level& configLe
 	return make_shared_ver<Git_Config>(c_git_config_out);
 }
 
-shared_ptr_t<Git_Config> Git_Config::open_on_disk(const file_path_t& configOnHDD) const
+shared_ptr_t<Git_Config> Git_Config::open_on_disk(const path_name_t& configOnHDD) const
 {
 	git_config* c_git_config_out;
 	check_for_error(git_config_open_ondisk(&c_git_config_out, configOnHDD.c_str()));
@@ -420,12 +420,15 @@ T Git_Config::parse_int(const string_t & int_val) const
 	return parse_int_helper_<T>::parse(int_val);
 }
 
-file_path_t Git_Config::parse_path(const string_t & path) const
+path_name_t Git_Config::parse_path(const string_t & path) const
 {
-	size_t file_path_length{ 256 };
-	Scoped_Deleter_Buf<git_buf> c_git_buf_out(file_path_length);
-	check_for_error( git_config_parse_path(const_cast<git_buf*>(c_git_buf_out.get_type()),path.c_str()));
-	return c_git_buf_out.get_string();
+	//size_t file_path_length{ 256 };
+	//Scoped_Deleter_Buf<git_buf> c_git_buf_out(file_path_length);
+	git_buf c_git_buf;
+	check_for_error( git_config_parse_path(&c_git_buf,path.c_str()));
+	path_name_t path_parsed(c_git_buf.ptr);
+	
+	return path_parsed;
 }
 
 void Git_Config::set(const string_t & varName, const bool val)

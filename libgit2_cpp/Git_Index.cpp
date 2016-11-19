@@ -21,7 +21,7 @@ void Git_Index::add(Git_Index_Entry & indexEntry)
 	check_for_error(git_index_add(c_guts_, indexEntry.c_guts()));
 }
 
-void Git_Index::add_bypath(const file_path_t & path)
+void Git_Index::add_bypath(const path_name_t & path)
 {
 	check_for_error(git_index_add_bypath(c_guts_, path.c_str()));
 }
@@ -57,7 +57,7 @@ void Git_Index::conflict_cleanup()
 	check_for_error(git_index_conflict_cleanup(c_guts_));
 }
 
-vector_t<shared_ptr_t<Git_Index_Entry>> Git_Index::conflict_get(const file_path_t& path) 
+vector_t<shared_ptr_t<Git_Index_Entry>> Git_Index::conflict_get(const path_name_t& path) 
 {
 	const git_index_entry* c_git_index_entry_ancestor_out{};
 	const git_index_entry* c_git_index_entry_our_out{};
@@ -73,7 +73,7 @@ vector_t<shared_ptr_t<Git_Index_Entry>> Git_Index::conflict_get(const file_path_
 	return vec_result;
 }
 
-void Git_Index::conflict_remove(const file_path_t& path)
+void Git_Index::conflict_remove(const path_name_t& path)
 {
 	check_for_error(git_index_conflict_remove(c_guts_, path.c_str()));
 }
@@ -93,7 +93,7 @@ size_t Git_Index::entry_count() const
 	return git_index_entrycount(c_guts_);
 }
 
-size_t Git_Index::find(const file_path_t & path) const
+size_t Git_Index::find(const path_name_t & path) const
 {
 	size_t inx;
 	check_for_error(git_index_find(&inx, c_guts_, path.c_str()));
@@ -116,7 +116,7 @@ shared_ptr_t<Git_Index_Entry> Git_Index::get_by_index(const size_t inx) const
 	return make_shared_ver<Git_Index_Entry>(*c_git_index_entry);
 }
 
-shared_ptr_t<Git_Index_Entry> Git_Index::get_by_path(const file_path_t & path, const int stage) const
+shared_ptr_t<Git_Index_Entry> Git_Index::get_by_path(const path_name_t & path, const int stage) const
 {
 	const git_index_entry * c_git_index_entry = git_index_get_bypath(c_guts_, path.c_str(), stage);
 
@@ -169,7 +169,7 @@ void Git_Index::remove_by_path(const string_t & path) const
 	check_for_error(git_index_remove_bypath(c_guts_, path.c_str()));
 }
 
-void Git_Index::remove_directory(const file_path_t & dir, const int stage) const
+void Git_Index::remove_directory(const path_name_t & dir, const int stage) const
 {
 	check_for_error(git_index_remove_directory(c_guts_, dir.c_str(), stage));
 }

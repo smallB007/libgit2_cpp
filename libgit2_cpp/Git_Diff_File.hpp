@@ -7,7 +7,7 @@ public:
 	~Git_Diff_File()=default;
 	LIBGIT2_DIFF_FILE_INTERFACE
 	Git_Object_ID     id()const;
-	file_path_t		  path()const;
+	path_name_t		  path()const;
 	git_off_t		  size()const;
 	uint32_t		  flags()const;
 	uint16_t		  mode()const;

@@ -8,8 +8,8 @@ public:
 	Git_Blob(git_blob*);
 LIBGIT2_BLOB_INTERFACE
 	shared_ptr_t<Git_Object_ID> create_from_buffer(const NMS::vector<char>& buffer);
-	shared_ptr_t<Git_Object_ID> create_from_disk(const file_path_t&);
-	shared_ptr_t<Git_Object_ID> create_from_workdir(const file_path_t&);
+	shared_ptr_t<Git_Object_ID> create_from_disk(const path_name_t&);
+	shared_ptr_t<Git_Object_ID> create_from_workdir(const path_name_t&);
 	shared_ptr_t<Git_Repo> owner()const;
 	shared_ptr_t<Git_Object_ID> id()const;
 	bool is_binary()const;

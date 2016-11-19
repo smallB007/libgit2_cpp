@@ -15,7 +15,7 @@ shared_ptr_t<Git_Object_ID> Git_Blob::create_from_buffer(const NMS::vector<char>
 	return make_shared_ver<Git_Object_ID>(c_git_oid_out);
 }
 
-shared_ptr_t<Git_Object_ID> Git_Blob::create_from_disk(const file_path_t& file_path)
+shared_ptr_t<Git_Object_ID> Git_Blob::create_from_disk(const path_name_t& file_path)
 {
 	git_oid* c_git_oid_out{};
 	check_for_error(git_blob_create_fromdisk(c_git_oid_out, c_parent_guts(), file_path.c_str()));
@@ -23,7 +23,7 @@ shared_ptr_t<Git_Object_ID> Git_Blob::create_from_disk(const file_path_t& file_p
 	return make_shared_ver<Git_Object_ID>(c_git_oid_out);
 }
 
-shared_ptr_t<Git_Object_ID> Git_Blob::create_from_workdir(const file_path_t& relative_file_path)
+shared_ptr_t<Git_Object_ID> Git_Blob::create_from_workdir(const path_name_t& relative_file_path)
 {
 	git_oid* c_git_oid_out{};
 	check_for_error(git_blob_create_fromworkdir(c_git_oid_out, c_parent_guts(), relative_file_path.c_str()));
@@ -49,7 +49,7 @@ shared_ptr_t<Git_Object_ID> Git_Blob::id()const
 {
 
 	const git_oid* c_git_oid = git_blob_id(c_guts_);
-	return make_shared_ver<Git_Object_ID>(const_cast<git_oid*>(c_git_oid));
+	return make_shared_ver<Git_Object_ID>(/*const_cast<git_oid*>*/(c_git_oid));
 
 }
 

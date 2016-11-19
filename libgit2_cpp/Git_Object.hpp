@@ -2,7 +2,7 @@
 #include "Git_Object_iface.hpp"
 
 template<class T>
-inline Git_Object<T>::Git_Object(T * c_git_object, c_git_deleter_t<T> c_git_class_deleter):Guts_Provider(c_git_object,NMS::move(c_git_class_deleter))
+inline Git_Object<T>::Git_Object(const T * c_git_object, c_git_deleter_t<T> c_git_class_deleter):Guts_Provider(const_cast<T*>(c_git_object),NMS::move(c_git_class_deleter))
 {
 	/*c_guts_ = c_git_object ;*/
 }
@@ -33,7 +33,7 @@ shared_ptr_t<Git_Object<T>> Git_Object<T>::lookup(const Git_Object_ID& id,git_ot
 	return make_shared_ver<Git_Object<T>>(c_git_object_out);
 }
 template<class T>
-shared_ptr_t<Git_Object<T>> Git_Object<T>::lookup_by_path(const Git_Object& treeish, const file_path_t& path, git_otype type)const
+shared_ptr_t<Git_Object<T>> Git_Object<T>::lookup_by_path(const Git_Object& treeish, const path_name_t& path, git_otype type)const
 {
 	git_object* c_git_object_out;
 	check_for_error(git_object_lookup_bypath(&c_git_object_out, treeish.c_guts(), path.c_str(), type));

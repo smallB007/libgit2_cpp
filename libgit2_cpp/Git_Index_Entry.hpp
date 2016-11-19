@@ -17,6 +17,6 @@ public:
 	git_oid 	id()const;
 	uint16_t 	flags()const;
 	uint16_t 	flags_extended()const;
-	file_path_t 	path()const;
+	path_name_t 	path()const;
 };
 

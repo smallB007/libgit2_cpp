@@ -26,11 +26,11 @@ public:
 	c_git_class* c_guts() const { return c_guts_; }
 	operator c_git_class*() const { return c_guts_; }
 	
-	Guts_Provider(c_git_deleter_t<c_git_class> c_git_class_deleter):
-																c_git_class_deleter_(NMS::move(c_git_class_deleter))
-	{
-#pragma message("Todo remove this ctor in favour of the bottom one")
-	}
+	//Guts_Provider(c_git_deleter_t<c_git_class> c_git_class_deleter):
+	//															c_git_class_deleter_(NMS::move(c_git_class_deleter))
+	//{
+//#pragma message("Todo remove this ctor in favour of the bottom one")
+	//}
 	Guts_Provider(c_git_class* c_ptr, c_git_deleter_t<c_git_class> c_git_class_deleter) :c_guts_{c_ptr},
 																							c_git_class_deleter_(NMS::move(c_git_class_deleter))
 	{
@@ -39,7 +39,7 @@ public:
 	{
 		if (c_git_class_deleter_)
 		{
-			c_git_class_deleter_(const_cast<c_git_class*>(c_guts_));
+			c_git_class_deleter_(/*const_cast<c_git_class*>*/(c_guts_));
 			c_guts_ = nullptr;
 		}
 	}

@@ -2,7 +2,7 @@
 
 
 
-Git_Object_ID::Git_Object_ID(const git_oid* c_git_oid): Provider(const_cast<git_oid*>(c_git_oid),nullptr)
+Git_Object_ID::Git_Object_ID(const git_oid* c_git_oid): Provider(/*const_cast<git_oid*>*/(c_git_oid),nullptr)
 {
 #pragma message("Warning nullptr as a deleter")
 }

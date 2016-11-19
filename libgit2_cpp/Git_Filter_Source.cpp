@@ -14,7 +14,7 @@ shared_ptr_t<Git_Repo> Git_Filter_Source::repo() const
 	return make_shared_ver<Git_Repo>(c_git_repo);
 }
 
-file_path_t Git_Filter_Source::path() const
+path_name_t Git_Filter_Source::path() const
 {
 	return git_filter_source_path(c_guts_);
 }

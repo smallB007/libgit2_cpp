@@ -11,7 +11,7 @@ Git_Object_ID     Git_Diff_File::id()const
 {
 	return const_cast<git_oid*>(&c_guts_.id);
 }
-file_path_t		  Git_Diff_File::path()const
+path_name_t		  Git_Diff_File::path()const
 {
 	return c_guts_.path;
 }

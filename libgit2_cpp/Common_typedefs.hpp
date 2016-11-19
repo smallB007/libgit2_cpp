@@ -3,7 +3,7 @@
 typedef NMS::string repo_path_t;
 typedef NMS::string branch_name_t;
 typedef NMS::string namespace_name_t;
-typedef NMS::string file_path_t;
+typedef NMS::string path_name_t;
 typedef NMS::string file_name_t;
 typedef NMS::string filter_name_t;
 typedef NMS::string string_t;

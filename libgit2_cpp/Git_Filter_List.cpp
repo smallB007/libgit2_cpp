@@ -27,7 +27,7 @@ shared_ptr_t<Git_Buf> Git_Filter_List::apply_to_data(const Git_Buf & gitBuf) con
 	return make_shared_ver<Git_Buf>(c_git_buf_out);
 }
 
-shared_ptr_t<Git_Buf> Git_Filter_List::apply_to_file(const file_path_t& path) const
+shared_ptr_t<Git_Buf> Git_Filter_List::apply_to_file(const path_name_t& path) const
 {
 	git_buf c_git_buf_out;
 
@@ -45,7 +45,7 @@ size_t Git_Filter_List::length() const
 {
 	return git_filter_list_length(c_guts_);
 }
-shared_ptr_t<Git_Filter_List> Git_Filter_List::load(const Git_Blob& blob, const file_path_t& relative_path, git_filter_mode_t filterMode, uint32_t flags) const
+shared_ptr_t<Git_Filter_List> Git_Filter_List::load(const Git_Blob& blob, const path_name_t& relative_path, git_filter_mode_t filterMode, uint32_t flags) const
 {
 #pragma message("Warning Native libgit2 enum used")
 	git_filter_list* c_git_filter_list_out;
@@ -87,7 +87,7 @@ git_filter_mode_t Git_Filter_List::filter_source_mode(const Git_Filter_Source & 
 	return fileSrc.mode();
 }
 
-file_path_t Git_Filter_List::filter_source_path(const Git_Filter_Source & fileSrc) const
+path_name_t Git_Filter_List::filter_source_path(const Git_Filter_Source & fileSrc) const
 {
 	return fileSrc.path();
 }

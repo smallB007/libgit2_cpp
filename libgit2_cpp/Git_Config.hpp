@@ -20,7 +20,7 @@ private:
 	Git_Config_Backend git_config_backend_;
 	enum E_Path_Type {GLOBAL,PROGRAM,SYSTEM,XDG};
 	template<E_Path_Type e>
-	file_path_t find_path_helper_()const;
+	path_name_t find_path_helper_()const;
 	template<class T>
 	class parse_int_helper_;
 public:
@@ -28,17 +28,17 @@ public:
 	//Git_Config();
 LIBGIT2_CONFIG_INTERFACE
 	void add_backend(const Git_Config_Backend& config_backend, const Git_Config_Level& config_level, bool force = false);
-	void add_file_on_disk(const file_path_t& path, const Git_Config_Level& config_level = GIT_CONFIG_HIGHEST_LEVEL, bool force = false);
+	void add_file_on_disk(const path_name_t& path, const Git_Config_Level& config_level = GIT_CONFIG_HIGHEST_LEVEL, bool force = false);
 	void delete_entry(const string_t& name);
-	file_path_t find_global_path()const;
-	file_path_t find_program_data_path()const;
-	file_path_t find_system_path()const;
+	path_name_t find_global_path()const;
+	path_name_t find_program_data_path()const;
+	path_name_t find_system_path()const;
 	bool get_bool(const string_t&);
 	shared_ptr_t<Git_Config_Entry> get_entry(const string_t& varName);
 	int32_t get_int32(const string_t& varName);
 	int64_t get_int64(const string_t& varName);
 	int get_mapped(const string_t & varName)const;
-	file_path_t get_path(const string_t & varName)const;
+	path_name_t get_path(const string_t & varName)const;
 	string_t get_string(const string_t& varName)const;
 	string_t get_string_buf(const string_t& varName)const;
 	void init_backend();
@@ -48,13 +48,13 @@ LIBGIT2_CONFIG_INTERFACE
 	shared_ptr_t<Git_Config> open_default()const;
 	shared_ptr_t<Git_Config> open_global()const;
 	shared_ptr_t<Git_Config> open_level(const Git_Config_Level& configLevel)const;
-	shared_ptr_t<Git_Config> open_on_disk(const file_path_t&)const;
+	shared_ptr_t<Git_Config> open_on_disk(const path_name_t&)const;
 	bool parse_bool(const string_t& bool_val)const;
 	
 	template<class T>
 	T parse_int(const string_t&)const;
 
-	file_path_t parse_path(const string_t&)const;
+	path_name_t parse_path(const string_t&)const;
 
 	void set(const string_t& varName, const bool val);
 	void set(const string_t& varName, const int32_t val);

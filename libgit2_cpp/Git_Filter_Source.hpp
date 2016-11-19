@@ -13,7 +13,7 @@ public:
 	/**
 	* Get the path that the source data is coming from.
 	*/
-	file_path_t path()const;
+	path_name_t path()const;
 
 	/**
 	* Get the file mode of the source file

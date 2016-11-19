@@ -278,12 +278,15 @@
     <ClInclude Include="MergingEngine.hpp">
       <Filter>Header Files\Git</Filter>
     </ClInclude>
+    <ClInclude Include="Git_Tree_Entry.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Tree_Update.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libgit2_pp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Parent_Provider.cpp">
@@ -450,6 +453,15 @@
     </ClCompile>
     <ClCompile Include="MergingEngine.cpp">
       <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Tree_Entry.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Tree_Update.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="libgit2_cpp.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

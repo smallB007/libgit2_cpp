@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -225,6 +225,8 @@
     <ClInclude Include="Git_Signature.hpp" />
     <ClInclude Include="Git_Transaction.hpp" />
     <ClInclude Include="Git_Tree.hpp" />
+    <ClInclude Include="Git_Tree_Entry.hpp" />
+    <ClInclude Include="Git_Tree_Update.hpp" />
     <ClInclude Include="Guts_Provider.hpp" />
     <ClInclude Include="Libgit2_includes.hpp" />
     <ClInclude Include="LIBGIT_PP_MACROS.hpp" />
@@ -293,7 +295,9 @@
     <ClCompile Include="Git_Signature.cpp" />
     <ClCompile Include="Git_Transaction.cpp" />
     <ClCompile Include="Git_Tree.cpp" />
-    <ClCompile Include="libgit2_pp.cpp" />
+    <ClCompile Include="Git_Tree_Entry.cpp" />
+    <ClCompile Include="Git_Tree_Update.cpp" />
+    <ClCompile Include="libgit2_cpp.cpp" />
     <ClCompile Include="MergingEngine.cpp" />
     <ClCompile Include="Parent_Provider.cpp" />
     <ClCompile Include="stdafx.cpp" />
