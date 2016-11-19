@@ -82,7 +82,7 @@ void Git_Branch::move_(const branch_name_t& new_branch_name, bool force)
 void Git_Branch::rename(const branch_name_t& new_branch_name)
 {
 	move_(new_branch_name,true);
-#pragma message("ToDo with the force argument - next iteration");
+#pragma message("ToDo with the force argument - next iteration")
 }
 
 void Git_Branch::move(const branch_name_t& new_branch_name)

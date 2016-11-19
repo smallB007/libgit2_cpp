@@ -11,7 +11,7 @@ shared_ptr_t<Git_Describe_Result> Git_Describe_Result::describe_commit(const sha
 {
 	git_describe_result* c_git_describe_result_out;
 	check_for_error(git_describe_commit(&c_git_describe_result_out, reinterpret_cast<git_object*>(commit->c_guts()), describe_options.c_guts()));
-#pragma message("Idea: perhaps there is a possibility to have c_guts(Git_Object) instead of Git_Object->c_guts()");
+#pragma message("Idea: perhaps there is a possibility to have c_guts(Git_Object) instead of Git_Object->c_guts()")
 	return make_shared_ver<Git_Describe_Result>(c_git_describe_result_out);
 }
 

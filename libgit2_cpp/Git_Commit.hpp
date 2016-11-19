@@ -20,10 +20,12 @@ public:
 	Git_Commit(git_commit*c_git_commit, const vector_t<string_t>& files_to_commit, const string_t& msg) ;
 	vector_t<shared_ptr_t<Git_Commit>> get_parents()const;
 
-LIBGIT2_COMMIT_INTERFACE
+	LIBGIT2_COMMIT_INTERFACE
+		void amend(const string_t& updateRef, const string_t& messageEncoding, const string_t& message, const Git_Tree& tree);
 	shared_ptr_t<Git_Commit_Author> author()const;
 	string_t body()const;
 	shared_ptr_t<Git_Signature> commiter()const;
+	
 	shared_ptr_t<Git_Commit_ID> id()const;
 
 		
@@ -43,7 +45,6 @@ LIBGIT2_COMMIT_INTERFACE
 	shared_ptr_t<Git_Object_ID> tree_id()const;
 
 #ifdef _FULL_IMPLEMENTATION_
-	void amend();
 	git_commit_create_buffer
 		git_commit_create_from_callback
 		git_commit_create_v

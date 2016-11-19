@@ -65,19 +65,19 @@ const shared_ptr_t<Git_Commit> Git_Repo::get_head_commit()const
 vector_t<file_name_t> Git_Repo::get_files_to_commit()
 {
 	return vector_t<file_name_t>();
-#pragma message("ToDo fix that");
+#pragma message("ToDo fix that")
 }
 
 string_t Git_Repo::get_msg_to_commit()
 {
 	return string_t();
-#pragma message("ToDo fix that");
+#pragma message("ToDo fix that")
 }
 
 branch_name_t Git_Repo::get_current_branch()
 {
 	return branch_name_t();
-#pragma message("ToDo fix that");
+#pragma message("ToDo fix that")
 }
 
 pair_t<bool,shared_ptr_t<Git_Branch>> Git_Repo::find_branch(const branch_name_t& branch_name)const

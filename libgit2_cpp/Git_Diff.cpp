@@ -170,7 +170,7 @@ shared_ptr_t<Git_Buf> Git_Diff::stats_to_buf(git_diff_stats_format_t statsFormat
 
 check_for_error(git_diff_stats_to_buf(&c_git_buf_out, stats->c_guts(), statsFormat, width));
 	return make_shared_ver<Git_Buf>(std::move(c_git_buf_out));
-#pragma messate("Error this is highly doubious")
+#pragma message("Error this is highly doubious")
 }
 
 char Git_Diff::status_char(git_delta_t status) const

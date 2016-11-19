@@ -45,7 +45,7 @@
 	}
 
 	git_tree* git_tree_out;
-#pragma message("ToDo put git_tree_out and sig into scoped deleter");
+#pragma message("ToDo put git_tree_out and sig into scoped deleter")
 	check_for_error(git_tree_lookup(&git_tree_out, rep, git_oid_tree));
 
 	//	Normally creating a commit would involve looking up the current HEAD commit and making that be the parent of the initial commit, but here this is the first commit so there will be no parent.
@@ -73,6 +73,16 @@ vector_t<shared_ptr_t<Git_Commit>> Git_Commit::get_parents()const
 		result.emplace_back(make_shared_ver<Git_Commit>(parent));
 	}
 	return result;
+}
+
+void Git_Commit::amend(const string_t& updateRef,const string_t& messageEncoding,const string_t& message,const Git_Tree& tree)
+{
+	const git_oid* id = git_commit_id(c_guts_);
+
+	const git_signature* c_git_signature_author = git_commit_author(c_guts_);
+	const git_signature* c_git_signature_commiter = git_commit_committer(c_guts_);
+
+	check_for_error(git_commit_amend(const_cast<git_oid *>(id), c_guts_, updateRef.c_str(), c_git_signature_author, c_git_signature_commiter, messageEncoding.c_str(), message.c_str(), tree.c_guts()));
 }
 
 shared_ptr_t<Git_Commit_Author> Git_Commit::author()const
@@ -125,6 +135,7 @@ shared_ptr_t<Git_Signature> Git_Commit::signature()const
 shared_ptr_t<Git_Commit_ID> Git_Commit::id()const
 {
 	const git_oid * commit_id = git_commit_id(c_guts_);
+	check_for_nullptr(commit_id);
 	return make_shared_ver<Git_Commit_ID>(commit_id);
 }
 

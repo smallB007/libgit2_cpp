@@ -61,7 +61,6 @@ LIBGIT2_REPO_INTERFACE
 LIBGIT2_COMMIT_INTERFACE
 	const shared_ptr_t<Git_Commit> commit_lookup(const Git_Commit_ID&)const;
 
-
 LIBGIT2_BRANCH_INTERFACE
 	shared_ptr_t<Git_Branch> create_branch(const branch_name_t& branch_name);
 	void delete_branch(const branch_name_t& branch_name);
