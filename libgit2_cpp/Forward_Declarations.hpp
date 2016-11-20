@@ -50,6 +50,7 @@ class Git_Time;
 class Git_Transaction;
 class Git_Tree;
 class Git_Tree_Entry;
+class Git_TreeBuilder;
 
 template<class T>
 class Singleton;

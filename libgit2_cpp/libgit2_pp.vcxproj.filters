@@ -275,14 +275,17 @@
     <ClInclude Include="Git_Reference.hpp">
       <Filter>Header Files\Git</Filter>
     </ClInclude>
-    <ClInclude Include="MergingEngine.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
     <ClInclude Include="Git_Tree_Entry.hpp">
       <Filter>Header Files\Git</Filter>
     </ClInclude>
     <ClInclude Include="Git_Tree_Update.hpp">
       <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="MergingEngine.hpp">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_TreeBuilder.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -451,9 +454,6 @@
     <ClCompile Include="Git_Reference.cpp">
       <Filter>Source Files\Git</Filter>
     </ClCompile>
-    <ClCompile Include="MergingEngine.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
     <ClCompile Include="Git_Tree_Entry.cpp">
       <Filter>Source Files\Git</Filter>
     </ClCompile>
@@ -461,6 +461,12 @@
       <Filter>Source Files\Git</Filter>
     </ClCompile>
     <ClCompile Include="libgit2_cpp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MergingEngine.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_TreeBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
