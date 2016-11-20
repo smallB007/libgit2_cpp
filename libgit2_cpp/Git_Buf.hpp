@@ -10,6 +10,7 @@ public:
 	size_t size()const;
 	size_t capacity()const;
 	git_buf* head()const;
+	string_t get_string()const;
 LIBGIT2_BUF_INTERFACE
 	bool contains_null()const;
 	void grow(const NMS::size_t target_size);

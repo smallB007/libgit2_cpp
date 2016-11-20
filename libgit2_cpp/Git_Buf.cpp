@@ -27,6 +27,12 @@ git_buf* Git_Buf::head() const
 	return c_guts_;
 }
 
+string_t Git_Buf::get_string() const
+{
+	return string_t(c_guts_->ptr, c_guts_->ptr + c_guts_->size);
+#pragma message("Warning check for oned")
+}
+
 bool Git_Buf::contains_null()const
 {
 	return git_buf_contains_nul(c_guts_);
