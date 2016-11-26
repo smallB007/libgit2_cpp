@@ -22,7 +22,7 @@
     <ProjectGuid>{2F5D9C75-6250-49D7-B3FA-76D15EF34CD2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>libgit2_cpp</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
     <ProjectName>libgit2_cpp</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -80,6 +80,10 @@
     <LibraryPath>$(LIBGIT2_LIBx64);$(BOOST_LIBx64);$(EA_STL_LIBx64);$(LibraryPath)</LibraryPath>
     <IncludePath>$(BOOST);$(EA_STL_INCLUDE);$(EA_STL_BASE);$(LIBGIT2);$(IncludePath)</IncludePath>
     <SourcePath>$(LIBGIT2_SRC);$(SourcePath)</SourcePath>
+    <EnableCppCoreCheck>true</EnableCppCoreCheck>
+    <EnableExperimentalCppCoreCheck>true</EnableExperimentalCppCoreCheck>
+    <CodeAnalysisRuleSet>C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -102,8 +106,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;USE_STD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -111,7 +114,15 @@
       <DisableSpecificWarnings>4800; </DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <CompileAs>Default</CompileAs>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <DiagnosticsFormat>Caret</DiagnosticsFormat>
+      <SDLCheck>false</SDLCheck>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <CallingConvention>FastCall</CallingConvention>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -165,6 +176,7 @@
     <ClInclude Include="Check_Result.hpp" />
     <ClInclude Include="Common_defines.hpp" />
     <ClInclude Include="Common_typedefs.hpp" />
+    <ClInclude Include="Converters.hpp" />
     <ClInclude Include="Copied_From_libgit2.hpp" />
     <ClInclude Include="Diff_File_Stats.hpp" />
     <ClInclude Include="ENUMS.hpp" />
@@ -215,8 +227,11 @@
     <ClInclude Include="Factory_Git_Object.hpp" />
     <ClInclude Include="Git_Object_iface.hpp" />
     <ClInclude Include="Git_ODB.hpp" />
+    <ClInclude Include="Git_Push_Options.hpp" />
     <ClInclude Include="Git_RefDB.hpp" />
     <ClInclude Include="Git_Reference.hpp" />
+    <ClInclude Include="Git_Refspec.hpp" />
+    <ClInclude Include="Git_Remote.hpp" />
     <ClInclude Include="Git_Strarray.hpp" />
     <ClInclude Include="Git_Time.hpp" />
     <ClInclude Include="Git_Object_ID.hpp" />
@@ -224,6 +239,7 @@
     <ClInclude Include="Git_Root.hpp" />
     <ClInclude Include="Git_Signature.hpp" />
     <ClInclude Include="Git_Transaction.hpp" />
+    <ClInclude Include="Git_Transport.hpp" />
     <ClInclude Include="Git_Tree.hpp" />
     <ClInclude Include="Git_TreeBuilder.hpp" />
     <ClInclude Include="Git_Tree_Entry.hpp" />
@@ -231,7 +247,7 @@
     <ClInclude Include="Guts_Provider.hpp" />
     <ClInclude Include="Libgit2_includes.hpp" />
     <ClInclude Include="LIBGIT_PP_MACROS.hpp" />
-    <ClInclude Include="MergingEngine.hpp" />
+    <ClInclude Include="Merging_Engine.hpp" />
     <ClInclude Include="Parent_Provider.hpp" />
     <ClInclude Include="Provider.hpp" />
     <ClInclude Include="Provider_iface_.hpp" />
@@ -286,8 +302,11 @@
     <ClCompile Include="Git_Merge_Options.cpp" />
     <ClCompile Include="Git_Message.cpp" />
     <ClCompile Include="Git_ODB.cpp" />
+    <ClCompile Include="Git_Push_Options.cpp" />
     <ClCompile Include="Git_RefDB.cpp" />
     <ClCompile Include="Git_Reference.cpp" />
+    <ClCompile Include="Git_Refspec.cpp" />
+    <ClCompile Include="Git_Remote.cpp" />
     <ClCompile Include="Git_Strarray.cpp" />
     <ClCompile Include="Git_Time.cpp" />
     <ClCompile Include="Git_Object_ID.cpp" />
@@ -295,12 +314,13 @@
     <ClCompile Include="Git_Root.cpp" />
     <ClCompile Include="Git_Signature.cpp" />
     <ClCompile Include="Git_Transaction.cpp" />
+    <ClCompile Include="Git_Transport.cpp" />
     <ClCompile Include="Git_Tree.cpp" />
     <ClCompile Include="Git_TreeBuilder.cpp" />
     <ClCompile Include="Git_Tree_Entry.cpp" />
     <ClCompile Include="Git_Tree_Update.cpp" />
     <ClCompile Include="libgit2_cpp.cpp" />
-    <ClCompile Include="MergingEngine.cpp" />
+    <ClCompile Include="Merging_Engine.cpp" />
     <ClCompile Include="Parent_Provider.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>

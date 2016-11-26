@@ -1,6 +1,9 @@
 #include "Git_Remote.hpp"
 #include "Git_Refspec.hpp"
-
+#include "Converters.hpp"
+#include "Git_Repo.hpp"
+#include "Git_Strarray.hpp"
+#include "Git_Push_Options.hpp"
 
 Git_Remote::Git_Remote(const string_t& name, const string_t& url):Provider(c_guts_,git_remote_free)
 {
@@ -84,4 +87,73 @@ Git_Refspec Git_Remote::get_refspec(size_t inx)
 	check_for_nullptr(c_git_refspec);
 
 	return Git_Refspec(c_git_refspec);
+}
+
+bool Git_Remote::is_valid_name(const std::string_view & name) const
+{
+#pragma message("Idea use string_view wherever pos Artie ;)")
+	return git_remote_is_valid_name(name.data());
+}
+ 
+template<class Result>
+Result Git_Remote::list() const
+{
+	git_strarray *c_git_strarray_out{};
+	check_for_error(git_remote_list(c_git_strarray_out, c_parent_guts()));
+	auto result = git_strarray_to<Result>(c_git_strarray_out);
+	
+	return result;
+}
+
+Git_Remote Git_Remote::lookup(const std::string_view & name) const
+{
+	git_remote* c_git_remote_out{};
+	check_for_error(git_remote_lookup(&c_git_remote_out, c_parent_guts(), name.data()));
+
+	return Git_Remote(c_git_remote_out);
+}
+
+string_t Git_Remote::name() const
+{
+	return git_remote_name(c_guts_);
+}
+
+shared_ptr_t<Git_Repo> Git_Remote::owner() const
+{
+	git_repository * c_git_repository = git_remote_owner(c_guts_);
+	check_for_nullptr(c_git_repository);
+
+	return make_shared_ver<Git_Repo>(c_git_repository);
+}
+
+int Git_Remote::prune_refs() const
+{
+	return git_remote_prune_refs(c_guts_);
+}
+
+void Git_Remote::push(const Git_Strarray& refspecs, const Git_Push_Options& opts) const
+{
+	check_for_error(git_remote_push(c_guts_, refspecs.c_guts(), opts.c_guts()));
+}
+
+string_t Git_Remote::push_url() const
+{
+	string_t url = git_remote_pushurl(c_guts_);
+	return url;
+}
+
+void Git_Remote::set_url(const std::string_view& url) const
+{
+	check_for_error(git_remote_set_url(c_parent_guts(), git_remote_name(c_guts_), url.data()));
+}
+
+void Git_Remote::stop() const
+{
+	git_remote_stop(c_guts_);
+}
+
+string_t Git_Remote::url() const
+{
+	string_t url = git_remote_url(c_guts_);
+	return url;
 }

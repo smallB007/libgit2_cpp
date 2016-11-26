@@ -2,7 +2,7 @@
 #include "stdafx.h"
 class Parent_Provider 
 {
-	friend class MergingEngine;
+	friend class Merging_Engine;
 	static shared_ptr_t<Git_Repo> parent_;
 public:
 	shared_ptr_t<Git_Repo> get_parent()const;

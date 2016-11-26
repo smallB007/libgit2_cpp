@@ -40,7 +40,7 @@ void Git_TreeBuilder::remove(const file_name_t &filename) const
 
 Git_Object_ID Git_TreeBuilder::write() const
 {
-	git_oid* id;
+	git_oid* id{};
 	check_for_error(git_treebuilder_write(id, c_guts_));
 
 	return Git_Object_ID(id);

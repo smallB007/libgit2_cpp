@@ -185,7 +185,7 @@ void Git_Index::write() const
 
 shared_ptr_t<Git_Object_ID> Git_Index::write_tree() const
 {
-	git_oid * c_git_out;
+	git_oid * c_git_out{};
 	check_for_error(git_index_write_tree(c_git_out,c_guts_));
 	
 	return make_shared_ver<Git_Object_ID>(c_git_out);
@@ -193,7 +193,7 @@ shared_ptr_t<Git_Object_ID> Git_Index::write_tree() const
 
 shared_ptr_t<Git_Object_ID> Git_Index::write_tree_to(Git_Repo & repoOut) const
 {
-	git_oid * c_git_out;
+	git_oid * c_git_out{};
 	check_for_error(git_index_write_tree_to(c_git_out, c_guts_, repoOut.c_guts()));
 
 	return make_shared_ver<Git_Object_ID>(c_git_out);

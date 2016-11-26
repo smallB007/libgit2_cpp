@@ -39,6 +39,7 @@ class Git_Merge_Options;
 class Git_Message;
 class Git_Object_ID;
 class Git_ODB;
+class Git_Push_Options;
 class Git_RefDB;
 class Git_Reference;
 class Git_Refspec;

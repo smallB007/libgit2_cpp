@@ -281,11 +281,26 @@
     <ClInclude Include="Git_Tree_Update.hpp">
       <Filter>Header Files\Git</Filter>
     </ClInclude>
-    <ClInclude Include="MergingEngine.hpp">
+    <ClInclude Include="Converters.hpp">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="Git_Push_Options.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Refspec.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Remote.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Transport.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
     <ClInclude Include="Git_TreeBuilder.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="Merging_Engine.hpp">
+      <Filter>Header Files\Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -463,11 +478,23 @@
     <ClCompile Include="libgit2_cpp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MergingEngine.cpp">
-      <Filter>Source Files\Tools</Filter>
-    </ClCompile>
     <ClCompile Include="Git_TreeBuilder.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Push_Options.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Refspec.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Remote.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Transport.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Merging_Engine.cpp">
+      <Filter>Source Files\Tools</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
