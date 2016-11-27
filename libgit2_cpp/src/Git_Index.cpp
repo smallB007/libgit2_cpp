@@ -141,8 +141,8 @@ shared_ptr_t<Git_Repo> Git_Index::owner() const
 {
 	git_repository * c_git_repository = git_index_owner(c_guts_);
 	
-	return make_shared_ver<Git_Repo>(c_git_repository);
-
+//	return make_shared_ver<Git_Repo>(c_git_repository);
+	return Factory_Git_Object<Git_Repo>::create(c_git_repository);
 }
 
 string_t Git_Index::path() const

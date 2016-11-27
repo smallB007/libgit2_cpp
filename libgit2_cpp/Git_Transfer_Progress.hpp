@@ -1,6 +1,6 @@
 #pragma once
 #include "precompiled.hpp"
-class Git_Transfer_Progress : Guts_Provider<git_transfer_progress,Memory_Management<NO>>
+class Git_Transfer_Progress : public Guts_Provider<git_transfer_progress,Memory_Management<NO>>
 {
 public:
 	Git_Transfer_Progress();

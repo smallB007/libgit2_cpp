@@ -1,10 +1,11 @@
 #pragma once
 #include "precompiled.hpp"
-
+#include <memory>
 class LIBGIT2_CPP_API Git_Repo : public Provider<git_repository>
 {
 	friend class Git_Root;
-private:
+	
+	private:
 	set_t<shared_ptr_t<Git_Branch>> branches_;
 private:
 	shared_ptr_t<Git_Branch> find_branch_by_c_git_reference_(git_reference*const)const;
@@ -12,16 +13,16 @@ private:
 protected:
 	pair_t<bool, shared_ptr_t<Git_Branch>> find_branch(const branch_name_t& branch_name)const;
 public:
-	Git_Repo(git_repository*);
-	Git_Repo(const repo_path_t& path_to_repo, const bool is_bare);
-	Git_Repo(const Git_Repo&)=delete;
-	Git_Repo& operator=(const Git_Repo&) = delete;
 #ifdef _DEBUG
 	~Git_Repo()
 	{
 		std::cout << "~Git_Repo\n";
 	}
 #endif
+	Git_Repo(git_repository*);
+	Git_Repo(const repo_path_t& path_to_repo, const bool is_bare);
+	Git_Repo(const Git_Repo&)=delete;
+	Git_Repo& operator=(const Git_Repo&) = delete;
 	bool is_my_path(const repo_path_t& path_to_some_repo)const;
 	//void rename(const string_t& repo_name);
 

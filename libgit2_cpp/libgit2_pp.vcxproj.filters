@@ -311,6 +311,9 @@
     <ClInclude Include="Git_Transfer_Progress.hpp">
       <Filter>Header Files\Git</Filter>
     </ClInclude>
+    <ClInclude Include="Git_Indexer.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Diff_File_Stats.cpp">
@@ -503,6 +506,9 @@
       <Filter>Source Files\pch</Filter>
     </ClCompile>
     <ClCompile Include="Git_Transfer_Progress.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Indexer.cpp">
       <Filter>Source Files\Git</Filter>
     </ClCompile>
   </ItemGroup>

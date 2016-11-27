@@ -176,6 +176,7 @@
     <Text Include="Wrapped_Functionality.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Git_Indexer.hpp" />
     <ClInclude Include="Git_Transfer_Progress.hpp" />
     <ClInclude Include="include\git2\Check_Result.hpp" />
     <ClInclude Include="include\git2\Common_defines.hpp" />
@@ -263,6 +264,7 @@
     <ClInclude Include="include\git2_cpp.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Git_Indexer.cpp" />
     <ClCompile Include="Git_Transfer_Progress.cpp" />
     <ClCompile Include="src\Diff_File_Stats.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>

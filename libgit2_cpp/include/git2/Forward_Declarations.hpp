@@ -37,6 +37,7 @@ class Git_Filter_List;
 class Git_Filter_Source;
 class Git_Index;
 class Git_Index_Entry;
+class Git_Indexer;
 class Git_Merge_File_Input;
 class Git_Merge_File_Options;
 class Git_Merge_File_Result;

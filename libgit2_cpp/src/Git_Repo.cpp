@@ -199,8 +199,9 @@ LIBGIT2_CLONE_INTERFACE shared_ptr_t<Git_Repo> Git_Repo::clone(const repo_path_t
 {
 	git_repository* c_git_repo_out{};
 	check_for_error( git_clone(&c_git_repo_out,remote_repo_path.c_str(), local_target_dir.c_str(), clone_options.c_guts()));
-	shared_ptr_t<Git_Repo> repo_dud = make_shared_ver<Git_Repo>(c_git_repo_out);
+	shared_ptr_t<Git_Repo> repo_dud = Factory_Git_Object<Git_Repo>::create(c_git_repo_out);
 #pragma message("ToDo make sure that this works as intended, that is the clone of the repo is correct one and doesn't need to be created/written on hdd etc")
+#pragma message("ToDo it would be nice from the safety perspective that only factory could create object")
 	return repo_dud;
 }
 
