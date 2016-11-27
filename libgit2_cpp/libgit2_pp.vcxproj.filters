@@ -28,6 +28,12 @@
     <Filter Include="Source Files\Git">
       <UniqueIdentifier>{0326c8f6-954b-4242-baee-4569493fd97a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\pch">
+      <UniqueIdentifier>{3a5e6cfd-d42c-4ae2-b362-8826438385e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\pch">
+      <UniqueIdentifier>{2cc4a58e-e5c8-40a4-9f8f-ab0ff6a5b38d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Building_libgit2_pp.txt">
@@ -56,445 +62,450 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Forward_Declarations.hpp">
+    <ClInclude Include="include\git2\Git_Annotated_Commit.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Blame.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Blob.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Branch.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Buf.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Checkout.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Checkout_Options.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_CherryPick_Options.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Clone_Options.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Commit.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Commit_Author.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Commit_ID.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Config.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Config_Backend.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Config_Entry.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Config_Level.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Credentials.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_CVar_Map.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Delta.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Describe_Format_Options.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Describe_Options.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Describe_Result.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Diff.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Diff_Delta.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Diff_File.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Diff_Find_Options.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Diff_Options.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Diff_Perfdata.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Diff_Similarity_Metric.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Diff_Stats.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Fetch_Options.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Filter.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Filter_List.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_filter_Source.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Index.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Index_Entry.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Merge_File_Input.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Merge_File_Options.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Merge_File_Result.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Merge_Options.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Message.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Object.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Object_ID.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Object_iface.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_ODB.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Push_Options.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_RefDB.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Reference.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Refspec.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Remote.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Repo.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Root.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Signature.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Strarray.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Time.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Transaction.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Transport.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Tree.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Tree_Entry.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_Tree_Update.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Git_TreeBuilder.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Guts_Provider.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Libgit2_includes.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Merging_Engine.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Parent_Provider.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Provider.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Provider_iface_.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Remove_Const_From_Ptr.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Scoped_Deleter_Buf.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Singleton.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\STD_Variants.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Check_Result.hpp">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Check_Result.hpp">
+    <ClInclude Include="include\git2\Common_defines.hpp">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Common_defines.hpp">
+    <ClInclude Include="include\git2\Common_typedefs.hpp">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Common_typedefs.hpp">
+    <ClInclude Include="include\git2\Converters.hpp">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Copied_From_libgit2.hpp">
+    <ClInclude Include="include\git2\Copied_From_libgit2.hpp">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="ENUMS.hpp">
+    <ClInclude Include="include\git2\Diff_File_Stats.hpp">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Error_Handling.hpp">
+    <ClInclude Include="include\git2\ENUMS.hpp">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Scoped_Deleter_Buf.hpp">
+    <ClInclude Include="include\git2\Error_Handling.hpp">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Factory_Git_Object.hpp">
+    <ClInclude Include="include\git2\Factory_Git_Object.hpp">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="LIBGIT_PP_MACROS.hpp">
+    <ClInclude Include="include\git2\Forward_Declarations.hpp">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Libgit2_includes.hpp">
-      <Filter>Header Files\Tools</Filter>
+    <ClInclude Include="include\git2_cpp.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Parent_Provider.hpp">
-      <Filter>Header Files\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Provider.hpp">
-      <Filter>Header Files\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Provider_iface_.hpp">
-      <Filter>Header Files\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Remove_Const_From_Ptr.hpp">
-      <Filter>Header Files\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Singleton.hpp">
-      <Filter>Header Files\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="STD_Variants.hpp">
-      <Filter>Header Files\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Guts_Provider.hpp">
-      <Filter>Header Files\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Blame.hpp">
+    <ClInclude Include="include\git2\LIBGIT_CPP_MACROS.hpp">
       <Filter>Header Files\Git</Filter>
     </ClInclude>
-    <ClInclude Include="Git_Blob.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Branch.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Buf.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Checkout.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Checkout_Options.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_CherryPick_Options.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Clone_Options.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Commit.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Commit_Author.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Commit_ID.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Config.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Config_Backend.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Config_Entry.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Config_Level.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Credentials.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_CVar_Map.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Describe_Format_Options.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Describe_Options.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Describe_Result.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Diff.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Index.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Merge_Options.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Message.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Object.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Object_ID.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Object_iface.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_ODB.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_RefDB.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Repo.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Root.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Signature.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Time.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Transaction.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Tree.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Diff_Options.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Diff_Find_Options.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Diff_Similarity_Metric.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Diff_Stats.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Diff_File_Stats.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Diff_Delta.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Diff_File.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Diff_Perfdata.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Delta.hpp">
-      <Filter>Header Files\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Fetch_Options.hpp">
-      <Filter>Header Files\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Strarray.hpp">
-      <Filter>Header Files\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Filter.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Filter_List.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Filter_Source.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Index_Entry.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Annotated_Commit.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Merge_File_Input.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Merge_File_Options.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Merge_File_Result.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Reference.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Tree_Entry.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Tree_Update.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Converters.hpp">
-      <Filter>Header Files\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Push_Options.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Refspec.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Remote.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_Transport.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Git_TreeBuilder.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="Merging_Engine.hpp">
-      <Filter>Header Files\Tools</Filter>
+    <ClInclude Include="include\git2\precompiled.hpp">
+      <Filter>Header Files\pch</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Diff_File_Stats.cpp">
+      <Filter>Source Files\Git</Filter>
     </ClCompile>
-    <ClCompile Include="Parent_Provider.cpp">
+    <ClCompile Include="src\Git_Annotated_Commit.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Blame.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Blob.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Branch.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Buf.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Checkout.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Checkout_Options.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_CherryPick_Options.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Clone_Options.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Commit.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Commit_Author.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Commit_ID.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Config.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Config_Backend.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Config_Entry.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Config_Level.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Credentials.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_CVar_Map.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Delta.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Describe_Format_Options.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Describe_Options.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Describe_Result.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Diff.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Diff_Delta.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Diff_File.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Diff_Find_Options.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Diff_Options.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Diff_Perfdata.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Diff_Similarity_Metric.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Diff_Stats.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Fetch_Options.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Filter.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Filter_List.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_filter_Source.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Index.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Index_Entry.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Merge_File_Input.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Merge_File_Options.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Merge_File_Result.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Merge_Options.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Message.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Object_ID.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_ODB.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Push_Options.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_RefDB.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Reference.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Refspec.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Remote.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Repo.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Root.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Signature.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Strarray.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Time.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Transaction.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Transport.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Tree.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Tree_Entry.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_Tree_Update.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Git_TreeBuilder.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libgit2_cpp.cpp" />
+    <ClCompile Include="src\Merging_Engine.cpp">
       <Filter>Source Files\Tools</Filter>
     </ClCompile>
-    <ClCompile Include="Git_Blame.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Blob.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Branch.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Buf.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Checkout.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Checkout_Options.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_CherryPick_Options.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Clone_Options.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Commit.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Commit_Author.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Commit_ID.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Config.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Config_Backend.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Config_Entry.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Config_Level.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Credentials.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_CVar_Map.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Describe_Format_Options.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Describe_Options.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Describe_Result.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Diff.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Index.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Merge_Options.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Message.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Object_ID.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_ODB.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_RefDB.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Repo.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Root.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Signature.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Time.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Transaction.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Tree.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Diff_Options.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Diff_Find_Options.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Diff_Similarity_Metric.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Diff_Stats.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Diff_File_Stats.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Diff_Delta.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Diff_File.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Diff_Perfdata.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Delta.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Fetch_Options.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Strarray.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Filter.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Filter_List.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Filter_Source.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Index_Entry.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Annotated_Commit.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Merge_File_Input.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Merge_File_Options.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Merge_File_Result.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Reference.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Tree_Entry.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Tree_Update.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="libgit2_cpp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_TreeBuilder.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Push_Options.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Refspec.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Remote.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Git_Transport.cpp">
-      <Filter>Source Files\Git</Filter>
-    </ClCompile>
-    <ClCompile Include="Merging_Engine.cpp">
+    <ClCompile Include="src\Parent_Provider.cpp">
       <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stdafx.cpp" />
+    <ClCompile Include="src\precompiled.cpp">
+      <Filter>Source Files\pch</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
