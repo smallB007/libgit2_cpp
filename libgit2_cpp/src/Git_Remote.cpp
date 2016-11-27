@@ -123,7 +123,7 @@ shared_ptr_t<Git_Repo> Git_Remote::owner() const
 	git_repository * c_git_repository = git_remote_owner(c_guts_);
 	check_for_nullptr(c_git_repository);
 
-	return make_shared_ver<Git_Repo>(c_git_repository);
+	return Factory_Git_Object<Git_Repo>::create(c_git_repository);
 }
 
 int Git_Remote::prune_refs() const

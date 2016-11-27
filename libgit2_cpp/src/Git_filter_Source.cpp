@@ -11,7 +11,7 @@ Git_Filter_Source::Git_Filter_Source(git_filter_source* c_git_filter_source):Pro
 shared_ptr_t<Git_Repo> Git_Filter_Source::repo() const
 {
 	git_repository * c_git_repo = git_filter_source_repo(c_guts_);
-	return make_shared_ver<Git_Repo>(c_git_repo);
+	return Factory_Git_Object<Git_Repo>::create(c_git_repo);
 }
 
 path_name_t Git_Filter_Source::path() const

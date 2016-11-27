@@ -1,29 +1,20 @@
 #pragma once
 #include "precompiled.hpp"
-//#include "Provider.hpp"
 
-
-
-class Git_Commit : public Provider<git_commit>
+class LIBGIT2_CPP_API Git_Commit : public Provider<git_commit>
 {
+	DECLARE_CREATION_AND_DESTRUCTION_PRIVILEGES
 private:
-	
-public:
-	
-	/*template<class git_class, class... Args>
-	static void creator(git_class a,Args... args)
-	{
-		Git_Commit ab(a,args...);
-	}*/
-
 	Git_Commit(git_commit*);/**Works simply as a stub to pass around*/
-	Git_Commit(/*git_commit*c_git_commit,*/ const vector_t<string_t>& files_to_commit, const string_t& msg) ;
+	Git_Commit(const vector_t<string_t>& files_to_commit, const string_t& msg) ;
 #ifdef _DEBUG
 	~Git_Commit()
 	{
-		std::cout << "~Git_Commit\n";
+		std::cout << "~Git_Commit\n"; 
 	}
 #endif
+	
+public:
 	vector_t<shared_ptr_t<Git_Commit>> get_parents()const;
 
 	LIBGIT2_COMMIT_INTERFACE

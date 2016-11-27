@@ -29,7 +29,7 @@ void Git_Repo::create_initial_commit_()
 	git_reference* git_branch_ref_out;
 	check_for_error(git_repository_head(&git_branch_ref_out, c_guts_));
 
-	shared_ptr_t<Git_Branch> master_branch = make_shared_ver<Git_Branch>(git_branch_ref_out);
+	shared_ptr_t<Git_Branch> master_branch = Factory_Git_Object<Git_Branch>::create(git_branch_ref_out);
 	branches_.insert(master_branch);
 }
 
@@ -41,7 +41,7 @@ const shared_ptr_t<Git_Commit> Git_Repo::get_head_commit()const
 	git_commit* git_commit_out{ nullptr };
 	check_for_error(git_commit_lookup(&git_commit_out, c_guts_, &git_oid_out));
 
-	return make_shared_ver<Git_Commit>(git_commit_out);
+	return Factory_Git_Object<Git_Commit>::create(git_commit_out);
 }
 
 vector_t<file_name_t> Git_Repo::get_files_to_commit()
@@ -134,7 +134,7 @@ const shared_ptr_t<Git_Commit> Git_Repo::commit_lookup(const Git_Commit_ID& comm
 	}
 	else
 	{
-		return make_shared_ver<Git_Commit>(commit_out);
+		return Factory_Git_Object<Git_Commit>::create(commit_out);
 	}
 }
 

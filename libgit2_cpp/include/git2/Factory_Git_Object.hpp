@@ -7,6 +7,12 @@ public:
 	template<class... Args>
 	static shared_ptr_t<Git_Class> create(Args... args)
 	{
-		return make_shared_ver<Git_Class>(args...);
+		typedef typename Git_Class::Git_Deleter deleter;
+		auto ptr = new Git_Class(args...);
+		shared_ptr_t<Git_Class> shared;
+		shared.reset(ptr,deleter());
+
+		return shared;
+		//return make_shared_ver<Git_Class>(args...);
 	}
 };

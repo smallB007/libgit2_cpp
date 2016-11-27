@@ -4,13 +4,8 @@
 
 class LIBGIT2_CPP_API Git_Branch : public Provider<git_reference>
 {
+	DECLARE_CREATION_AND_DESTRUCTION_PRIVILEGES
 private:
-	set_t<shared_ptr_t<Git_Commit>> commits_;
-
-	git_repository* get_owner_()const;
-	
-	void move_(const branch_name_t& new_branch_name, bool force = true);
-public:
 	Git_Branch(git_reference*);
 	Git_Branch(const branch_name_t& branch_name, bool force = false);
 #ifdef _DEBUG
@@ -19,6 +14,13 @@ public:
 		std::cout << "~Git_Branch\n";
 	}
 #endif
+
+	set_t<shared_ptr_t<Git_Commit>> commits_;
+
+	git_repository* get_owner_()const;
+	
+	void move_(const branch_name_t& new_branch_name, bool force = true);
+public:
 	shared_ptr_t<Git_Commit> create_commit();
 
 LIBGIT2_BRANCH_INTERFACE
