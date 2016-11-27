@@ -12,10 +12,10 @@ private:
 protected:
 	pair_t<bool, shared_ptr_t<Git_Branch>> find_branch(const branch_name_t& branch_name)const;
 public:
-	Git_Repo(const Git_Repo&)=delete;
-	Git_Repo& operator=(const Git_Repo&) = delete;
 	Git_Repo(git_repository*);
 	Git_Repo(const repo_path_t& path_to_repo, const bool is_bare);
+	Git_Repo(const Git_Repo&)=delete;
+	Git_Repo& operator=(const Git_Repo&) = delete;
 #ifdef _DEBUG
 	~Git_Repo()
 	{

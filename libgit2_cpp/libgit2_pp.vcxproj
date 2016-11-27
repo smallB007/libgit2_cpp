@@ -176,6 +176,7 @@
     <Text Include="Wrapped_Functionality.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Git_Transfer_Progress.hpp" />
     <ClInclude Include="include\git2\Check_Result.hpp" />
     <ClInclude Include="include\git2\Common_defines.hpp" />
     <ClInclude Include="include\git2\Common_typedefs.hpp" />
@@ -260,14 +261,9 @@
     <ClInclude Include="include\git2\Singleton.hpp" />
     <ClInclude Include="include\git2\STD_Variants.hpp" />
     <ClInclude Include="include\git2_cpp.hpp" />
-    <ClInclude Include="stdafx.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Git_Transfer_Progress.cpp" />
     <ClCompile Include="src\Diff_File_Stats.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -330,15 +326,9 @@
     <ClCompile Include="src\Git_TreeBuilder.cpp" />
     <ClCompile Include="src\Git_Tree_Entry.cpp" />
     <ClCompile Include="src\Git_Tree_Update.cpp" />
-    <ClCompile Include="src\libgit2_cpp.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="src\Merging_Engine.cpp" />
     <ClCompile Include="src\Parent_Provider.cpp" />
     <ClCompile Include="src\precompiled.cpp" />
-    <ClCompile Include="src\stdafx.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

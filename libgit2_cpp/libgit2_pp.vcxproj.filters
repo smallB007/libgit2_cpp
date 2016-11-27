@@ -56,12 +56,6 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\git2\Git_Annotated_Commit.hpp">
       <Filter>Header Files\Git</Filter>
     </ClInclude>
@@ -245,36 +239,6 @@
     <ClInclude Include="include\git2\Git_TreeBuilder.hpp">
       <Filter>Header Files\Git</Filter>
     </ClInclude>
-    <ClInclude Include="include\git2\Guts_Provider.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="include\git2\Libgit2_includes.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="include\git2\Merging_Engine.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="include\git2\Parent_Provider.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="include\git2\Provider.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="include\git2\Provider_iface_.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="include\git2\Remove_Const_From_Ptr.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="include\git2\Scoped_Deleter_Buf.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="include\git2\Singleton.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
-    <ClInclude Include="include\git2\STD_Variants.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
     <ClInclude Include="include\git2\Check_Result.hpp">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
@@ -308,11 +272,44 @@
     <ClInclude Include="include\git2_cpp.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\git2\LIBGIT_CPP_MACROS.hpp">
-      <Filter>Header Files\Git</Filter>
-    </ClInclude>
     <ClInclude Include="include\git2\precompiled.hpp">
       <Filter>Header Files\pch</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\LIBGIT_CPP_MACROS.hpp">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Guts_Provider.hpp">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Libgit2_includes.hpp">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Merging_Engine.hpp">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Parent_Provider.hpp">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Provider.hpp">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Provider_iface_.hpp">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Remove_Const_From_Ptr.hpp">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Scoped_Deleter_Buf.hpp">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\Singleton.hpp">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2\STD_Variants.hpp">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Git_Transfer_Progress.hpp">
+      <Filter>Header Files\Git</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -496,16 +493,17 @@
     <ClCompile Include="src\Git_TreeBuilder.cpp">
       <Filter>Source Files\Git</Filter>
     </ClCompile>
-    <ClCompile Include="src\libgit2_cpp.cpp" />
     <ClCompile Include="src\Merging_Engine.cpp">
       <Filter>Source Files\Tools</Filter>
     </ClCompile>
     <ClCompile Include="src\Parent_Provider.cpp">
       <Filter>Source Files\Tools</Filter>
     </ClCompile>
-    <ClCompile Include="src\stdafx.cpp" />
     <ClCompile Include="src\precompiled.cpp">
       <Filter>Source Files\pch</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Transfer_Progress.cpp">
+      <Filter>Source Files\Git</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
