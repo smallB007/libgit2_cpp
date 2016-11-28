@@ -314,6 +314,9 @@
     <ClInclude Include="Git_Indexer.hpp">
       <Filter>Header Files\Git</Filter>
     </ClInclude>
+    <ClInclude Include="Git_Attr.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Diff_File_Stats.cpp">
@@ -510,6 +513,9 @@
     </ClCompile>
     <ClCompile Include="Git_Indexer.cpp">
       <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Attr.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
