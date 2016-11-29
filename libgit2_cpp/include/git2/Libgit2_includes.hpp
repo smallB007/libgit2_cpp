@@ -5,4 +5,6 @@
 #include <git2\sys\diff.h>
 #include <git2\sys\filter.h>
 #include <git2\sys\refs.h>
+#include <git2\sys\hashsig.h>
+
 

@@ -22,15 +22,15 @@ Git_Root::~Git_Root()
 
 shared_ptr_t<Git_Repo> Git_Root::create_repository(const repo_path_t& path_to_repo, const bool is_bare)
 {
+#pragma message("Idea make all string_t string_view_t")
 	/**As a side note and something to put into your KB Artie, 'smart' ptrs should be returned by value so the proper counter incrementation
 	can take place*/
 	/**Find out if such repo already exists*/
-	for (const auto aSharedPtr : repositories_)
+	auto iter = NMS::find_if(NMS::begin(repositories_), NMS::end(repositories_),
+																				[&path_to_repo](shared_ptr_t<Git_Repo> const& i) { return i->path() == path_to_repo; });
+	if (iter != NMS::end(repositories_))
 	{
-		if (aSharedPtr->is_my_path(path_to_repo))
-		{
-			return aSharedPtr;
-		}
+		return *iter;
 	}
 	
 	/**no repo found, create it then*/

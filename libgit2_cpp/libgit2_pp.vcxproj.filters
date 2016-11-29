@@ -317,6 +317,9 @@
     <ClInclude Include="Git_Attr.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Git_Hashsig.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Diff_File_Stats.cpp">
@@ -515,6 +518,9 @@
       <Filter>Source Files\Git</Filter>
     </ClCompile>
     <ClCompile Include="Git_Attr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Hashsig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

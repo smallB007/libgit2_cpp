@@ -4,6 +4,7 @@
 //#include "git2\Git_Blame.hpp"
 //#include "git2\Git_Blob.hpp"
 #include "git2\Git_Branch.hpp"
+#include "git2\Git_Commit.hpp"
 //#include "git2\Git_Buf.hpp"
 //#include "git2\Git_Checkout.hpp"
 //#include "git2\Git_Checkout_Options.hpp"

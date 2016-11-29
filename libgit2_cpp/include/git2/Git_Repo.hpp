@@ -7,7 +7,6 @@ class LIBGIT2_CPP_API Git_Repo : public Provider<git_repository>
 private:
 	set_t<shared_ptr_t<Git_Branch>> branches_;
 	shared_ptr_t<Git_Branch> find_branch_by_c_git_reference_(git_reference*const)const;
-	void create_initial_commit_();
 	Git_Repo(git_repository*);
 	Git_Repo(const repo_path_t& path_to_repo, const bool is_bare);
 	Git_Repo(const Git_Repo&)=delete;
@@ -19,6 +18,7 @@ private:
 	}
 #endif
 public:
+	void create_initial_commit_();
 	pair_t<bool, shared_ptr_t<Git_Branch>> find_branch(const branch_name_t& branch_name)const;
 	bool is_my_path(const repo_path_t& path_to_some_repo)const;
 	//void rename(const string_t& repo_name);
