@@ -320,6 +320,9 @@
     <ClInclude Include="include\git2_cpp.hpp">
       <Filter>Source Files\Git</Filter>
     </ClInclude>
+    <ClInclude Include="Git_Ignore.hpp">
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Diff_File_Stats.cpp">
@@ -521,6 +524,9 @@
       <Filter>Source Files\Git</Filter>
     </ClCompile>
     <ClCompile Include="Git_Hashsig.cpp">
+      <Filter>Source Files\Git</Filter>
+    </ClCompile>
+    <ClCompile Include="Git_Ignore.cpp">
       <Filter>Source Files\Git</Filter>
     </ClCompile>
   </ItemGroup>

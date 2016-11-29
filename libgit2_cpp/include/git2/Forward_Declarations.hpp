@@ -35,6 +35,7 @@ class Git_Fetch_Options;
 class Git_Filter;
 class Git_Filter_List;
 class Git_Filter_Source;
+class Git_Ignore;
 class Git_Index;
 class Git_Index_Entry;
 class Git_Indexer;
