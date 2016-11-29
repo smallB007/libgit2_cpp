@@ -3,7 +3,7 @@
 #include "Git_Object_ID.hpp"
 #include "Git_ODB.hpp"
 
-Git_Indexer::Git_Indexer(const path_name_t& path, unsigned int mode, Git_ODB& odb, git_transfer_progress_cb progress_cb, void *progress_cb_payload):Provider(c_guts_,git_indexer_free)
+Git_Indexer::Git_Indexer(const string_t& path, unsigned int mode, Git_ODB& odb, git_transfer_progress_cb progress_cb, void *progress_cb_payload):Provider(c_guts_,git_indexer_free)
 {
 	check_for_error(git_indexer_new(&c_guts_, path.c_str(), mode, odb.c_guts(), progress_cb, progress_cb_payload));
 }

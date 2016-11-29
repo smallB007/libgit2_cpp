@@ -35,7 +35,7 @@ inline Git_Object<T>::Git_Object(const T * c_git_object, c_git_deleter_t<T> c_gi
 //}
 #ifdef fixed_git_object
 template<class T>
-shared_ptr_t<Git_Object<T>> Git_Object<T>::lookup_by_path(const Git_Object& treeish, const path_name_t& path, git_otype type)const
+shared_ptr_t<Git_Object<T>> Git_Object<T>::lookup_by_path(const Git_Object& treeish, const string_t& path, git_otype type)const
 {
 	git_object* c_git_object_out;
 	check_for_error(git_object_lookup_bypath(&c_git_object_out, (git_object*)treeish.c_guts(), path.c_str(), type));

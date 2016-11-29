@@ -140,7 +140,7 @@ shared_ptr_t<Git_Repo> Git_Reference::owner() const
 {
 	git_repository * c_git_repository = git_reference_owner(c_guts_);
 
-	return Factory_Git_Object<Git_Repo>::create(c_git_repository);
+	return Factory_Git_Object<Git_Repo>::create_ptr(c_git_repository);
 }
 template<class T>
 shared_ptr_t<Git_Object<T>> Git_Reference::peel(git_otype type) const

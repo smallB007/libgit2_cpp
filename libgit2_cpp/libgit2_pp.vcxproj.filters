@@ -269,9 +269,6 @@
     <ClInclude Include="include\git2\Forward_Declarations.hpp">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="include\git2_cpp.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\git2\precompiled.hpp">
       <Filter>Header Files\pch</Filter>
     </ClInclude>
@@ -315,10 +312,13 @@
       <Filter>Header Files\Git</Filter>
     </ClInclude>
     <ClInclude Include="Git_Attr.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Git</Filter>
     </ClInclude>
     <ClInclude Include="Git_Hashsig.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Git</Filter>
+    </ClInclude>
+    <ClInclude Include="include\git2_cpp.hpp">
+      <Filter>Source Files\Git</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -518,10 +518,10 @@
       <Filter>Source Files\Git</Filter>
     </ClCompile>
     <ClCompile Include="Git_Attr.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Git</Filter>
     </ClCompile>
     <ClCompile Include="Git_Hashsig.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Git</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -27,7 +27,7 @@ shared_ptr_t<Git_Buf> Git_Filter_List::apply_to_data(const Git_Buf & gitBuf) con
 	return make_shared_ver<Git_Buf>(c_git_buf_out);
 }
 
-shared_ptr_t<Git_Buf> Git_Filter_List::apply_to_file(const path_name_t& path) const
+shared_ptr_t<Git_Buf> Git_Filter_List::apply_to_file(const string_t& path) const
 {
 	git_buf c_git_buf_out;
 
@@ -45,7 +45,7 @@ size_t Git_Filter_List::length() const
 {
 	return git_filter_list_length(c_guts_);
 }
-shared_ptr_t<Git_Filter_List> Git_Filter_List::load(const Git_Blob& blob, const path_name_t& relative_path, git_filter_mode_t filterMode, uint32_t flags) const
+shared_ptr_t<Git_Filter_List> Git_Filter_List::load(const Git_Blob& blob, const string_t& relative_path, git_filter_mode_t filterMode, uint32_t flags) const
 {
 #pragma message("Warning Native libgit2 enum used")
 	git_filter_list* c_git_filter_list_out;
@@ -54,14 +54,14 @@ shared_ptr_t<Git_Filter_List> Git_Filter_List::load(const Git_Blob& blob, const 
 	return make_shared_ver<Git_Filter_List>(c_git_filter_list_out);
 }
 
-shared_ptr_t<Git_Filter> Git_Filter_List::lookup(const filter_name_t & filterName) const
+shared_ptr_t<Git_Filter> Git_Filter_List::lookup(const string_t & filterName) const
 {
 	git_filter* c_git_filter_out = git_filter_lookup(filterName.c_str());
 
 	return make_shared_ver<Git_Filter>(*c_git_filter_out);
 }
 
-void Git_Filter_List::register_filter(const filter_name_t & filterName, Git_Filter & filter, int priority) const
+void Git_Filter_List::register_filter(const string_t & filterName, Git_Filter & filter, int priority) const
 {
 	check_for_error(git_filter_register(filterName.c_str(), filter.c_guts(), priority));
 }
@@ -87,7 +87,7 @@ git_filter_mode_t Git_Filter_List::filter_source_mode(const Git_Filter_Source & 
 	return fileSrc.mode();
 }
 
-path_name_t Git_Filter_List::filter_source_path(const Git_Filter_Source & fileSrc) const
+string_t Git_Filter_List::filter_source_path(const Git_Filter_Source & fileSrc) const
 {
 	return fileSrc.path();
 }
@@ -97,7 +97,7 @@ shared_ptr_t<Git_Repo> Git_Filter_List::filter_source_repo(const Git_Filter_Sour
 	return fileSrc.repo();
 }
 
-void Git_Filter_List::unregister(const filter_name_t & filterName) const
+void Git_Filter_List::unregister(const string_t & filterName) const
 {
 	check_for_error(git_filter_unregister(filterName.c_str()));
 }

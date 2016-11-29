@@ -14,13 +14,13 @@ public:
 	bool connected()const;
 	Git_Remote create_anonymous(const string_t& url)const;
 	Git_Remote create_with_fetchspec(const string_t& remote_name, const string_t& url,const string_t& fetch)const;
-	branch_name_t default_branch()const;
+	string_t default_branch()const;
 	void remove(const string_t& remote_name)const;
 	void disconnect(const Git_Remote&)const;
 	Git_Remote duplicate()const;
 	Git_Refspec get_refspec(size_t inx);
 	bool is_valid_name(const std::string_view&)const;
-	template<class Result = set_t<path_name_t>>
+	template<class Result = set_t<string_t>>
 	Result list()const;
 	Git_Remote lookup(const std::string_view&)const;
 	string_t name()const;

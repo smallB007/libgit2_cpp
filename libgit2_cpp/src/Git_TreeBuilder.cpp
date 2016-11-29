@@ -17,7 +17,7 @@ unsigned Git_TreeBuilder::entrycount() const
 	return git_treebuilder_entrycount(c_guts_);
 }
 
-Git_Tree_Entry Git_TreeBuilder::get(const file_name_t &filename) const
+Git_Tree_Entry Git_TreeBuilder::get(const string_t &filename) const
 {
 	const git_tree_entry * c_git_tree_entry = git_treebuilder_get(c_guts_, filename.c_str());
 	check_for_nullptr(c_git_tree_entry);
@@ -25,7 +25,7 @@ Git_Tree_Entry Git_TreeBuilder::get(const file_name_t &filename) const
 	return Git_Tree_Entry(c_git_tree_entry);
 }
 
-Git_Tree_Entry Git_TreeBuilder::insert(const file_name_t &filename, const Git_Object_ID &id, const git_filemode_t filemode) const
+Git_Tree_Entry Git_TreeBuilder::insert(const string_t &filename, const Git_Object_ID &id, const git_filemode_t filemode) const
 {
 	const git_tree_entry *c_git_tree_entry_out;
 	check_for_error(git_treebuilder_insert(&c_git_tree_entry_out, c_guts_, filename.c_str(), id.c_guts(), filemode));
@@ -33,7 +33,7 @@ Git_Tree_Entry Git_TreeBuilder::insert(const file_name_t &filename, const Git_Ob
 	return Git_Tree_Entry(c_git_tree_entry_out);
 }
 
-void Git_TreeBuilder::remove(const file_name_t &filename) const
+void Git_TreeBuilder::remove(const string_t &filename) const
 {
 	check_for_error(git_treebuilder_remove(c_guts_, filename.c_str()));
 }

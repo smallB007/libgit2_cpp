@@ -13,7 +13,7 @@
 #include "Git_CherryPick_Options.hpp"
 #include "Git_Clone_Options.hpp"
 /*Proper CADRe - [C]onstructor [A]cquires, [D]estructor [Re]leses*/
-Git_Repo::Git_Repo(/*git_repository* c_git_repository,*/const repo_path_t& path_to_repo, const bool is_bare) :Provider(c_guts_, git_repository_free)
+Git_Repo::Git_Repo(/*git_repository* c_git_repository,*/const string_t& path_to_repo, const bool is_bare) :Provider(c_guts_, git_repository_free)
 {
 	check_for_error(git_repository_init(&c_guts_, path_to_repo.c_str(), static_cast<unsigned int>(is_bare)));
 	//repo_path_ = path_to_repo;
@@ -29,7 +29,7 @@ void Git_Repo::create_initial_commit_()
 	git_reference* git_branch_ref_out;
 	check_for_error(git_repository_head(&git_branch_ref_out, c_guts_));
 
-	shared_ptr_t<Git_Branch> master_branch = Factory_Git_Object<Git_Branch>::create(git_branch_ref_out);
+	shared_ptr_t<Git_Branch> master_branch = Factory_Git_Object<Git_Branch>::create_ptr(git_branch_ref_out);
 	branches_.insert(master_branch);
 }
 
@@ -41,12 +41,12 @@ const shared_ptr_t<Git_Commit> Git_Repo::get_head_commit()const
 	git_commit* git_commit_out{ nullptr };
 	check_for_error(git_commit_lookup(&git_commit_out, c_guts_, &git_oid_out));
 
-	return Factory_Git_Object<Git_Commit>::create(git_commit_out);
+	return Factory_Git_Object<Git_Commit>::create_ptr(git_commit_out);
 }
 
-vector_t<file_name_t> Git_Repo::get_files_to_commit()
+vector_t<string_t> Git_Repo::get_files_to_commit()
 {
-	return vector_t<file_name_t>();
+	return vector_t<string_t>();
 #pragma message("ToDo fix that")
 }
 
@@ -56,13 +56,13 @@ string_t Git_Repo::get_msg_to_commit()
 #pragma message("ToDo fix that")
 }
 
-branch_name_t Git_Repo::get_current_branch()
+string_t Git_Repo::get_current_branch()
 {
-	return branch_name_t();
+	return string_t();
 #pragma message("ToDo fix that")
 }
 
-pair_t<bool,shared_ptr_t<Git_Branch>> Git_Repo::find_branch(const branch_name_t& branch_name)const
+pair_t<bool,shared_ptr_t<Git_Branch>> Git_Repo::find_branch(const string_t& branch_name)const
 {
 	for (auto aSharedPtr : branches_)
 	{
@@ -75,13 +75,13 @@ pair_t<bool,shared_ptr_t<Git_Branch>> Git_Repo::find_branch(const branch_name_t&
 	return NMS::make_pair(false,nullptr);
 }
 
-shared_ptr_t<Git_Branch> Git_Repo::create_branch(const branch_name_t& branch_name)
+shared_ptr_t<Git_Branch> Git_Repo::create_branch(const string_t& branch_name)
 {
 	auto result = find_branch(branch_name);
 	/*Check if branch with that name already find_branch and if not create it*/
 	if (!result.first)
 	{
-		shared_ptr_t<Git_Branch> new_branch = Factory_Git_Object<Git_Branch>::create(branch_name);
+		shared_ptr_t<Git_Branch> new_branch = Factory_Git_Object<Git_Branch>::create_ptr(branch_name);
 		branches_.insert(new_branch);
 		return new_branch;
 	}
@@ -91,7 +91,7 @@ shared_ptr_t<Git_Branch> Git_Repo::create_branch(const branch_name_t& branch_nam
 	}
 }
 
-void Git_Repo::delete_branch(const branch_name_t& branch_name)
+void Git_Repo::delete_branch(const string_t& branch_name)
 {
 	auto aPair = find_branch(branch_name);
 	if (aPair.first)
@@ -105,7 +105,7 @@ void Git_Repo::delete_branch(const branch_name_t& branch_name)
 
 
 
-bool Git_Repo::is_my_path(const repo_path_t& path_to_some_repo)const
+bool Git_Repo::is_my_path(const string_t& path_to_some_repo)const
 {
 	const char* const c_path = git_repository_path(c_guts_);
 	return (0 == strcmp(path_to_some_repo.c_str(),c_path));
@@ -117,7 +117,7 @@ bool Git_Repo::is_my_path(const repo_path_t& path_to_some_repo)const
 //}
 
 
-//shared_ptr_t<Git_Branch> Git_Repo::get_branch(const branch_name_t& branch_name)const
+//shared_ptr_t<Git_Branch> Git_Repo::get_branch(const string_t& branch_name)const
 //{
 //	return nullptr;
 //}
@@ -134,7 +134,7 @@ const shared_ptr_t<Git_Commit> Git_Repo::commit_lookup(const Git_Commit_ID& comm
 	}
 	else
 	{
-		return Factory_Git_Object<Git_Commit>::create(commit_out);
+		return Factory_Git_Object<Git_Commit>::create_ptr(commit_out);
 	}
 }
 
@@ -148,7 +148,7 @@ decltype(Git_Repo::branches_)::iterator Git_Repo::end()const
 	return std::end(branches_);
 }
 
-shared_ptr_t<Git_Branch> Git_Repo::branch_lookup(const branch_name_t& branch_name, git_branch_t branch_type)const
+shared_ptr_t<Git_Branch> Git_Repo::branch_lookup(const string_t& branch_name, git_branch_t branch_type)const
 {
 	UNUSED(branch_type);
 	/*The above signature is 1:1 with libgit2 but for the momment type of branch will be ommited*/
@@ -195,11 +195,11 @@ void Git_Repo::cherrypick(const Git_Commit& commit, const Git_CherryPick_Options
 								cherrypick_options.c_guts()));
 }
 
-LIBGIT2_CLONE_INTERFACE shared_ptr_t<Git_Repo> Git_Repo::clone(const repo_path_t & remote_repo_path, const repo_path_t & local_target_dir, const Git_Clone_Options & clone_options) const
+LIBGIT2_CLONE_INTERFACE shared_ptr_t<Git_Repo> Git_Repo::clone(const string_t & remote_repo_path, const string_t & local_target_dir, const Git_Clone_Options & clone_options) const
 {
 	git_repository* c_git_repo_out{};
 	check_for_error( git_clone(&c_git_repo_out,remote_repo_path.c_str(), local_target_dir.c_str(), clone_options.c_guts()));
-	shared_ptr_t<Git_Repo> repo_dud = Factory_Git_Object<Git_Repo>::create(c_git_repo_out);
+	shared_ptr_t<Git_Repo> repo_dud = Factory_Git_Object<Git_Repo>::create_ptr(c_git_repo_out);
 #pragma message("ToDo make sure that this works as intended, that is the clone of the repo is correct one and doesn't need to be created/written on hdd etc")
 #pragma message("ToDo it would be nice from the safety perspective that only factory could create object")
 	return repo_dud;
@@ -232,7 +232,7 @@ shared_ptr_t<Git_Config> Git_Repo::config_snapshot()const
 	return make_shared_ver<Git_Config>(config_snapshot_out);
 }
 
-repo_path_t Git_Repo::discover(const repo_path_t start_path)const
+string_t Git_Repo::discover(const string_t start_path)const
 {
 	git_buf buf = GIT_BUF_INIT_CONST(NULL, 0);
 	auto res = git_repository_discover(&buf, start_path.c_str(), 0, NULL);
@@ -240,18 +240,18 @@ repo_path_t Git_Repo::discover(const repo_path_t start_path)const
 	{
 		throw - 1;
 	}
-	repo_path_t repo_path = buf.ptr;
+	string_t repo_path = buf.ptr;
 	return repo_path;
 }
 
-namespace_name_t Git_Repo::get_namespace()const
+string_t Git_Repo::get_namespace()const
 {
 	const char* repo_namespace = git_repository_get_namespace(c_guts_);
 	if (FAILED(repo_namespace))
 	{
 		throw - 1;
 	}
-	return namespace_name_t(repo_namespace);
+	return string_t(repo_namespace);
 }
 
 shared_ptr_t<Git_Branch> Git_Repo::head()const
@@ -370,7 +370,7 @@ shared_ptr_t<Git_ODB> Git_Repo::odb()const
 	return make_shared_ver<Git_ODB>(tmp);
 }
 
-repo_path_t Git_Repo::path() const
+string_t Git_Repo::path() const
 {
 	return git_repository_path(c_guts_);
 }
@@ -409,7 +409,7 @@ void Git_Repo::set_index(const Git_Index& index)
 	git_repository_set_index(c_guts_, index);
 }
 
-void Git_Repo::set_namespace(const namespace_name_t& namespace_name)
+void Git_Repo::set_namespace(const string_t& namespace_name)
 {
 	int res = git_repository_set_namespace(c_guts_, namespace_name.c_str());
 	if (FAILED(res))
@@ -428,7 +428,7 @@ void Git_Repo::set_ref_db(const Git_RefDB & ref_db)
 	git_repository_set_refdb(c_guts_, ref_db);
 }
 
-void Git_Repo::set_working_dir(const repo_path_t & working_dir, bool update_gitlink)
+void Git_Repo::set_working_dir(const string_t & working_dir, bool update_gitlink)
 {
 	int res = git_repository_set_workdir(c_guts_, working_dir.c_str(), update_gitlink);
 	if (FAILED(res))
@@ -437,11 +437,11 @@ void Git_Repo::set_working_dir(const repo_path_t & working_dir, bool update_gitl
 	}
 }
 
-const repo_path_t Git_Repo::get_working_dir() const
+const string_t Git_Repo::get_working_dir() const
 {
 	if (is_bare())
 	{
-		return repo_path_t();
+		return string_t();
 	}
 	else
 	{

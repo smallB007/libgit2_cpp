@@ -10,7 +10,7 @@ void Git_Attr::cache_flush() const
 	git_attr_cache_flush(c_parent_guts());
 }
 
-string_t Git_Attr::get(uint32_t flags, const path_name_t & path, const string_t & name) const
+string_t Git_Attr::get(uint32_t flags, const string_t & path, const string_t & name) const
 {
 	const char* c_value_out;
 	check_for_error(git_attr_get(&c_value_out, c_parent_guts(), flags, path.c_str(), name.c_str()));

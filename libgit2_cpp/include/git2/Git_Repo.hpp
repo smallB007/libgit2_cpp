@@ -8,7 +8,7 @@ private:
 	set_t<shared_ptr_t<Git_Branch>> branches_;
 	shared_ptr_t<Git_Branch> find_branch_by_c_git_reference_(git_reference*const)const;
 	Git_Repo(git_repository*);
-	Git_Repo(const repo_path_t& path_to_repo, const bool is_bare);
+	Git_Repo(const string_t& path_to_repo, const bool is_bare);
 	Git_Repo(const Git_Repo&)=delete;
 	Git_Repo& operator=(const Git_Repo&) = delete;
 #ifdef _DEBUG
@@ -19,20 +19,20 @@ private:
 #endif
 public:
 	void create_initial_commit_();
-	pair_t<bool, shared_ptr_t<Git_Branch>> find_branch(const branch_name_t& branch_name)const;
-	bool is_my_path(const repo_path_t& path_to_some_repo)const;
+	pair_t<bool, shared_ptr_t<Git_Branch>> find_branch(const string_t& branch_name)const;
+	bool is_my_path(const string_t& path_to_some_repo)const;
 	//void rename(const string_t& repo_name);
 
 	const shared_ptr_t<Git_Commit> get_head_commit()const;
-	vector_t<file_name_t> get_files_to_commit();
+	vector_t<string_t> get_files_to_commit();
 	string_t get_msg_to_commit();
-	branch_name_t get_current_branch();
+	string_t get_current_branch();
 LIBGIT2_REPO_INTERFACE
 	void cleanup();
 	shared_ptr_t<Git_Config> config()const;
 	shared_ptr_t<Git_Config> config_snapshot()const;
-	repo_path_t discover(const repo_path_t = ".")const;
-	namespace_name_t get_namespace()const;
+	string_t discover(const string_t = ".")const;
+	string_t get_namespace()const;
 	shared_ptr_t<Git_Branch> head()const;
 	bool is_head_detached()const;
 	bool is_head_unborn()const;
@@ -42,29 +42,29 @@ LIBGIT2_REPO_INTERFACE
 	bool is_empty()const;
 	bool is_shallow()const;
 	shared_ptr_t<Git_ODB> odb()const;
-	repo_path_t path()const;
+	string_t path()const;
 	shared_ptr_t<Git_RefDB> ref_db()const;
 	void set_bare();
 	void set_config(const Git_Config&);
 	void set_identity(const Git_Signature&);
 	void unset_identity();
 	void set_index(const Git_Index&);
-	void set_namespace(const namespace_name_t&);
+	void set_namespace(const string_t&);
 	void set_odb(const Git_ODB&);
 	void set_ref_db(const Git_RefDB&);
-	void set_working_dir(const repo_path_t&, bool = true);
-	const repo_path_t get_working_dir()const;
+	void set_working_dir(const string_t&, bool = true);
+	const string_t get_working_dir()const;
 	git_repository_state_t get_state()const;
 	void cleanup_state();
 LIBGIT2_COMMIT_INTERFACE
 	const shared_ptr_t<Git_Commit> commit_lookup(const Git_Commit_ID&)const;
 
 LIBGIT2_BRANCH_INTERFACE
-	shared_ptr_t<Git_Branch> create_branch(const branch_name_t& branch_name);
-	void delete_branch(const branch_name_t& branch_name);
+	shared_ptr_t<Git_Branch> create_branch(const string_t& branch_name);
+	void delete_branch(const string_t& branch_name);
 	decltype(branches_)::iterator begin()const;
 	decltype(branches_)::iterator end()const;
-	shared_ptr_t<Git_Branch> branch_lookup(const branch_name_t&,git_branch_t)const;
+	shared_ptr_t<Git_Branch> branch_lookup(const string_t&,git_branch_t)const;
 LIBGIT2_CHECKOUT_INTERFACE
 	void checkout_head()const;
 	void checkout_index()const;
@@ -72,7 +72,7 @@ LIBGIT2_CHECKOUT_INTERFACE
 LIBGIT2_CHERRYPICK_INTERFACE
 	void cherrypick(const Git_Commit&,const Git_CherryPick_Options&);
 LIBGIT2_CLONE_INTERFACE
-	shared_ptr_t<Git_Repo> clone(const repo_path_t& remote_repo_path,const repo_path_t& local_target_dir,const Git_Clone_Options& clone_options)const;
+	shared_ptr_t<Git_Repo> clone(const string_t& remote_repo_path,const string_t& local_target_dir,const Git_Clone_Options& clone_options)const;
 	
 #ifdef _FULL_IMPLEMENTATION_
 	git_branch_create_from_annotated

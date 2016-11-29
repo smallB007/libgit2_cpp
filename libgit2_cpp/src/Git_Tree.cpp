@@ -37,7 +37,7 @@ Git_Tree_Entry Git_Tree::entry_by_index(const size_t idx) const
 	return Git_Tree_Entry(c_git_entry);
 }
 
-Git_Tree_Entry Git_Tree::entry_by_index(const file_name_t & filename) const
+Git_Tree_Entry Git_Tree::entry_by_index(const string_t & filename) const
 {
 	const git_tree_entry * c_git_entry = git_tree_entry_byname(c_guts_, filename.c_str());
 	check_for_nullptr(c_git_entry);
@@ -45,7 +45,7 @@ Git_Tree_Entry Git_Tree::entry_by_index(const file_name_t & filename) const
 	return Git_Tree_Entry(c_git_entry);
 }
 
-Git_Tree_Entry Git_Tree::entry_by_path(const path_name_t & path) const
+Git_Tree_Entry Git_Tree::entry_by_path(const string_t & path) const
 {
 	git_tree_entry* c_git_tree_entry;
 	check_for_error(git_tree_entry_bypath(&c_git_tree_entry, c_guts_, path.c_str()));

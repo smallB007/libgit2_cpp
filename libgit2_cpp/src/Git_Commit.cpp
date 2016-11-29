@@ -70,7 +70,7 @@ vector_t<shared_ptr_t<Git_Commit>> Git_Commit::get_parents()const
 	{
 		git_commit* parent;
 		check_for_error(git_commit_parent(&parent, c_guts_, i));
-		result.emplace_back(Factory_Git_Object<Git_Commit>::create(parent));
+		result.emplace_back(Factory_Git_Object<Git_Commit>::create_ptr(parent));
 	}
 	return result;
 }
@@ -152,7 +152,7 @@ shared_ptr_t<Git_Commit> Git_Commit::nth_gen_ancestor(const unsigned nth_generat
 	git_commit* ancestor_out;
 	check_for_error(git_commit_nth_gen_ancestor(&ancestor_out, c_guts_, nth_generation));
 
-	return Factory_Git_Object<Git_Commit>::create(ancestor_out);
+	return Factory_Git_Object<Git_Commit>::create_ptr(ancestor_out);
 }
 
 shared_ptr_t<Git_Repo> Git_Commit::owner()const
@@ -160,7 +160,7 @@ shared_ptr_t<Git_Repo> Git_Commit::owner()const
 	git_repository* c_git_repo = git_commit_owner(c_guts_);
 	check_for_nullptr(c_git_repo);
 
-	return Factory_Git_Object<Git_Repo>::create(c_git_repo);
+	return Factory_Git_Object<Git_Repo>::create_ptr(c_git_repo);
 }
 
 shared_ptr_t<Git_Commit> Git_Commit::parent(const unsigned parent_pos)const
@@ -173,7 +173,7 @@ shared_ptr_t<Git_Commit> Git_Commit::parent(const unsigned parent_pos)const
 	git_commit* commit_out;
 	check_for_error( git_commit_parent(&commit_out, c_guts_, parent_pos));
 
-	return Factory_Git_Object<Git_Commit>::create(commit_out);
+	return Factory_Git_Object<Git_Commit>::create_ptr(commit_out);
 }
 
 shared_ptr_t<Git_Object_ID> Git_Commit::parent_id(const unsigned parent_pos)const

@@ -53,12 +53,12 @@ Git_Remote Git_Remote::create_with_fetchspec(const string_t & remote_name, const
 	return Git_Remote(c_git_remote_out);
 }
 
-branch_name_t Git_Remote::default_branch() const
+string_t Git_Remote::default_branch() const
 {
 	git_buf c_git_buf_out;
 #pragma message("Idea perhaps Git_Buf is either unnecessary or can not be exposed as a return type, because always the data it contains is transformed into other type")
 	check_for_error(git_remote_default_branch(&c_git_buf_out, c_guts_));
-	branch_name_t result(c_git_buf_out.ptr, c_git_buf_out.ptr + c_git_buf_out.size);
+	string_t result(c_git_buf_out.ptr, c_git_buf_out.ptr + c_git_buf_out.size);
 #pragma message("Warning check if the size is correct or have to be oned(+-1)")
 	return result;
 }
@@ -123,7 +123,7 @@ shared_ptr_t<Git_Repo> Git_Remote::owner() const
 	git_repository * c_git_repository = git_remote_owner(c_guts_);
 	check_for_nullptr(c_git_repository);
 
-	return Factory_Git_Object<Git_Repo>::create(c_git_repository);
+	return Factory_Git_Object<Git_Repo>::create_ptr(c_git_repository);
 }
 
 int Git_Remote::prune_refs() const

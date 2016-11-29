@@ -11,7 +11,7 @@ public:
 	shared_ptr_t<Git_Object> duplicate()const;
 	shared_ptr_t<Git_Object_ID> id()const;
 	shared_ptr_t<Git_Object> lookup(const Git_Object_ID&, git_otype)const;
-	shared_ptr_t<Git_Object> lookup_by_path(const Git_Object&, const path_name_t& path, git_otype)const;
+	shared_ptr_t<Git_Object> lookup_by_path(const Git_Object&, const string_t& path, git_otype)const;
 	shared_ptr_t<Git_Object<T>> Git_Object<T>::lookup_by_prefix(const Git_Object_ID& id, size_t len, git_otype type)const;
 	shared_ptr_t<Git_Repo> owner()const;
 	shared_ptr_t<Git_Object> peel(git_otype target_type)const;

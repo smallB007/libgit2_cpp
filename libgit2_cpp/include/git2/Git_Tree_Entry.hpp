@@ -9,6 +9,6 @@ public:
 	uint16_t attr()const;
 	uint16_t filename_len()const;
 	const Git_Object_ID oid()const;
-	file_name_t filename()const;
+	string_t filename()const;
 };
 

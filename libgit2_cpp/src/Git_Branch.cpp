@@ -6,7 +6,7 @@ Git_Branch::Git_Branch(git_reference* c_git_branch_ref) : Provider(c_git_branch_
 {
 }
 
-Git_Branch::Git_Branch(const branch_name_t& branch_name, bool force):Provider(c_guts_, git_reference_free)
+Git_Branch::Git_Branch(const string_t& branch_name, bool force):Provider(c_guts_, git_reference_free)
 {
 	const git_commit* git_commit_in = get_parent()->get_head_commit()->c_guts();
 	
@@ -17,7 +17,7 @@ Git_Branch::Git_Branch(const branch_name_t& branch_name, bool force):Provider(c_
 
 
 
-branch_name_t Git_Branch::name()const
+string_t Git_Branch::name()const
 {
 	const char* name_out{};
 	check_for_error(git_branch_name(&name_out, c_guts_));
@@ -34,7 +34,7 @@ shared_ptr_t<Git_Commit> Git_Branch::create_commit()
 #pragma message("ToDo THIS ^^^ should be a method of Repo: create on active branch a commit")
 	
 
-	auto new_commit = Factory_Git_Object<Git_Commit>::create(files_to_commit, msg);
+	auto new_commit = Factory_Git_Object<Git_Commit>::create_ptr(files_to_commit, msg);
 	commits_.insert(new_commit);
 	
 	return new_commit;
@@ -66,20 +66,20 @@ decltype(Git_Branch::commits_)::iterator Git_Branch::end()const
 {
 	return std::end(commits_);
 }
-void Git_Branch::move_(const branch_name_t& new_branch_name, bool force)
+void Git_Branch::move_(const string_t& new_branch_name, bool force)
 {
 	git_reference* git_branch_ref_out;
 #pragma message("ToDo What to do with it^^^?")
 	check_for_error(git_branch_move(&git_branch_ref_out, c_guts_, new_branch_name.c_str(), force));
 }
 
-void Git_Branch::rename(const branch_name_t& new_branch_name)
+void Git_Branch::rename(const string_t& new_branch_name)
 {
 	move_(new_branch_name,true);
 #pragma message("ToDo with the force argument - next iteration")
 }
 
-void Git_Branch::move(const branch_name_t& new_branch_name)
+void Git_Branch::move(const string_t& new_branch_name)
 {
 	move_(new_branch_name, false);
 }

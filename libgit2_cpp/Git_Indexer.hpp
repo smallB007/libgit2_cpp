@@ -3,7 +3,7 @@
 class Git_Indexer : Provider<git_indexer>
 {
 public:
-	Git_Indexer(const path_name_t& path, unsigned int mode, Git_ODB& odb, git_transfer_progress_cb progress_cb, void *progress_cb_payload);
+	Git_Indexer(const string_t& path, unsigned int mode, Git_ODB& odb, git_transfer_progress_cb progress_cb, void *progress_cb_payload);
 
 	~Git_Indexer() = default;
 	LIBGIT2_INDEXER_INTERFACE

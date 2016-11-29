@@ -20,7 +20,7 @@ Git_Root::~Git_Root()
 	git_libgit2_shutdown();
 }
 
-shared_ptr_t<Git_Repo> Git_Root::create_repository(const repo_path_t& path_to_repo, const bool is_bare)
+shared_ptr_t<Git_Repo> Git_Root::create_repository(const string_t& path_to_repo, const bool is_bare)
 {
 #pragma message("Idea make all string_t string_view_t")
 	/**As a side note and something to put into your KB Artie, 'smart' ptrs should be returned by value so the proper counter incrementation
@@ -34,7 +34,7 @@ shared_ptr_t<Git_Repo> Git_Root::create_repository(const repo_path_t& path_to_re
 	}
 	
 	/**no repo found, create it then*/
-	auto _git_repo = Factory_Git_Object<Git_Repo>::create(path_to_repo.c_str(), is_bare);
+	auto _git_repo = Factory_Git_Object<Git_Repo>::create_ptr(path_to_repo.c_str(), is_bare);
 	repositories_.push_back(_git_repo);
 	///**always make just created repo active*/
 	active_repo_ = _git_repo;

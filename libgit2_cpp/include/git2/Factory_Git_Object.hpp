@@ -5,7 +5,7 @@ class Factory_Git_Object
 {
 public:
 	template<class... Args>
-	static shared_ptr_t<Git_Class> create(Args... args)
+	static shared_ptr_t<Git_Class> create_ptr(Args... args)
 	{
 		typedef typename Git_Class::Git_Deleter deleter;
 		auto ptr = new Git_Class(args...);
@@ -14,5 +14,11 @@ public:
 
 		return shared;
 		//return make_shared_ver<Git_Class>(args...);
+	}
+
+	template<class... Args>
+	static Git_Class create(Args... args)
+	{
+		return Git_Class(args...);
 	}
 };

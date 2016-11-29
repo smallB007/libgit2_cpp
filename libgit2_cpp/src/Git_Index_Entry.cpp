@@ -54,7 +54,7 @@ uint16_t 	Git_Index_Entry::flags_extended()const
 {
 	return c_guts_.flags_extended;
 }
-path_name_t 	Git_Index_Entry::path()const
+string_t 	Git_Index_Entry::path()const
 {
 	return c_guts_.path;
 }

@@ -23,7 +23,7 @@ const Git_Object_ID Git_Tree_Entry::oid()const
 #pragma message("Error f ")
 	return Git_Object_ID(nullptr);
 }
-file_name_t Git_Tree_Entry::filename()const
+string_t Git_Tree_Entry::filename()const
 {
 #pragma message("Error f")
 	return "";
