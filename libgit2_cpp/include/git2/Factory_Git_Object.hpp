@@ -13,7 +13,6 @@ public:
 		shared.reset(ptr,deleter());
 
 		return shared;
-		//return make_shared_ver<Git_Class>(args...);
 	}
 
 	template<class... Args>
