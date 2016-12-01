@@ -18,6 +18,6 @@ Git_Object_ID Git_Indexer::hash() const
 	const git_oid * c_git_oid = git_indexer_hash(c_guts_);
 	check_for_nullptr(c_git_oid);
 
-	return Git_Object_ID(c_git_oid);
+	return Factory_Git_Object<Git_Object_ID>::create(c_git_oid);
 }
 

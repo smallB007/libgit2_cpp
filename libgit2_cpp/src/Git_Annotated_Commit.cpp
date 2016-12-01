@@ -35,7 +35,7 @@ shared_ptr_t<Git_Object_ID> Git_Annotated_Commit::commit_id() const
 	const git_oid * c_git_oid = git_annotated_commit_id(c_guts_);
 	check_for_nullptr(c_git_oid);
 #pragma message("ToDo find every place where Git_Object_ID is const_cast and rem that cast")
-	return make_shared_ver<Git_Object_ID>(c_git_oid);
+	return Factory_Git_Object<Git_Object_ID>::create_ptr(c_git_oid);
 }
 
 shared_ptr_t<Git_Annotated_Commit> Git_Annotated_Commit::commit_lookup(const Git_Object_ID &id) const

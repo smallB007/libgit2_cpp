@@ -4,6 +4,7 @@
 
 Git_Branch::Git_Branch(git_reference* c_git_branch_ref) : Provider(c_git_branch_ref,git_reference_free)
 {
+#pragma message("Idea / d1reportSingleClassLayoutGit_Branch")
 }
 
 Git_Branch::Git_Branch(const string_t& branch_name, bool force):Provider(c_guts_, git_reference_free)

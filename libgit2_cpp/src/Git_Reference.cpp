@@ -126,7 +126,7 @@ shared_ptr_t<Git_Object_ID> Git_Reference::name_to_id(const string_t & name) con
 	git_oid c_git_oid_out;
 	check_for_error(git_reference_name_to_id(&c_git_oid_out, c_parent_guts(),name.c_str()));
 
-	return make_shared_ver<Git_Object_ID>(std::move(c_git_oid_out));
+	return Factory_Git_Object<Git_Object_ID>::create_ptr(std::move(c_git_oid_out));
 #pragma message("ToDo maybe move this c_git_oid_out?")
 }
 string_t Git_Reference::normalize_name(const string_t& name, int flags) const
@@ -220,7 +220,7 @@ shared_ptr_t<Git_Object_ID> Git_Reference::target() const
 	const git_oid * c_git_oid = git_reference_target(c_guts_);
 	check_for_nullptr(c_git_oid);
 
-	return make_shared_ver<Git_Object_ID>(const_cast<git_oid*>(c_git_oid));
+	return Factory_Git_Object<Git_Object_ID>::create_ptr(c_git_oid);
 }
 
 shared_ptr_t<Git_Object_ID> Git_Reference::target_peel() const
@@ -228,7 +228,7 @@ shared_ptr_t<Git_Object_ID> Git_Reference::target_peel() const
 	const git_oid * c_git_oid = git_reference_target_peel(c_guts_);
 	check_for_nullptr(c_git_oid);
 	
-	return make_shared_ver<Git_Object_ID>(const_cast<git_oid*>(c_git_oid));
+	return Factory_Git_Object<Git_Object_ID>::create_ptr(c_git_oid);
 }
 
 git_ref_t Git_Reference::type() const

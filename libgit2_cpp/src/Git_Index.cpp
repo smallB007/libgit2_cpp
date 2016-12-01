@@ -39,7 +39,7 @@ int Git_Index::caps() const
 shared_ptr_t<const Git_Object_ID> Git_Index::checksum() const
 {
 	const git_oid * c_git_oid = git_index_checksum(c_guts_);
-	return make_shared_ver<Git_Object_ID>(const_cast<git_oid*>(c_git_oid));
+	return Factory_Git_Object<Git_Object_ID>::create_ptr(c_git_oid);
 }
 
 void Git_Index::clear()
@@ -188,7 +188,7 @@ shared_ptr_t<Git_Object_ID> Git_Index::write_tree() const
 	git_oid * c_git_out{};
 	check_for_error(git_index_write_tree(c_git_out,c_guts_));
 	
-	return make_shared_ver<Git_Object_ID>(c_git_out);
+	return Factory_Git_Object<Git_Object_ID>::create_ptr(c_git_out);
 }
 
 shared_ptr_t<Git_Object_ID> Git_Index::write_tree_to(Git_Repo & repoOut) const
@@ -196,7 +196,7 @@ shared_ptr_t<Git_Object_ID> Git_Index::write_tree_to(Git_Repo & repoOut) const
 	git_oid * c_git_out{};
 	check_for_error(git_index_write_tree_to(c_git_out, c_guts_, repoOut.c_guts()));
 
-	return make_shared_ver<Git_Object_ID>(c_git_out);
+	return Factory_Git_Object<Git_Object_ID>::create_ptr(c_git_out);
 }
 
 

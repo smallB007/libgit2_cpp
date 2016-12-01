@@ -181,7 +181,7 @@ shared_ptr_t<Git_Object_ID> Git_Commit::parent_id(const unsigned parent_pos)cons
 	const git_oid * c_git_oid = git_commit_parent_id(c_guts_, parent_pos);
 	check_for_nullptr(c_git_oid);
 
-	return make_shared_ver<Git_Object_ID>(/*const_cast<git_oid *>*/(c_git_oid));
+	return Factory_Git_Object<Git_Object_ID>::create_ptr(c_git_oid);
 	
 }
 
@@ -233,5 +233,5 @@ shared_ptr_t<Git_Object_ID> Git_Commit::tree_id()const
 	const git_oid * c_git_oid = git_commit_tree_id(c_guts_);
 	check_for_nullptr(c_git_oid);
 
-	return make_shared_ver<Git_Object_ID>(/*const_cast<git_oid*>*/(c_git_oid));
+	return Factory_Git_Object<Git_Object_ID>::create_ptr(c_git_oid);
 }

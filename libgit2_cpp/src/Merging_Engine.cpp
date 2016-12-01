@@ -46,7 +46,7 @@ vector_t<shared_ptr_t<Git_Object_ID>> Merging_Engine::merge_bases(const Git_Obje
 	vector_t<shared_ptr_t<Git_Object_ID>> result;
 	for (size_t beg{ 0 }, end{ c_git_oidarray_out.count }; beg != end; ++beg)
 	{
-		result.push_back(make_shared_ver<Git_Object_ID>(c_git_oidarray_out.ids[beg]));
+		result.push_back(Factory_Git_Object<Git_Object_ID>::create_ptr(c_git_oidarray_out.ids[beg]));
 	}
 
 	return result;

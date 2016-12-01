@@ -57,6 +57,7 @@ class Git_Repo;
 class Git_Root;
 class Git_Signature;
 class Git_Strarray;
+class Git_Submodule;
 class Git_Time;
 class Git_Transaction;
 class Git_Transfer_Progress;

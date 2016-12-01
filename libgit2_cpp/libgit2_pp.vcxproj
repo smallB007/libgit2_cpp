@@ -180,6 +180,7 @@
     <ClInclude Include="Git_Hashsig.hpp" />
     <ClInclude Include="Git_Ignore.hpp" />
     <ClInclude Include="Git_Indexer.hpp" />
+    <ClInclude Include="Git_Submodule.hpp" />
     <ClInclude Include="Git_Transfer_Progress.hpp" />
     <ClInclude Include="include\git2\Check_Result.hpp" />
     <ClInclude Include="include\git2\Common_defines.hpp" />
@@ -271,6 +272,7 @@
     <ClCompile Include="Git_Hashsig.cpp" />
     <ClCompile Include="Git_Ignore.cpp" />
     <ClCompile Include="Git_Indexer.cpp" />
+    <ClCompile Include="Git_Submodule.cpp" />
     <ClCompile Include="Git_Transfer_Progress.cpp" />
     <ClCompile Include="src\Diff_File_Stats.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -278,7 +280,9 @@
     <ClCompile Include="src\Git_Annotated_Commit.cpp" />
     <ClCompile Include="src\Git_Blame.cpp" />
     <ClCompile Include="src\Git_Blob.cpp" />
-    <ClCompile Include="src\Git_Branch.cpp" />
+    <ClCompile Include="src\Git_Branch.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/d1reportSingleClassLayoutGit_Branch %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="src\Git_Buf.cpp" />
     <ClCompile Include="src\Git_Checkout.cpp" />
     <ClCompile Include="src\Git_Checkout_Options.cpp" />

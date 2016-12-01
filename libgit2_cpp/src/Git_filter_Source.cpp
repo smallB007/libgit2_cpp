@@ -28,7 +28,7 @@ shared_ptr_t<Git_Object_ID> Git_Filter_Source::id() const
 {
 	const git_oid * c_git_oid_out = git_filter_source_id(c_guts_);
 
-	return make_shared_ver<Git_Object_ID>(const_cast<git_oid*>(c_git_oid_out));
+	return Factory_Git_Object<Git_Object_ID>::create_ptr(c_git_oid_out);
 }
 
 git_filter_mode_t Git_Filter_Source::mode() const

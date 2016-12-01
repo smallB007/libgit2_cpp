@@ -43,5 +43,5 @@ Git_Object_ID Git_TreeBuilder::write() const
 	git_oid* id{};
 	check_for_error(git_treebuilder_write(id, c_guts_));
 
-	return Git_Object_ID(id);
+	return Factory_Git_Object<Git_Object_ID>::create(id);
 }

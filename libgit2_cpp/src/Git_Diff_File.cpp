@@ -9,7 +9,7 @@ Git_Diff_File::Git_Diff_File(git_diff_file c_git_diff_file)
 
 Git_Object_ID     Git_Diff_File::id()const
 {
-	return const_cast<git_oid*>(&c_guts_.id);
+	return Factory_Git_Object<Git_Object_ID>::create(&c_guts_.id);
 }
 string_t		  Git_Diff_File::path()const
 {

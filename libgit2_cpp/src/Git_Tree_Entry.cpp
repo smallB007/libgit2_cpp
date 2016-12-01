@@ -21,7 +21,7 @@ uint16_t Git_Tree_Entry::filename_len()const
 const Git_Object_ID Git_Tree_Entry::oid()const
 {
 #pragma message("Error f ")
-	return Git_Object_ID(nullptr);
+	return Factory_Git_Object<Git_Object_ID>::create(nullptr);
 }
 string_t Git_Tree_Entry::filename()const
 {
