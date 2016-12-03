@@ -2,12 +2,11 @@
 
 #include <type_traits>
 #include <boost/algorithm/string/predicate.hpp>
-
+#include "Git_Buf.hpp"
 #include "Git_Config_Backend.hpp"
 #include "Git_Config_Entry.hpp"
-#include "Scoped_Deleter_Buf.hpp"
+//#include "Scoped_Deleter_Buf.hpp"
 #include "Git_CVar_Map.hpp"
-
 
 
 Git_Config::Git_Config(git_config* c_git_config):Provider(c_git_config,git_config_free)
@@ -78,11 +77,12 @@ string_t Git_Config::find_path_helper_() const
 		break;
 	}
 
-	size_t file_path_length{ 256 };
-	Scoped_Deleter_Buf<git_buf> c_git_buf_out(file_path_length);
-	check_for_error(git_config_find(c_git_buf_out));
+	//size_t file_path_length{ 256 };
+	//Scoped_Deleter_Buf<git_buf> c_git_buf_out(file_path_length);
+	Git_Buf _git_buf_;
+	check_for_error(git_config_find(_git_buf_));
 
-	string_t file_path(c_git_buf_out.get_string());
+	string_t file_path(_git_buf_.get_string());
 	return file_path;
 }
 
@@ -261,10 +261,11 @@ string_t Git_Config::get_path(const string_t & varName) const
 	//check_for_error( git_config_get_path(c_git_buf_out, c_guts_, varName.c_str()));
 	//return string_t();
 
-	size_t file_path_length{ 256 };
-	Scoped_Deleter_Buf<git_buf> c_git_buf_out(file_path_length);
-	check_for_error( git_config_get_path(c_git_buf_out, c_guts_, varName.c_str()));
-	return c_git_buf_out.get_string();
+	//size_t file_path_length{ 256 };
+	//Scoped_Deleter_Buf<git_buf> c_git_buf_out(file_path_length);
+	Git_Buf _git_buf_;
+	check_for_error( git_config_get_path(_git_buf_, c_guts_, varName.c_str()));
+	return _git_buf_.get_string();
 }
 
 string_t Git_Config::get_string(const string_t & varName)const
@@ -278,9 +279,10 @@ string_t Git_Config::get_string_buf(const string_t & varName)const
 #pragma message("ToDo GIT_EXTERN(void) git_buf_free(git_buf *buffer);")
 
 	Caller<git_buf, git_config_get_string_buf> al(c_guts_, varName.c_str());
-	git_buf* c_git_buf = &al.get_val();
-	char* char_ptr = reinterpret_cast<char*>(c_git_buf);
-	return char_ptr;
+	Git_Buf _git_buf_ = &al.get_val();
+	//char* char_ptr = reinterpret_cast<char*>(c_git_buf);
+#pragma message("Error git_buf or al is leaking")
+	return _git_buf_.get_string();
 }
 
 void Git_Config::init_backend()
@@ -424,9 +426,9 @@ string_t Git_Config::parse_path(const string_t & path) const
 {
 	//size_t file_path_length{ 256 };
 	//Scoped_Deleter_Buf<git_buf> c_git_buf_out(file_path_length);
-	git_buf c_git_buf;
-	check_for_error( git_config_parse_path(&c_git_buf,path.c_str()));
-	string_t path_parsed(c_git_buf.ptr);
+	Git_Buf _git_buf_;
+	check_for_error( git_config_parse_path(_git_buf_,path.c_str()));
+	string_t path_parsed = _git_buf_.get_string();
 	
 	return path_parsed;
 }

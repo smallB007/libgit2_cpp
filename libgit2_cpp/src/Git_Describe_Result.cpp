@@ -17,10 +17,10 @@ shared_ptr_t<Git_Describe_Result> Git_Describe_Result::describe_commit(const sha
 
 shared_ptr_t<Git_Buf> Git_Describe_Result::describe_format(Git_Describe_Format_Options describe_format_options)const
 {
-	git_buf* c_git_buf_out{};
-	check_for_error(git_describe_format(c_git_buf_out, c_guts_, describe_format_options.c_guts()));
+	Git_Buf _git_buf_;
+	check_for_error(git_describe_format(_git_buf_, c_guts_, describe_format_options.c_guts()));
 	
-	return make_shared_ver<Git_Buf>(c_git_buf_out);
+	return make_shared_ver<Git_Buf>(_git_buf_);
 }
 
 shared_ptr_t<Git_Describe_Result> Git_Describe_Result::describe_workdir(Git_Describe_Options describe_options) 

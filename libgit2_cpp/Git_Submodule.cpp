@@ -1,4 +1,5 @@
 #include "Git_Submodule.hpp"
+#include "Git_Buf.hpp"
 #include "Git_Object_ID.hpp"
 #include "Git_Repo.hpp"
 #include "Converters.hpp"
@@ -133,10 +134,10 @@ shared_ptr_t<Git_Repo> Git_Submodule::repo_init(bool use_gitlink) const
 
 string_t Git_Submodule::resolve_url(const std::string_view & relativeUrl) const
 {
-	git_buf c_git_buf_out;
-	check_for_error(git_submodule_resolve_url(&c_git_buf_out, c_parent_guts(), relativeUrl.data()));
+	Git_Buf _git_buf_;
+	check_for_error(git_submodule_resolve_url(_git_buf_, c_parent_guts(), relativeUrl.data()));
 
-	return git_buf_to_string(c_git_buf_out);
+	return _git_buf_.get_string();
 }
 
 void Git_Submodule::set_branch(const std::string_view & branchName) const

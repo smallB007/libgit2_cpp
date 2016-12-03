@@ -232,25 +232,13 @@ shared_ptr_t<Git_Config> Git_Repo::config_snapshot()const
 	return make_shared_ver<Git_Config>(config_snapshot_out);
 }
 
-string_t Git_Repo::discover(const string_t start_path)const
-{
-	git_buf buf = GIT_BUF_INIT_CONST(NULL, 0);
-	auto res = git_repository_discover(&buf, start_path.c_str(), 0, NULL);
-	if (LIBGIT2_CPP_FAIL_CHECK(res))
-	{
-		throw - 1;
-	}
-	string_t repo_path = buf.ptr;
-	return repo_path;
-}
+
 
 string_t Git_Repo::get_namespace()const
 {
 	const char* repo_namespace = git_repository_get_namespace(c_guts_);
-	if (LIBGIT2_CPP_FAIL_CHECK(repo_namespace))
-	{
-		throw - 1;
-	}
+	check_for_nullptr(repo_namespace);
+
 	return string_t(repo_namespace);
 }
 
@@ -258,25 +246,11 @@ shared_ptr_t<Git_Branch> Git_Repo::head()const
 {
 	/*0 on success, GIT_EUNBORNBRANCH when HEAD points to a non existing branch, GIT_ENOTFOUND when HEAD is missing; an error code otherwise*/
 	git_reference* c_git_branch_ref_out;
-	auto res = git_repository_head(&c_git_branch_ref_out,c_guts_);
-	if (!LIBGIT2_CPP_FAIL_CHECK(res))
-	{/*find that ref amongst those branches */
-		auto aSharedPtr = find_branch_by_c_git_reference_(c_git_branch_ref_out);
-		git_reference_free(c_git_branch_ref_out);
-		return aSharedPtr;
-	}
-	else if (GIT_EUNBORNBRANCH == res)
-	{/*non existing branch*/
-		throw - 1;
-	}
-	else if (GIT_ENOTFOUND == res)
-	{/*head is missing*/
-		throw - 1;
-	}
-	else
-	{
-		throw - 1;
-	}
+	check_for_error(git_repository_head(&c_git_branch_ref_out,c_guts_));
+	auto aSharedPtr = find_branch_by_c_git_reference_(c_git_branch_ref_out);
+	git_reference_free(c_git_branch_ref_out);
+
+	return aSharedPtr;
 }
 
 shared_ptr_t<Git_Branch> Git_Repo::find_branch_by_c_git_reference_(git_reference*const c_git_branch_ref)const

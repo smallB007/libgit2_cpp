@@ -165,11 +165,11 @@ size_t Git_Diff::insertions() const
 shared_ptr_t<Git_Buf> Git_Diff::stats_to_buf(git_diff_stats_format_t statsFormat, size_t width) const
 {
 #pragma message("ToDo native libgit2 enum used")
-	git_buf c_git_buf_out;
+	Git_Buf _git_buf_;
 	auto stats = get_stats(*this);
 
-check_for_error(git_diff_stats_to_buf(&c_git_buf_out, stats->c_guts(), statsFormat, width));
-	return make_shared_ver<Git_Buf>(std::move(c_git_buf_out));
+	check_for_error(git_diff_stats_to_buf(_git_buf_, stats->c_guts(), statsFormat, width));
+	return make_shared_ver<Git_Buf>(std::move(_git_buf_));
 #pragma message("Error this is highly doubious")
 }
 
@@ -185,9 +185,9 @@ shared_ptr_t<Git_Buf> Git_Diff::diff_to_buf(const Git_Diff & diff, git_diff_form
 {
 #pragma message("ToDo native libgit2 enum used")
 
-	git_buf* c_git_buf_out;
-	check_for_error(git_diff_to_buf(&c_git_buf_out, diff.c_guts_, format));
-	return make_shared_ver<Git_Buf>(c_git_buf_out);
+	Git_Buf _git_buf_;
+	check_for_error(git_diff_to_buf(_git_buf_, diff.c_guts_, format));
+	return make_shared_ver<Git_Buf>(_git_buf_);
 }
 #endif
 

@@ -1,9 +1,10 @@
 #pragma once
 #include "precompiled.hpp"
-class Git_Buf : public Provider<git_buf>
+class LIBGIT2_CPP_API Git_Buf : public Provider<git_buf>
 {
-	
+	git_buf c_git_buf_;
 public:
+	Git_Buf();
 	Git_Buf(git_buf* c_git_buf);
 	Git_Buf(git_buf&);
 	~Git_Buf()=default;

@@ -16,6 +16,9 @@ Git_Signature::Git_Signature(git_buf* signature_block, git_buf* signed_data):sig
 
 Git_Signature::~Git_Signature()
 {
+	git_buf_free(signature_block_);
+	git_buf_free(signed_data_);
+#pragma message("ToDo why this is done manually?")
 }
 
 shared_ptr_t<Git_Commit_Author> Git_Signature::author()const

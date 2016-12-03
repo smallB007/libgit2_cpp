@@ -50,16 +50,17 @@ bool Git_Refspec::is_destination_matching(const string_t &refname) const
 
 Git_Buf Git_Refspec::transform(const string_t &name) const
 {
-	git_buf c_git_buf_out;
-	git_refspec_transform(&c_git_buf_out, c_guts_, name.c_str());
+	Git_Buf _git_buf_;
+	git_refspec_transform(_git_buf_, c_guts_, name.c_str());
 
-	return Git_Buf(c_git_buf_out);
+	return Git_Buf(_git_buf_);
 }
 
 Git_Buf Git_Refspec::rtransform(const string_t &name) const
 {
-	git_buf c_git_buf_out;
-	check_for_error(git_refspec_rtransform(&c_git_buf_out, c_guts_, name.c_str()));
+	Git_Buf _git_buf_;
+	check_for_error(git_refspec_rtransform(_git_buf_, c_guts_, name.c_str()));
 
-	return Git_Buf(c_git_buf_out);
+	return Git_Buf(_git_buf_);
+#pragma message("ToDo check if ctor won't leak")
 }

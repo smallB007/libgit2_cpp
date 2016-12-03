@@ -13,27 +13,29 @@ Git_Filter_List::~Git_Filter_List()
 
 shared_ptr_t<Git_Buf> Git_Filter_List::apply_to_blob(const Git_Filter_List & filters, const Git_Blob & blob) const
 {
-	git_buf c_git_buf_out;
-	check_for_error(git_filter_list_apply_to_blob(&c_git_buf_out, filters.c_guts_, blob.c_guts()));
-	return make_shared_ver<Git_Buf>(c_git_buf_out);
+	Git_Buf _git_buf_;
+	check_for_error(git_filter_list_apply_to_blob(_git_buf_, filters.c_guts_, blob.c_guts()));
+
+	return make_shared_ver<Git_Buf>(_git_buf_);
+#pragma message("ToDo check if ctor of Git_Buf won't leak if called as above")
 }
 
 shared_ptr_t<Git_Buf> Git_Filter_List::apply_to_data(const Git_Buf & gitBuf) const
 {
-	git_buf c_git_buf_out;
+	Git_Buf _git_buf_;
 
-	check_for_error(git_filter_list_apply_to_data(&c_git_buf_out, c_guts_, gitBuf.c_guts()));
+	check_for_error(git_filter_list_apply_to_data(_git_buf_, c_guts_, gitBuf.c_guts()));
 
-	return make_shared_ver<Git_Buf>(c_git_buf_out);
+	return make_shared_ver<Git_Buf>(_git_buf_);
 }
 
 shared_ptr_t<Git_Buf> Git_Filter_List::apply_to_file(const string_t& path) const
 {
-	git_buf c_git_buf_out;
+	Git_Buf _git_buf_;
 
-	check_for_error(git_filter_list_apply_to_file(&c_git_buf_out, c_guts_, c_parent_guts(), path.c_str()));
+	check_for_error(git_filter_list_apply_to_file(_git_buf_, c_guts_, c_parent_guts(), path.c_str()));
 
-	return make_shared_ver<Git_Buf>(c_git_buf_out);
+	return make_shared_ver<Git_Buf>(_git_buf_);
 }
 
 bool Git_Filter_List::contains(const string_t & name) const

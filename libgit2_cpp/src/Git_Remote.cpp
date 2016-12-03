@@ -1,4 +1,5 @@
 #include "Git_Remote.hpp"
+#include "Git_Buf.hpp"
 #include "Git_Refspec.hpp"
 #include "Converters.hpp"
 #include "Git_Repo.hpp"
@@ -55,10 +56,10 @@ Git_Remote Git_Remote::create_with_fetchspec(const string_t & remote_name, const
 
 string_t Git_Remote::default_branch() const
 {
-	git_buf c_git_buf_out;
+	Git_Buf _git_buf_;
 #pragma message("Idea perhaps Git_Buf is either unnecessary or can not be exposed as a return type, because always the data it contains is transformed into other type")
-	check_for_error(git_remote_default_branch(&c_git_buf_out, c_guts_));
-	string_t result(c_git_buf_out.ptr, c_git_buf_out.ptr + c_git_buf_out.size);
+	check_for_error(git_remote_default_branch(_git_buf_, c_guts_));
+	string_t result = _git_buf_.get_string();
 #pragma message("Warning check if the size is correct or have to be oned(+-1)")
 	return result;
 }

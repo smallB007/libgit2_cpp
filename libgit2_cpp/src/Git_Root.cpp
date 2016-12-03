@@ -1,6 +1,6 @@
 #include "Git_Root.hpp"
-
-
+#include "Git_Buf.hpp"
+#pragma message("ToDo include-what-you-use")
 inline Git_Root* create_git()
 {
 	static Git_Root git_root;
@@ -42,6 +42,25 @@ shared_ptr_t<Git_Repo> Git_Root::create_repository(const string_t& path_to_repo,
 	_git_repo->create_initial_commit_();
 	
 	return _git_repo;
+}
+
+const auto Git_Root::get_repositories() const
+{
+	return repositories_;
+}
+
+string_t Git_Root::discover(const std::string_view& start_path)const
+{
+	//git_buf buf = GIT_BUF_INIT_CONST(NULL, 0);
+	Git_Buf _git_buf_;
+#pragma message("Error each git_buf must be inited before it can be used")
+	//check_for_error(git_repository_discover(&buf, start_path.c_str(), 0, NULL));
+	check_for_error(git_repository_discover(_git_buf_.c_guts(), start_path.data(), 0, NULL));
+
+	//string_t repo_path = buf.ptr;
+	string_t repo_path ( _git_buf_.get_string());
+#pragma message("Error each git_buf must be released!!!")
+	return repo_path;
 }
 
 shared_ptr_t<Git_Repo> Git_Root::find_c_git_repository(git_repository* c_git_repo)const

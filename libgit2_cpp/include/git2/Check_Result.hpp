@@ -4,11 +4,11 @@
 //{
 #pragma message("ToDo Perhaps instead of struct only function would suffice?")
 #pragma message("ToDo Also, perhaps adding type to throw in form of an enum would be useful?")
-	inline void check_for_error(int res)
+	inline void check_for_error(const int res)
 	{
 		if (LIBGIT2_CPP_FAIL_CHECK(res))
 		{
-			throw - 1;
+			throw static_cast<git_error_code>(res);
 		}
 	}
 	template<class T>
@@ -16,7 +16,7 @@
 	{
 		if (LIBGIT2_CPP_FAIL_CHECK(p))
 		{
-			throw - 1;
+			throw nullptr_t();
 		}
 	}
 //};

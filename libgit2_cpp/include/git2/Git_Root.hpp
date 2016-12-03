@@ -32,6 +32,10 @@ Git_Root();
 	shared_ptr_t<Git_Repo> find_c_git_repository(git_repository*)const;
 public:
 	shared_ptr_t<Git_Repo> create_repository(const string_t& path_to_repo, const bool is_bare);
+	const auto get_repositories()const;
+	LIBGIT2_REPO_INTERFACE
+		string_t discover(const std::string_view& start_path)const;
+
 };
 
 /***

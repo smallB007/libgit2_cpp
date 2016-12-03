@@ -31,7 +31,6 @@ LIBGIT2_REPO_INTERFACE
 	void cleanup();
 	shared_ptr_t<Git_Config> config()const;
 	shared_ptr_t<Git_Config> config_snapshot()const;
-	string_t discover(const string_t = ".")const;
 	string_t get_namespace()const;
 	shared_ptr_t<Git_Branch> head()const;
 	bool is_head_detached()const;

@@ -1,4 +1,5 @@
 #include "Git_Commit.hpp"
+#include "Git_Buf.hpp"
 #include "Git_Repo.hpp"
 #include "Git_Commit_Author.hpp"
 #include "Git_Signature.hpp"
@@ -121,8 +122,8 @@ shared_ptr_t<Git_Commit> Git_Commit::duplicate()const
 
 shared_ptr_t<Git_Signature> Git_Commit::signature()const
 {
-	git_buf* signature_block{};//the signature block
-	git_buf* signed_data{}; //this is the commit contents minus the signature block
+	Git_Buf signature_block;
+	Git_Buf signed_data; //this is the commit contents minus the signature block
 	
 		
 	const git_oid * 	commit_id = git_commit_id(c_guts_);
@@ -130,6 +131,7 @@ shared_ptr_t<Git_Signature> Git_Commit::signature()const
 	check_for_error(git_commit_extract_signature(signature_block, signed_data, c_parent_guts(), const_cast<git_oid *>(commit_id), field));
 
 	return make_shared_ver<Git_Signature>(signature_block, signed_data);
+#pragma message("Warning this may not use provided Git_Signature ctor but the generated cpy_ctor or ptrs may get lost.")
 }
 
 shared_ptr_t<Git_Commit_ID> Git_Commit::id()const
