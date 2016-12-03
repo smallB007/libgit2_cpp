@@ -55,7 +55,7 @@ inline vector_t<typename Git_Type::c_git_class*> convert_to_libgit2_type(const v
 }
 
 
-string_t git_buf_to_string(const git_buf& c_git_buf)
+inline string_t git_buf_to_string(const git_buf& c_git_buf)
 {
 	string_t result(c_git_buf.ptr, c_git_buf.ptr + c_git_buf.size);
 #pragma message("Warning may contain rubbish")

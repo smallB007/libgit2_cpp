@@ -12,7 +12,7 @@ This macro is used in each class that inherits from Singleton
 */
 #define BEFRIEND_SINGLETON(x) friend class Singleton<x>
 
-#define UNUSED(x) __pragma(warning(suppress:4100)) x
+//#define UNUSED(x) __pragma(warning(suppress:4100)) x
 
 /***This macro is used in every Git class that is exposed to 3rd user
 	so that the user can only create it via Factory_Git_Object and may not destroy it*/

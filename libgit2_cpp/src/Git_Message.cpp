@@ -9,7 +9,7 @@ Git_Message::Git_Message(git_repository* c_git_repo):c_git_repo_{c_git_repo}
 	{
 		throw - 1;
 	}
-	else if (FAILED(res))
+	else if (LIBGIT2_CPP_FAIL_CHECK(res))
 	{
 		throw - 1;
 	}

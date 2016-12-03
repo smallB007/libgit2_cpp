@@ -6,7 +6,7 @@
 #pragma message("ToDo Also, perhaps adding type to throw in form of an enum would be useful?")
 	inline void check_for_error(int res)
 	{
-		if (FAILED(res))
+		if (LIBGIT2_CPP_FAIL_CHECK(res))
 		{
 			throw - 1;
 		}
@@ -14,7 +14,7 @@
 	template<class T>
 	inline void check_for_nullptr(T* p)
 	{
-		if (FAILED(p))
+		if (LIBGIT2_CPP_FAIL_CHECK(p))
 		{
 			throw - 1;
 		}

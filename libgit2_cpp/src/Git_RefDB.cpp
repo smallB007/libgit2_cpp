@@ -4,7 +4,7 @@
 Git_RefDB::Git_RefDB(git_repository * c_git_repo)
 {
 	int res = git_repository_refdb(&c_git_refdb_, c_git_repo);
-	if (FAILED(res))
+	if (LIBGIT2_CPP_FAIL_CHECK(res))
 	{
 		throw - 1;
 	}

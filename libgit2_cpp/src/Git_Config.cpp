@@ -20,7 +20,7 @@ Git_Config::Git_Config(git_config* c_git_config):Provider(c_git_config,git_confi
 //	/*
 //	This object is empty, so you have to add a file to it before you can do anything with it.
 //	*/
-//	if (FAILED(res) || FAILED(c_guts_))
+//	if (LIBGIT2_CPP_FAIL_CHECK(res) || LIBGIT2_CPP_FAIL_CHECK(c_guts_))
 //	{
 //		throw - 1;
 //	}
@@ -30,7 +30,7 @@ void Git_Config::add_backend(const Git_Config_Backend& config_backend, const Git
 {
 	int res = git_config_add_backend(c_guts_, const_cast<git_config_backend*>(&config_backend.c_git_config_backend_), config_level, force);
 	
-	if (FAILED(res) || GIT_EEXISTS == res)
+	if (LIBGIT2_CPP_FAIL_CHECK(res) || GIT_EEXISTS == res)
 	{
 		throw - 1;
 	}
@@ -40,7 +40,7 @@ void Git_Config::add_file_on_disk(const string_t& path, const Git_Config_Level& 
 {
 	int res = git_config_add_file_ondisk(c_guts_, path.c_str(), config_level, force);
 
-	if (FAILED(res) 
+	if (LIBGIT2_CPP_FAIL_CHECK(res) 
 		||	GIT_EEXISTS == res 
 		||	GIT_ENOTFOUND == res)
 	{
@@ -51,7 +51,7 @@ void Git_Config::add_file_on_disk(const string_t& path, const Git_Config_Level& 
 void Git_Config::delete_entry(const string_t & name)
 {
 	int res = git_config_delete_entry(c_guts_, name.c_str());
-	if (FAILED(res))
+	if (LIBGIT2_CPP_FAIL_CHECK(res))
 	{
 		throw - 1;
 	}

@@ -13,7 +13,7 @@ Git_Clone_Options::Git_Clone_Options(unsigned ver) :c_git_clone_options_{ ver }
 void Git_Clone_Options::set_default()
 {
 	int res = git_clone_init_options(&c_git_clone_options_, GIT_CLONE_OPTIONS_VERSION);
-	if (FAILED(res))
+	if (LIBGIT2_CPP_FAIL_CHECK(res))
 	{
 		throw - 1;
 	}

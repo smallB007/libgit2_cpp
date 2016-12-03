@@ -83,7 +83,7 @@ Git_Object_ID Git_Tree::tree_entry_id(const Git_Tree_Entry &entry) const
 {
 	const git_oid * c_git_oid = git_tree_entry_id(entry.c_guts());
 
-	return Git_Object_ID(c_git_oid);
+	return Factory_Git_Object<Git_Object_ID>::create(c_git_oid);
 }
 
 string_t Git_Tree::tree_entry_name(const Git_Tree_Entry & entry) const
@@ -114,7 +114,7 @@ Git_Object_ID Git_Tree::id() const
 {
 	const git_oid * c_git_oid = git_tree_id(c_guts_);
 
-	return Git_Object_ID(c_git_oid);
+	return Factory_Git_Object<Git_Object_ID>::create(c_git_oid);
 }
 
 Git_Tree Git_Tree::lookup(const Git_Object_ID &id) const

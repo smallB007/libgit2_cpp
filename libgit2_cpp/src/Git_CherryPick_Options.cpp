@@ -14,7 +14,7 @@ Git_CherryPick_Options::Git_CherryPick_Options(unsigned ver) :c_git_cherrypick_o
 void Git_CherryPick_Options::set_default()
 {
 	int res = git_cherrypick_init_options(&c_git_cherrypick_options_, GIT_CHERRYPICK_OPTIONS_VERSION);
-	if (FAILED(res))
+	if (LIBGIT2_CPP_FAIL_CHECK(res))
 	{
 		throw - 1;
 	}

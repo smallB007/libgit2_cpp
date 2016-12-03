@@ -35,7 +35,7 @@ shared_ptr_t<Git_Object_ID> Git_Blob::create_from_workdir(const string_t& relati
 shared_ptr_t<Git_Repo> Git_Blob::owner()const
 {
 	git_repository* c_git_repo = git_blob_owner(c_guts_);
-	if (FAILED(c_git_repo))
+	if (LIBGIT2_CPP_FAIL_CHECK(c_git_repo))
 	{
 		throw - 1;
 	}
@@ -82,7 +82,7 @@ shared_ptr_t<Git_Blob> Git_Blob::duplicate() const
 #else
 	int res = git_object_dup((git_object**)&c_git_blob_out,(git_object*)c_guts_);
 #endif
-	if (FAILED(res))
+	if (LIBGIT2_CPP_FAIL_CHECK(res))
 	{
 		throw - 1;
 	}
