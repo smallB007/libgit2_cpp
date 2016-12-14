@@ -83,7 +83,6 @@ LIBGIT2_CLONE_INTERFACE
 	git_repository_init_init_options
 		git_repository_mergehead_foreach
 		git_repository_new
-		git_repository_open
 		git_repository_open_bare
 		git_repository_open_ext
 		git_repository_reinit_filesystem

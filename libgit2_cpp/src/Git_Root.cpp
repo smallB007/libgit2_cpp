@@ -1,14 +1,14 @@
 #include "Git_Root.hpp"
 #include "Git_Buf.hpp"
 #pragma message("ToDo include-what-you-use")
-inline Git_Root* create_git()
-{
-	static Git_Root git_root;
+//inline Git_Root* create_git()
+//{
+//	static Git_Root git_root;
+//
+//	return &git_root;
+//}
 
-	return &git_root;
-}
-
-Git_Root* git_root_inst_ = create_git();
+//Git_Root* git_root_inst_ = create_git();
 
 Git_Root::Git_Root()
 {
@@ -18,6 +18,7 @@ Git_Root::Git_Root()
 Git_Root::~Git_Root()
 {
 	git_libgit2_shutdown();
+#pragma message("Error doesn't delete itself after adding repo to list on CListView")
 }
 
 shared_ptr_t<Git_Repo> Git_Root::create_repository(const string_t& path_to_repo, const bool is_bare)
@@ -41,6 +42,20 @@ shared_ptr_t<Git_Repo> Git_Root::create_repository(const string_t& path_to_repo,
 	///**initial commit must be created 'AFTER' active_repo_ has been set*/
 	_git_repo->create_initial_commit_();
 	
+	return _git_repo;
+}
+
+shared_ptr_t<Git_Repo> Git_Root::open_repository(const std::string_view & path_to_repo)
+{
+	git_repository* c_git_repository_out;
+	check_for_error(git_repository_open(&c_git_repository_out, path_to_repo.data()));
+
+	auto _git_repo = Factory_Git_Object<Git_Repo>::create_ptr(c_git_repository_out);
+
+	repositories_.push_back(_git_repo);
+	///**always make just created repo active*/
+	active_repo_ = _git_repo;
+
 	return _git_repo;
 }
 
